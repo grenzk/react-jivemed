@@ -2,20 +2,14 @@ import { Button } from 'primereact/button'
 
 const RootNavbar = () => {
   return (
-    <div className="flex justify-content-between flex-wrap m-4">
-      <div className="flex align-items-center justify-content-center flex-wrap">
-        <p className="font-base font-bold mx-5">Jivemed</p>
-        <div className="flex align-items-center justify-content-center flex-wrap mx-8">
-          <Button className="p-button-link mx-3" label="Link 1" />
-          <Button className="p-button-link mx-3" label="Link 2" />
-          <Button className="p-button-link mx-3" label="Link 3" />
-        </div>
+    <div className="flex align-items-center justify-content-between m-4">
+      <div className="flex">
+        <i className="pi pi-calendar-plus text-teal-500 text-3xl font-bold"></i>
+        <p className="text-2xl text-teal-500 font-bold ml-3">Jivemed</p>
       </div>
-      <div className="flex align-items-center justify-content-center flex-wrap">
-        <div className="flex align-items-center justify-content-center flex-wrap">
-          <Button className="p-button-link mr-3" label="Login" />
-          <Button label="Sign up" />
-        </div>
+      <div className="flex">
+        <Button className="p-button-text mr-3" label="Login" />
+        <Button label="Sign up" />
       </div>
     </div>
   )
