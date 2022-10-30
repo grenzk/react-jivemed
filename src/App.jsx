@@ -1,24 +1,36 @@
-import {
-  createRoutesFromElements,
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-} from 'react-router-dom';
-import Root from './routes/Root';
-import Error from './routes/Error';
-import Login from './routes/Login';
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import './App.css'
+import wireframe from './assets/images/wireframe.png'
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <>
-      <Route path="/" element={<Root />} errorElement={<Error />} />
-      <Route path="/login" element={<Login />} />
-    </>
+function App() {
+  const [count, setCount] = useState(0)
+
+  return (
+    <div className="App">
+      <div>
+        <a href="https://vitejs.dev" target="_blank">
+          <img src="/vite.svg" className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://reactjs.org" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+      </div>
+      <h1>Vite + React</h1>
+      <div className="card">
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
+        <p>
+          Edit <code>src/App.jsx</code> and save to test HMR
+        </p>
+      </div>
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
+      </p>
+      <img src={wireframe} alt="" />
+    </div>
   )
-);
+}
 
-const App = () => {
-  return <RouterProvider router={router} />;
-};
-
-export default App;
+export default App
