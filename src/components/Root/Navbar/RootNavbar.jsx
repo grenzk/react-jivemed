@@ -18,7 +18,7 @@ const RootNavbar = () => {
           Jivemed
         </a>
       </div>
-      <div className="navbar-end">
+      <div className="navbar-end gap-2">
         <button className="btn btn-ghost" onClick={handleLogin}>
           Login
         </button>
