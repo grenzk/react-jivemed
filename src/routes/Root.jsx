@@ -1,10 +1,10 @@
-import RootNavbar from '../components/Root/Navbar/RootNavbar'
+import RootNavbar from '../components/Root/Navbar/RootNavbar.jsx'
 
 const Root = () => {
   return (
-    <div>
+    <>
       <RootNavbar />
-    </div>
+    </>
   )
 }
 
