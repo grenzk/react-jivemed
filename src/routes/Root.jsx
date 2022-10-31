@@ -1,7 +1,11 @@
 import RootNavbar from '../components/Root/Navbar/RootNavbar'
 
 const Root = () => {
-  return <RootNavbar />
+  return (
+    <div>
+      <RootNavbar />
+    </div>
+  )
 }
 
 export default Root
