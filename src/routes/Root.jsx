@@ -26,12 +26,12 @@ const Root = () => {
       <RootNavbar />
       <Center>
         <Stack>
-          <Group p={30} className={classes.container}>
+          <Group mx={30} className={classes.container}>
             <Title>
               Lorem, ipsum dolor sit amet consectetur adipisicing elit.
             </Title>
           </Group>
-          <Group px={30} className={classes.container}>
+          <Group mx={30} className={classes.container}>
             <Text>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit.
               Consectetur repudiandae sit ipsa explicabo dolore saepe voluptate,
@@ -39,7 +39,7 @@ const Root = () => {
               nisi fugit nihil quam?
             </Text>
           </Group>
-          <Group px={30} pt={30} className={classes.container}>
+          <Group mx={30} className={classes.container}>
             <Button size="xl" onClick={handleGetStarted}>
               Get Started
             </Button>
