@@ -7,8 +7,9 @@ import {
   Title,
   Text,
   Anchor,
+  Group,
 } from '@mantine/core'
-import { SIGN_UP_LINK } from '../../../services/constants/links'
+import { LOGIN_LINK } from '../../../services/constants/links'
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -45,7 +46,7 @@ const useStyles = createStyles((theme) => ({
   },
 }))
 
-const LoginForm = () => {
+const SignUpForm = () => {
   const { classes } = useStyles()
 
   return (
@@ -58,17 +59,24 @@ const LoginForm = () => {
           mt="md"
           mb={50}
         >
-          Welcome back to Jivemed!
+          Create an account
         </Title>
-        <TextInput label="Email" size="md" />
-        <PasswordInput label="Password" mt="md" size="md" />
+        <Group grow>
+          <TextInput label="First Name" mt="md" size="md" />
+          <TextInput label="Last Name" mt="md" size="md" />
+        </Group>
+        <TextInput label="Email" mt="md" size="md" />
+        <Group grow>
+          <PasswordInput label="Password" mt="md" size="md" />
+          <PasswordInput label="Confirm Password" mt="md" size="md" />
+        </Group>
         <Button fullWidth mt="xl" size="md">
-          Login
+          Sign up
         </Button>
         <Text align="center" mt="md">
-          Don&apos;t have an account?{' '}
-          <Anchor href={SIGN_UP_LINK} weight={700}>
-            Sign up
+          Already have an account?{' '}
+          <Anchor href={LOGIN_LINK} weight={700}>
+            Log in
           </Anchor>
         </Text>
       </Paper>
@@ -76,4 +84,4 @@ const LoginForm = () => {
   )
 }
 
-export default LoginForm
+export default SignUpForm

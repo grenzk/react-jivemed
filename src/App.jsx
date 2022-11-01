@@ -5,16 +5,18 @@ import {
   Route,
 } from 'react-router-dom'
 import { NavigationProgress } from '@mantine/nprogress'
+import { LOGIN_LINK, SIGN_UP_LINK } from './services/constants/links'
 import Root from './routes/Root'
 import Error from './routes/Error'
 import Login from './routes/Login'
-import { LOGIN_LINK } from './services/constants/links'
+import SignUp from './routes/SignUp'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<Root />} errorElement={<Error />} />
       <Route path={LOGIN_LINK} element={<Login />} caseSensitive />
+      <Route path={SIGN_UP_LINK} element={<SignUp />} caseSensitive />
     </>
   )
 )
