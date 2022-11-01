@@ -16,6 +16,7 @@
     "@mantine/hooks": "^5.6.3",
     "@mantine/modals": "^5.6.3",
     "@mantine/notifications": "^5.6.3",
+    "@mantine/nprogress": "^5.6.3",
     "dayjs": "^1.11.6",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
