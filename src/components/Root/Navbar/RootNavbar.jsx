@@ -59,7 +59,6 @@ const RootNavbar = () => {
               Jivemed
             </Text>
           </Group>
-
           <Group className={classes.hiddenMobile}>
             <Button variant="default" onClick={handleSignIn}>
               Sign in

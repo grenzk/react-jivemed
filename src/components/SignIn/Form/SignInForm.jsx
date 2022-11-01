@@ -7,7 +7,9 @@ import {
   Title,
   Text,
   Anchor,
+  Group,
 } from '@mantine/core'
+import { TbCalendarPlus } from 'react-icons/tb'
 import { SIGN_UP_LINK } from '../../../services/constants/links'
 
 const useStyles = createStyles((theme) => ({
@@ -48,9 +50,25 @@ const useStyles = createStyles((theme) => ({
 const SignInForm = () => {
   const { classes } = useStyles()
 
+  const handleLogo = () => {
+    window.location.assign('/')
+  }
+
   return (
     <div className={classes.wrapper}>
       <Paper className={classes.form} radius={0} p={30}>
+        <Group
+          style={{ cursor: 'pointer' }}
+          spacing="xs"
+          position="center"
+          mt="md"
+          onClick={handleLogo}
+        >
+          <TbCalendarPlus size={30} />
+          <Text size={30} style={{ fontWeight: 'bold' }}>
+            Jivemed
+          </Text>
+        </Group>
         <Title
           order={2}
           className={classes.title}
@@ -58,7 +76,7 @@ const SignInForm = () => {
           mt="md"
           mb={50}
         >
-          Welcome back to Jivemed!
+          Welcome back!
         </Title>
         <TextInput label="Email" size="md" />
         <PasswordInput label="Password" mt="md" size="md" />
