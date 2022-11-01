@@ -12,7 +12,7 @@ import {
 } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { TbCalendarPlus } from 'react-icons/tb'
-import { LOG_IN_LINK, SIGN_UP_LINK } from '../../../services/constants/links'
+import { LOGIN_LINK, SIGN_UP_LINK } from '../../../services/constants/links'
 
 const useStyles = createStyles((theme) => ({
   hiddenMobile: {
@@ -38,7 +38,7 @@ const RootNavbar = () => {
   }
 
   const handleLogIn = () => {
-    window.location.assign(LOG_IN_LINK)
+    window.location.assign(LOGIN_LINK)
   }
 
   const handleSignUp = () => {
