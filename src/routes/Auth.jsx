@@ -1,11 +1,11 @@
 import { useLocation } from 'react-router-dom'
-import { Paper, createStyles, Title, Text, Group } from '@mantine/core'
+import { Paper, createStyles, Title, Group } from '@mantine/core'
 import {
   startNavigationProgress,
   resetNavigationProgress,
   completeNavigationProgress,
 } from '@mantine/nprogress'
-import { TbCalendarPlus } from 'react-icons/tb'
+import Logo from '../components/Logo'
 import SignInForm from '../components/SignIn/Form/SignInForm'
 import SignUpForm from '../components/SignUp/Form/SignUpForm'
 import { SIGN_IN_LINK } from '../services/constants/links'
@@ -33,23 +33,12 @@ const useStyles = createStyles((theme) => ({
 
   title: {
     color: theme.colorScheme === 'dark' ? theme.white : theme.black,
-    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-  },
-
-  logo: {
-    color: theme.colorScheme === 'dark' ? theme.white : theme.black,
-    width: 120,
-    display: 'block',
-    marginLeft: 'auto',
-    marginRight: 'auto',
   },
 }))
 
 const Auth = () => {
   const location = useLocation()
   const { classes } = useStyles()
-
-  const handleLogo = () => window.location.assign('/')
 
   const displayTitle = () =>
     location.pathname === SIGN_IN_LINK ? 'Welcome back!' : 'Create an account'
@@ -60,18 +49,7 @@ const Auth = () => {
   return (
     <div className={classes.wrapper}>
       <Paper className={classes.form} radius={0} p={30}>
-        <Group
-          style={{ cursor: 'pointer' }}
-          spacing="xs"
-          position="center"
-          mt="md"
-          onClick={handleLogo}
-        >
-          <TbCalendarPlus size={30} />
-          <Text size={30} style={{ fontWeight: 'bold' }}>
-            Jivemed
-          </Text>
-        </Group>
+        <Logo />
         <Title
           order={2}
           className={classes.title}

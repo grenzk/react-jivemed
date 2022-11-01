@@ -12,6 +12,7 @@ import {
 } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { TbCalendarPlus } from 'react-icons/tb'
+import Logo from '../../Logo'
 import { SIGN_IN_LINK, SIGN_UP_LINK } from '../../../services/constants/links'
 
 const useStyles = createStyles((theme) => ({
@@ -49,16 +50,7 @@ const RootNavbar = () => {
     <Box pb={120}>
       <Header height={60} px="md">
         <Group position="apart" sx={{ height: '100%' }}>
-          <Group
-            style={{ cursor: 'pointer' }}
-            spacing="xs"
-            onClick={handleLogo}
-          >
-            <TbCalendarPlus size={30} />
-            <Text size={30} style={{ fontWeight: 'bold' }}>
-              Jivemed
-            </Text>
-          </Group>
+          <Logo />
           <Group className={classes.hiddenMobile}>
             <Button variant="default" onClick={handleSignIn}>
               Sign in

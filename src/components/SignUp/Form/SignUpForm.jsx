@@ -12,8 +12,8 @@ const SignUpForm = () => {
   return (
     <>
       <Group grow>
-        <TextInput label="First Name" mt="md" size="md" />
-        <TextInput label="Last Name" mt="md" size="md" />
+        <TextInput label="First Name" size="md" />
+        <TextInput label="Last Name" size="md" />
       </Group>
       <TextInput label="Email" mt="md" size="md" />
       <Group grow>
