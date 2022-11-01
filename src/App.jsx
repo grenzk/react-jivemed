@@ -4,6 +4,7 @@ import {
   RouterProvider,
   Route,
 } from 'react-router-dom'
+import { NavigationProgress } from '@mantine/nprogress'
 import Root from './routes/Root'
 import Error from './routes/Error'
 import Login from './routes/Login'
@@ -21,6 +22,7 @@ const router = createBrowserRouter(
 const App = () => {
   return (
     <div className="App">
+      <NavigationProgress />
       <RouterProvider router={router} />
     </div>
   )
