@@ -4,14 +4,14 @@ import {
   resetNavigationProgress,
   completeNavigationProgress,
 } from '@mantine/nprogress'
-import LoginForm from '../components/Login/Form/LoginForm'
+import SignInForm from '../components/SignIn/Form/SignInForm'
 
-const Login = () => {
+const SignIn = () => {
   return (
     <>
-      <LoginForm />
+      <SignInForm />
     </>
   )
 }
 
-export default Login
+export default SignIn

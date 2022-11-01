@@ -45,7 +45,7 @@ const useStyles = createStyles((theme) => ({
   },
 }))
 
-const LoginForm = () => {
+const SignInForm = () => {
   const { classes } = useStyles()
 
   return (
@@ -63,7 +63,7 @@ const LoginForm = () => {
         <TextInput label="Email" size="md" />
         <PasswordInput label="Password" mt="md" size="md" />
         <Button fullWidth mt="xl" size="md">
-          Login
+          Sign in
         </Button>
         <Text align="center" mt="md">
           Don&apos;t have an account?{' '}
@@ -76,4 +76,4 @@ const LoginForm = () => {
   )
 }
 
-export default LoginForm
+export default SignInForm

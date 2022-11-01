@@ -9,7 +9,7 @@ import {
   Anchor,
   Group,
 } from '@mantine/core'
-import { LOGIN_LINK } from '../../../services/constants/links'
+import { SIGN_IN_LINK } from '../../../services/constants/links'
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -75,8 +75,8 @@ const SignUpForm = () => {
         </Button>
         <Text align="center" mt="md">
           Already have an account?{' '}
-          <Anchor href={LOGIN_LINK} weight={700}>
-            Log in
+          <Anchor href={SIGN_IN_LINK} weight={700}>
+            Sign in
           </Anchor>
         </Text>
       </Paper>

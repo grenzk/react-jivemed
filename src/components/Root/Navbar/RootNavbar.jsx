@@ -12,7 +12,7 @@ import {
 } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { TbCalendarPlus } from 'react-icons/tb'
-import { LOGIN_LINK, SIGN_UP_LINK } from '../../../services/constants/links'
+import { SIGN_IN_LINK, SIGN_UP_LINK } from '../../../services/constants/links'
 
 const useStyles = createStyles((theme) => ({
   hiddenMobile: {
@@ -37,8 +37,8 @@ const RootNavbar = () => {
     window.location.assign('/')
   }
 
-  const handleLogIn = () => {
-    window.location.assign(LOGIN_LINK)
+  const handleSignIn = () => {
+    window.location.assign(SIGN_IN_LINK)
   }
 
   const handleSignUp = () => {
@@ -61,8 +61,8 @@ const RootNavbar = () => {
           </Group>
 
           <Group className={classes.hiddenMobile}>
-            <Button variant="default" onClick={handleLogIn}>
-              Log in
+            <Button variant="default" onClick={handleSignIn}>
+              Sign in
             </Button>
             <Button onClick={handleSignUp}>Sign up</Button>
           </Group>
@@ -89,8 +89,10 @@ const RootNavbar = () => {
             color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'}
           />
           <Group position="center" grow pb="xl" px="md">
-            <Button variant="default">Log in</Button>
-            <Button>Sign up</Button>
+            <Button variant="default" onClick={handleSignIn}>
+              Sign in
+            </Button>
+            <Button onClick={handleSignUp}>Sign up</Button>
           </Group>
         </ScrollArea>
       </Drawer>
