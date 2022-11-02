@@ -17,7 +17,7 @@ import bgImage from '../assets/img/calendar.svg'
 
 const useStyles = createStyles((theme) => ({
   root: {
-    backgroundSize: '35rem',
+    backgroundSize: '40rem',
     backgroundPosition: 'right',
     backgroundRepeat: 'no-repeat',
     backgroundImage: `url(${bgImage})`,
