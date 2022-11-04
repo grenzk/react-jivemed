@@ -6,6 +6,7 @@ import {
   completeNavigationProgress,
 } from '@mantine/nprogress'
 import Logo from '../components/Logo'
+import bgImage from '../assets/img/sign-in.svg'
 import SignInForm from '../components/SignIn/Form/SignInForm'
 import SignUpForm from '../components/SignUp/Form/SignUpForm'
 import { SIGN_IN_LINK } from '../services/constants/links'
@@ -13,9 +14,9 @@ import { SIGN_IN_LINK } from '../services/constants/links'
 const useStyles = createStyles((theme) => ({
   wrapper: {
     minHeight: '100vh',
-    backgroundSize: 'cover',
-    backgroundImage:
-      'url(https://images.unsplash.com/photo-1484242857719-4b9144542727?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1280&q=80)',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: '105%',
+    backgroundImage: `url(${bgImage})`,
   },
 
   form: {
