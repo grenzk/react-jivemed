@@ -17,6 +17,10 @@ const useStyles = createStyles((theme) => ({
     backgroundRepeat: 'no-repeat',
     backgroundPosition: '105%',
     backgroundImage: `url(${bgImage})`,
+
+    [`@media (min-width: ${theme.breakpoints.xl}px)`]: {
+      backgroundPosition: '85%',
+    },
   },
 
   form: {
