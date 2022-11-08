@@ -10,6 +10,8 @@ import bgImage from '../assets/img/sign-in.svg'
 import SignInForm from '../components/SignIn/Form/SignInForm'
 import SignUpForm from '../components/SignUp/Form/SignUpForm'
 import { SIGN_IN_LINK } from '../services/constants/links'
+import { axiosPost } from '../services/utilities/axios'
+import { USER_SIGN_IN_ENDPOINT } from '../services/constants/endpoints'
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -46,7 +48,12 @@ const Auth = () => {
   const { classes } = useStyles()
 
   const handleSignIn = (userInfo) => {
-    console.log(userInfo)
+    const body = {
+      user: userInfo,
+    }
+    axiosPost(USER_SIGN_IN_ENDPOINT, body).then((response) =>
+      console.log(response.data)
+    )
   }
 
   const displayTitle = () =>

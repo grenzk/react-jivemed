@@ -17,7 +17,12 @@ const SignInForm = ({ handleSignIn }) => {
 
   return (
     <>
-      <form onSubmit={form.onSubmit((values) => handleSignIn(values))}>
+      <form
+        onSubmit={form.onSubmit((values) => {
+          handleSignIn(values)
+          form.reset()
+        })}
+      >
         <TextInput label="Email" size="md" {...form.getInputProps('email')} />
         <PasswordInput
           label="Password"
