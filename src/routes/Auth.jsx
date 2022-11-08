@@ -45,11 +45,19 @@ const Auth = () => {
   const location = useLocation()
   const { classes } = useStyles()
 
+  const handleSignIn = (userInfo) => {
+    console.log(userInfo)
+  }
+
   const displayTitle = () =>
     location.pathname === SIGN_IN_LINK ? 'Welcome back!' : 'Create an account'
 
   const displayForm = () =>
-    location.pathname === SIGN_IN_LINK ? <SignInForm /> : <SignUpForm />
+    location.pathname === SIGN_IN_LINK ? (
+      <SignInForm handleSignIn={handleSignIn} />
+    ) : (
+      <SignUpForm />
+    )
 
   return (
     <div className={classes.wrapper}>
