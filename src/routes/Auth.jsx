@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom'
-import { Paper, createStyles, Title, Group } from '@mantine/core'
+import { Paper, createStyles, Title } from '@mantine/core'
 import {
   startNavigationProgress,
   completeNavigationProgress,
