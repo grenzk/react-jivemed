@@ -15,6 +15,7 @@ import {
   USER_SIGN_IN_ENDPOINT,
   USER_SIGN_UP_ENDPOINT,
 } from '../services/constants/endpoints'
+import { setCookie } from '../services/utilities/cookie'
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -62,9 +63,13 @@ const Auth = () => {
   const handleSignIn = (userInfo) => {
     startNavigationProgress()
     axiosPost(USER_SIGN_IN_ENDPOINT, userInfo).then((response) => {
-      console.log(response.data)
       completeNavigationProgress()
       resetNavigationProgress()
+      setCookie(
+        'access_token',
+        response.data.access_token,
+        response.data.access_token_expiration
+      )
     })
   }
 
