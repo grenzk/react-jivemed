@@ -1,12 +1,35 @@
 import { TextInput, PasswordInput, Button, Text, Anchor } from '@mantine/core'
+import { useForm } from '@mantine/form'
 import { SIGN_UP_LINK } from '../../../services/constants/links'
 
-const SignInForm = () => {
+const SignInForm = ({ handleSignIn }) => {
+  const form = useForm({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+
+    validate: {
+      email: (value) => (value === '' ? 'Invalid email' : null),
+      password: (value) => (value === '' ? 'Invalid password' : null),
+    },
+  })
+
   return (
-    <>
-      <TextInput label="Email" size="md" />
-      <PasswordInput label="Password" mt="md" size="md" />
-      <Button fullWidth mt="xl" size="md">
+    <form
+      onSubmit={form.onSubmit((values) => {
+        handleSignIn({ user: values })
+        form.reset()
+      })}
+    >
+      <TextInput label="Email" size="md" {...form.getInputProps('email')} />
+      <PasswordInput
+        label="Password"
+        mt="md"
+        size="md"
+        {...form.getInputProps('password')}
+      />
+      <Button fullWidth mt="xl" size="md" type="submit">
         Sign in
       </Button>
       <Text align="center" mt="md">
@@ -15,7 +38,7 @@ const SignInForm = () => {
           Sign up
         </Anchor>
       </Text>
-    </>
+    </form>
   )
 }
 

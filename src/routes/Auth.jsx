@@ -2,14 +2,20 @@ import { useLocation } from 'react-router-dom'
 import { Paper, createStyles, Title, Group } from '@mantine/core'
 import {
   startNavigationProgress,
-  resetNavigationProgress,
   completeNavigationProgress,
+  resetNavigationProgress,
 } from '@mantine/nprogress'
 import Logo from '../components/Logo'
 import bgImage from '../assets/img/sign-in.svg'
 import SignInForm from '../components/SignIn/Form/SignInForm'
 import SignUpForm from '../components/SignUp/Form/SignUpForm'
 import { SIGN_IN_LINK } from '../services/constants/links'
+import { axiosPost } from '../services/utilities/axios'
+import {
+  USER_SIGN_IN_ENDPOINT,
+  USER_SIGN_UP_ENDPOINT,
+} from '../services/constants/endpoints'
+import { setCookie } from '../services/utilities/cookie'
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -45,11 +51,37 @@ const Auth = () => {
   const location = useLocation()
   const { classes } = useStyles()
 
+  const handleSignUp = (userInfo) => {
+    startNavigationProgress()
+    axiosPost(USER_SIGN_UP_ENDPOINT, userInfo).then((response) => {
+      console.log(response.data)
+      completeNavigationProgress()
+      resetNavigationProgress()
+    })
+  }
+
+  const handleSignIn = (userInfo) => {
+    startNavigationProgress()
+    axiosPost(USER_SIGN_IN_ENDPOINT, userInfo).then((response) => {
+      completeNavigationProgress()
+      resetNavigationProgress()
+      setCookie(
+        'access_token',
+        response.data.access_token,
+        response.data.access_token_expiration
+      )
+    })
+  }
+
   const displayTitle = () =>
     location.pathname === SIGN_IN_LINK ? 'Welcome back!' : 'Create an account'
 
   const displayForm = () =>
-    location.pathname === SIGN_IN_LINK ? <SignInForm /> : <SignUpForm />
+    location.pathname === SIGN_IN_LINK ? (
+      <SignInForm handleSignIn={handleSignIn} />
+    ) : (
+      <SignUpForm handleSignUp={handleSignUp} />
+    )
 
   return (
     <div className={classes.wrapper}>
