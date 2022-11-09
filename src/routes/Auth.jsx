@@ -2,8 +2,8 @@ import { useLocation } from 'react-router-dom'
 import { Paper, createStyles, Title, Group } from '@mantine/core'
 import {
   startNavigationProgress,
-  resetNavigationProgress,
   completeNavigationProgress,
+  resetNavigationProgress,
 } from '@mantine/nprogress'
 import Logo from '../components/Logo'
 import bgImage from '../assets/img/sign-in.svg'
@@ -11,7 +11,10 @@ import SignInForm from '../components/SignIn/Form/SignInForm'
 import SignUpForm from '../components/SignUp/Form/SignUpForm'
 import { SIGN_IN_LINK } from '../services/constants/links'
 import { axiosPost } from '../services/utilities/axios'
-import { USER_SIGN_IN_ENDPOINT } from '../services/constants/endpoints'
+import {
+  USER_SIGN_IN_ENDPOINT,
+  USER_SIGN_UP_ENDPOINT,
+} from '../services/constants/endpoints'
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -47,13 +50,22 @@ const Auth = () => {
   const location = useLocation()
   const { classes } = useStyles()
 
-  const handleSignIn = (userInfo) => {
-    const body = {
-      user: userInfo,
-    }
-    axiosPost(USER_SIGN_IN_ENDPOINT, body).then((response) =>
+  const handleSignUp = (userInfo) => {
+    startNavigationProgress()
+    axiosPost(USER_SIGN_UP_ENDPOINT, userInfo).then((response) => {
       console.log(response.data)
-    )
+      completeNavigationProgress()
+      resetNavigationProgress()
+    })
+  }
+
+  const handleSignIn = (userInfo) => {
+    startNavigationProgress()
+    axiosPost(USER_SIGN_IN_ENDPOINT, userInfo).then((response) => {
+      console.log(response.data)
+      completeNavigationProgress()
+      resetNavigationProgress()
+    })
   }
 
   const displayTitle = () =>
@@ -63,7 +75,7 @@ const Auth = () => {
     location.pathname === SIGN_IN_LINK ? (
       <SignInForm handleSignIn={handleSignIn} />
     ) : (
-      <SignUpForm />
+      <SignUpForm handleSignUp={handleSignUp} />
     )
 
   return (

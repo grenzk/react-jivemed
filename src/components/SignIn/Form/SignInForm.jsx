@@ -16,31 +16,29 @@ const SignInForm = ({ handleSignIn }) => {
   })
 
   return (
-    <>
-      <form
-        onSubmit={form.onSubmit((values) => {
-          handleSignIn(values)
-          form.reset()
-        })}
-      >
-        <TextInput label="Email" size="md" {...form.getInputProps('email')} />
-        <PasswordInput
-          label="Password"
-          mt="md"
-          size="md"
-          {...form.getInputProps('password')}
-        />
-        <Button fullWidth mt="xl" size="md" type="submit">
-          Sign in
-        </Button>
-        <Text align="center" mt="md">
-          Don&apos;t have an account?{' '}
-          <Anchor href={SIGN_UP_LINK} weight={700}>
-            Sign up
-          </Anchor>
-        </Text>
-      </form>
-    </>
+    <form
+      onSubmit={form.onSubmit((values) => {
+        handleSignIn({ user: values })
+        form.reset()
+      })}
+    >
+      <TextInput label="Email" size="md" {...form.getInputProps('email')} />
+      <PasswordInput
+        label="Password"
+        mt="md"
+        size="md"
+        {...form.getInputProps('password')}
+      />
+      <Button fullWidth mt="xl" size="md" type="submit">
+        Sign in
+      </Button>
+      <Text align="center" mt="md">
+        Don&apos;t have an account?{' '}
+        <Anchor href={SIGN_UP_LINK} weight={700}>
+          Sign up
+        </Anchor>
+      </Text>
+    </form>
   )
 }
 
