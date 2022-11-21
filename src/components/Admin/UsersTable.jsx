@@ -7,6 +7,8 @@ import {
   Paper,
   Title,
   Stack,
+  Button,
+  Group,
 } from '@mantine/core'
 
 const useStyles = createStyles((theme) => ({
@@ -65,7 +67,15 @@ const UsersTable = () => {
     <div>
       <Center>
         <Stack>
-          <Title order={2}>Patients</Title>
+          <Group position="apart">
+            <Title order={2}>Patients</Title>
+            <Button
+              variant="gradient"
+              gradient={{ from: 'indigo', to: 'cyan' }}
+            >
+              Add Patient
+            </Button>
+          </Group>
           <Paper shadow="xs" p="md">
             <ScrollArea
               sx={{ height: 450 }}
