@@ -10,6 +10,8 @@ import {
   SIGN_UP_LINK,
   CLIENT_LINK,
   CLIENT_DASHBOARD_LINK,
+  CLIENT_PATIENTS_LINK,
+  CLIENT_DOCTORS_LINK,
 } from './services/constants/links'
 import Root from './routes/Root'
 import Error from './routes/Error'
@@ -28,6 +30,8 @@ const router = createBrowserRouter(
           element={<Client />}
           caseSensitive
         />
+        <Route path={CLIENT_DOCTORS_LINK} element={<Client />} caseSensitive />
+        <Route path={CLIENT_PATIENTS_LINK} element={<Client />} caseSensitive />
       </Route>
     </>
   )

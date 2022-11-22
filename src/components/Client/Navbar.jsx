@@ -1,5 +1,10 @@
 import { useState } from 'react'
 import {
+  CLIENT_DASHBOARD_LINK,
+  CLIENT_DOCTORS_LINK,
+  CLIENT_PATIENTS_LINK,
+} from '../../services/constants/links'
+import {
   createStyles,
   Header,
   Container,
@@ -95,9 +100,9 @@ const useStyles = createStyles((theme) => ({
 }))
 
 const links = [
-  { link: '/client/dashboard', label: 'Dashboard' },
-  { link: 'string1', label: 'Doctors' },
-  { link: '/patients', label: 'Patients' },
+  { link: CLIENT_DASHBOARD_LINK, label: 'Dashboard' },
+  { link: CLIENT_DOCTORS_LINK, label: 'Doctors' },
+  { link: CLIENT_PATIENTS_LINK, label: 'Patients' },
   { link: 'string3', label: 'Settings' },
 ]
 
