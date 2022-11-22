@@ -58,7 +58,7 @@ const data = [
   { id: 2, name: 'Juan Dela Cruz', email: 'jdc@email.com' },
 ]
 
-const UsersTable = () => {
+const PatientsTable = () => {
   const [opened, setOpened] = useState(false)
   const { classes, cx } = useStyles()
   const [scrolled, setScrolled] = useState(false)
@@ -195,4 +195,4 @@ const UsersTable = () => {
   )
 }
 
-export default UsersTable
+export default PatientsTable

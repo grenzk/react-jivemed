@@ -1,5 +1,11 @@
+import DoctorsTable from '../../../components/Client/Admin/Table/DoctorsTable'
+
 const ClientAdminDoctors = () => {
-  return <div>Doctors</div>
+  return (
+    <>
+      <DoctorsTable />
+    </>
+  )
 }
 
 export default ClientAdminDoctors
