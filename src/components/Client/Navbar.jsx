@@ -3,6 +3,7 @@ import {
   CLIENT_DASHBOARD_LINK,
   CLIENT_DOCTORS_LINK,
   CLIENT_PATIENTS_LINK,
+  CLIENT_DEPARTMENTS_LINK,
 } from '../../services/constants/links'
 import {
   createStyles,
@@ -17,6 +18,7 @@ import {
 } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import Logo from '../Logo'
+import { TbLogout } from "react-icons/tb";
 
 const HEADER_HEIGHT = 70
 
@@ -103,7 +105,7 @@ const links = [
   { link: CLIENT_DASHBOARD_LINK, label: 'Dashboard' },
   { link: CLIENT_DOCTORS_LINK, label: 'Doctors' },
   { link: CLIENT_PATIENTS_LINK, label: 'Patients' },
-  { link: 'string3', label: 'Settings' },
+  { link: CLIENT_DEPARTMENTS_LINK, label: 'Departments' },
 ]
 
 const Navbar = () => {
@@ -143,6 +145,7 @@ const Navbar = () => {
           <Avatar color="cyan" radius="xl">
             MK
           </Avatar>
+          <TbLogout size={24} color='gray' />
         </Group>
 
         <Burger
