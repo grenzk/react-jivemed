@@ -95,7 +95,7 @@ const useStyles = createStyles((theme) => ({
 }))
 
 const links = [
-  { link: '', label: 'Dashboard' },
+  { link: '/client/dashboard', label: 'Dashboard' },
   { link: 'string1', label: 'Doctors' },
   { link: '/patients', label: 'Patients' },
   { link: 'string3', label: 'Settings' },
