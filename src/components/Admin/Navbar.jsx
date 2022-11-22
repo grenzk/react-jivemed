@@ -9,7 +9,6 @@ import {
   Transition,
   Avatar,
   Divider,
-  ActionIcon,
 } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import Logo from '../Logo'
@@ -98,7 +97,7 @@ const useStyles = createStyles((theme) => ({
 const links = [
   { link: '', label: 'Dashboard' },
   { link: 'string1', label: 'Doctors' },
-  { link: 'string2', label: 'Patients' },
+  { link: '/patients', label: 'Patients' },
   { link: 'string3', label: 'Settings' },
 ]
 
@@ -115,7 +114,7 @@ const Navbar = () => {
         [classes.linkActive]: active === link.link,
       })}
       onClick={(event) => {
-        event.preventDefault()
+        // event.preventDefault()
         setActive(link.link)
         close()
       }}
