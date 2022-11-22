@@ -1,10 +1,5 @@
 import { useLocation } from 'react-router-dom'
 import { Paper, createStyles, Title } from '@mantine/core'
-import {
-  startNavigationProgress,
-  completeNavigationProgress,
-  resetNavigationProgress,
-} from '@mantine/nprogress'
 import Logo from '../components/Logo'
 import bgImage from '../assets/img/sign-in.svg'
 import SignInForm from '../components/SignIn/Form/SignInForm'
@@ -52,19 +47,13 @@ const Auth = () => {
   const { classes } = useStyles()
 
   const handleSignUp = (userInfo) => {
-    startNavigationProgress()
     axiosPost(USER_SIGN_UP_ENDPOINT, userInfo).then((response) => {
       console.log(response.data)
-      completeNavigationProgress()
-      resetNavigationProgress()
     })
   }
 
   const handleSignIn = (userInfo) => {
-    startNavigationProgress()
     axiosPost(USER_SIGN_IN_ENDPOINT, userInfo).then((response) => {
-      completeNavigationProgress()
-      resetNavigationProgress()
       setCookie(
         'access_token',
         response.data.access_token,
