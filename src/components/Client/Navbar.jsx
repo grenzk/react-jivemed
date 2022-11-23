@@ -21,32 +21,32 @@ import {
   CLIENT_PATIENTS_LINK,
   CLIENT_DEPARTMENTS_LINK,
 } from '../../services/constants/links'
-import { adminNavLinks } from '../../services/constants/navLinks'
+import { adminNavLinks, userNavLinks } from '../../services/constants/navLinks'
 
-const Navbar = () => {
+const Navbar = ({ role }) => {
   const [opened, { toggle, close }] = useDisclosure(false)
 
   const [active, setActive] = useState('')
+  const [navLinks, setNavLinks] = useState([])
 
   const { classes, cx } = useStyles()
 
   const location = useLocation()
 
-  const items = adminNavLinks.map((link) => (
-    <a
-      key={link.label}
-      href={link.link}
-      className={cx(classes.link, {
-        [classes.linkActive]: active === link.link,
-      })}
-      onClick={() => {
-        setActive(link.link)
-        close()
-      }}
-    >
-      {link.label}
-    </a>
-  ))
+  useEffect(() => {
+    const getNavLinks = () => {
+      switch (role) {
+        case 'admin':
+          setNavLinks(adminNavLinks)
+          break
+        case 'patient':
+          setNavLinks(userNavLinks)
+          break
+      }
+    }
+
+    getNavLinks()
+  }, [role])
 
   useEffect(() => {
     const setActiveLink = () => {
@@ -69,6 +69,24 @@ const Navbar = () => {
     setActiveLink()
   }, [location])
 
+  const showItems = () => {
+    return navLinks.map((link) => (
+      <a
+        key={link.label}
+        href={link.link}
+        className={cx(classes.link, {
+          [classes.linkActive]: active === link.link,
+        })}
+        onClick={() => {
+          setActive(link.link)
+          close()
+        }}
+      >
+        {link.label}
+      </a>
+    ))
+  }
+
   return (
     <Header height={HEADER_HEIGHT} mb={30} className={classes.root}>
       <Container size={1250} className={classes.header}>
@@ -76,7 +94,7 @@ const Navbar = () => {
 
         <Group>
           <Group spacing={8} className={classes.links}>
-            {items}
+            {showItems()}
           </Group>
 
           <Divider orientation="vertical" />
@@ -97,7 +115,7 @@ const Navbar = () => {
         <Transition transition="pop-top-right" duration={200} mounted={opened}>
           {(styles) => (
             <Paper className={classes.dropdown} withBorder style={styles}>
-              {items}
+              {showItems()}
             </Paper>
           )}
         </Transition>

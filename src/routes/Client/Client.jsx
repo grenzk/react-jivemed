@@ -21,7 +21,7 @@ const Client = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar role={role} />
       {displayPage()}
     </>
   )
