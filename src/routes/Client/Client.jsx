@@ -18,6 +18,7 @@ const Client = () => {
         return <Patient />
     }
   }
+
   return (
     <>
       <Navbar />
