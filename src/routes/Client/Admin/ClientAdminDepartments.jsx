@@ -1,5 +1,7 @@
+import DepartmentsTable from '../../../components/Client/Admin/Table/DepartmentsTable'
+
 const ClientAdminDepartments = () => {
-  return <div>Departments</div>
+  return <DepartmentsTable />
 }
 
 export default ClientAdminDepartments
