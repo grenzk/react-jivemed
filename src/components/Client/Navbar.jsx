@@ -25,7 +25,11 @@ import {
   CLIENT_APPOINTMENTS_LINK,
   CLIENT_TRANSACTIONS_LINK,
 } from '../../services/constants/links'
-import { adminNavLinks, userNavLinks } from '../../services/constants/navLinks'
+import {
+  adminNavLinks,
+  userNavLinks,
+  doctorNavLinks,
+} from '../../services/constants/navLinks'
 
 const Navbar = ({ role }) => {
   const [opened, { toggle, close }] = useDisclosure(false)
@@ -46,6 +50,8 @@ const Navbar = ({ role }) => {
         case 'patient':
           setNavLinks(userNavLinks)
           break
+        case 'doctor':
+          setNavLinks(doctorNavLinks)
       }
     }
 
