@@ -18,6 +18,7 @@ import {
 import Root from './routes/Root'
 import Error from './routes/Error'
 import Auth from './routes/Auth'
+import ProtectedRoute from './routes/ProtectedRoute'
 import Client from './routes/Client/Client'
 
 const router = createBrowserRouter(
@@ -26,34 +27,44 @@ const router = createBrowserRouter(
       <Route path="/" element={<Root />} errorElement={<Error />} />
       <Route path={SIGN_IN_LINK} element={<Auth />} caseSensitive />
       <Route path={SIGN_UP_LINK} element={<Auth />} caseSensitive />
-      <Route errorElement={<Error />}>
-        <Route
-          path={CLIENT_DASHBOARD_LINK}
-          element={<Client />}
-          caseSensitive
-        />
-        <Route path={CLIENT_DOCTORS_LINK} element={<Client />} caseSensitive />
-        <Route path={CLIENT_PATIENTS_LINK} element={<Client />} caseSensitive />
-        <Route
-          path={CLIENT_DEPARTMENTS_LINK}
-          element={<Client />}
-          caseSensitive
-        />
-        <Route
-          path={CLIENT_AVAILABLE_SCHEDULES_LINK}
-          element={<Client />}
-          caseSensitive
-        />
-        <Route
-          path={CLIENT_APPOINTMENTS_LINK}
-          element={<Client />}
-          caseSensitive
-        />
-        <Route
-          path={CLIENT_TRANSACTIONS_LINK}
-          element={<Client />}
-          caseSensitive
-        />
+      <Route element={<ProtectedRoute />}>
+        <Route errorElement={<Error />}>
+          <Route
+            path={CLIENT_DASHBOARD_LINK}
+            element={<Client />}
+            caseSensitive
+          />
+          <Route
+            path={CLIENT_DOCTORS_LINK}
+            element={<Client />}
+            caseSensitive
+          />
+          <Route
+            path={CLIENT_PATIENTS_LINK}
+            element={<Client />}
+            caseSensitive
+          />
+          <Route
+            path={CLIENT_DEPARTMENTS_LINK}
+            element={<Client />}
+            caseSensitive
+          />
+          <Route
+            path={CLIENT_AVAILABLE_SCHEDULES_LINK}
+            element={<Client />}
+            caseSensitive
+          />
+          <Route
+            path={CLIENT_APPOINTMENTS_LINK}
+            element={<Client />}
+            caseSensitive
+          />
+          <Route
+            path={CLIENT_TRANSACTIONS_LINK}
+            element={<Client />}
+            caseSensitive
+          />
+        </Route>
       </Route>
     </>
   )

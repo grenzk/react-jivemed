@@ -3,32 +3,37 @@ import { Paper, Title } from '@mantine/core'
 import Logo from '../components/Logo'
 import SignInForm from '../components/SignIn/Form/SignInForm'
 import SignUpForm from '../components/SignUp/Form/SignUpForm'
-import { SIGN_IN_LINK } from '../services/constants/links'
+import {
+  CLIENT_DASHBOARD_LINK,
+  SIGN_IN_LINK,
+} from '../services/constants/links'
 import { axiosPost } from '../services/utilities/axios'
 import {
-  USER_SIGN_IN_ENDPOINT,
-  USER_SIGN_UP_ENDPOINT,
+  SIGN_IN_ENDPOINT,
+  SIGN_UP_ENDPOINT,
 } from '../services/constants/endpoints'
 import { setCookie } from '../services/utilities/cookie'
 import useStyles from '../services/hooks/useStyles'
+import { accessTokenCookie } from '../services/constants/cookies'
 
 const Auth = () => {
   const location = useLocation()
   const { classes } = useStyles()
 
   const handleSignUp = (userInfo) => {
-    axiosPost(USER_SIGN_UP_ENDPOINT, userInfo).then((response) => {
+    axiosPost(SIGN_UP_ENDPOINT, userInfo).then((response) => {
       console.log(response.data)
     })
   }
 
   const handleSignIn = (userInfo) => {
-    axiosPost(USER_SIGN_IN_ENDPOINT, userInfo).then((response) => {
+    axiosPost(SIGN_IN_ENDPOINT, userInfo).then((response) => {
       setCookie(
-        'access_token',
+        accessTokenCookie,
         response.data.access_token,
         response.data.access_token_expiration
       )
+      window.location.assign(CLIENT_DASHBOARD_LINK)
     })
   }
 

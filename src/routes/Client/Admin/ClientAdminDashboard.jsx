@@ -28,7 +28,7 @@ const ClientAdminDashboard = () => {
     const Icon = stat.icon
 
     return (
-      <Paper withBorder p="md" radius="md" key={stat.adminDashboardTitle}>
+      <Paper withBorder p="md" radius="md" key={stat.title}>
         <Group position="apart">
           <Text
             size="xs"
