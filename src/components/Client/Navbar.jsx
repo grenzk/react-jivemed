@@ -121,8 +121,8 @@ const Navbar = ({ role }) => {
           <Avatar color="cyan" radius="xl">
             MK
           </Avatar>
-          <ActionIcon variant="transparent">
-            <TbLogout size={24} color="gray" />
+          <ActionIcon>
+            <TbLogout size={18} />
           </ActionIcon>
         </Group>
 
