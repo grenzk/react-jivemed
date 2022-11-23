@@ -18,11 +18,18 @@ import { HEADER_HEIGHT } from '../../services/constants/styles'
 import useStyles from '../../services/hooks/useStyles'
 import {
   CLIENT_DASHBOARD_LINK,
-  CLIENT_DOCTORS_LINK,
   CLIENT_PATIENTS_LINK,
+  CLIENT_DOCTORS_LINK,
   CLIENT_DEPARTMENTS_LINK,
+  CLIENT_AVAILABLE_SCHEDULES_LINK,
+  CLIENT_APPOINTMENTS_LINK,
+  CLIENT_TRANSACTIONS_LINK,
 } from '../../services/constants/links'
-import { adminNavLinks, userNavLinks } from '../../services/constants/navLinks'
+import {
+  adminNavLinks,
+  userNavLinks,
+  doctorNavLinks,
+} from '../../services/constants/navLinks'
 
 const Navbar = ({ role }) => {
   const [opened, { toggle, close }] = useDisclosure(false)
@@ -43,6 +50,8 @@ const Navbar = ({ role }) => {
         case 'patient':
           setNavLinks(userNavLinks)
           break
+        case 'doctor':
+          setNavLinks(doctorNavLinks)
       }
     }
 
@@ -63,6 +72,15 @@ const Navbar = ({ role }) => {
           break
         case CLIENT_DEPARTMENTS_LINK:
           setActive(CLIENT_DEPARTMENTS_LINK)
+          break
+        case CLIENT_AVAILABLE_SCHEDULES_LINK:
+          setActive(CLIENT_AVAILABLE_SCHEDULES_LINK)
+          break
+        case CLIENT_APPOINTMENTS_LINK:
+          setActive(CLIENT_APPOINTMENTS_LINK)
+          break
+        case CLIENT_TRANSACTIONS_LINK:
+          setActive(CLIENT_TRANSACTIONS_LINK)
           break
       }
     }
@@ -103,8 +121,8 @@ const Navbar = ({ role }) => {
           <Avatar color="cyan" radius="xl">
             MK
           </Avatar>
-          <ActionIcon variant="transparent">
-            <TbLogout size={24} color="gray" />
+          <ActionIcon>
+            <TbLogout size={18} />
           </ActionIcon>
         </Group>
 
