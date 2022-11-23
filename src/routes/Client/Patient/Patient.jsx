@@ -8,6 +8,7 @@ import {
 import ClientPatientDashboard from './ClientPatientDashboard'
 import ClientPatientAvailableSchedules from './ClientPatientAvailableSchedules'
 import ClientPatientDoctors from './ClientPatientDoctors'
+import ClientPatientTransactions from './ClientPatientTransactions'
 
 const Patient = () => {
   const location = useLocation()
@@ -19,6 +20,8 @@ const Patient = () => {
       return <ClientPatientAvailableSchedules />
     case CLIENT_DOCTORS_LINK:
       return <ClientPatientDoctors />
+    case CLIENT_TRANSACTIONS_LINK:
+      return <ClientPatientTransactions />
   }
 }
 
