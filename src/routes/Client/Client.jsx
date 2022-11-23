@@ -4,7 +4,7 @@ import Patient from './Patient/Patient'
 import Navbar from '../../components/Client/Navbar'
 
 const Client = () => {
-  const [role, setRole] = useState('patient')
+  const [role, setRole] = useState('')
 
   useEffect(() => {
     setRole('patient')
