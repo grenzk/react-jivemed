@@ -4,11 +4,9 @@ import {
   RouterProvider,
   Route,
 } from 'react-router-dom'
-import { NavigationProgress } from '@mantine/nprogress'
 import {
   SIGN_IN_LINK,
   SIGN_UP_LINK,
-  CLIENT_LINK,
   CLIENT_DASHBOARD_LINK,
   CLIENT_PATIENTS_LINK,
   CLIENT_DOCTORS_LINK,
@@ -25,7 +23,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<Root />} errorElement={<Error />} />
       <Route path={SIGN_IN_LINK} element={<Auth />} caseSensitive />
       <Route path={SIGN_UP_LINK} element={<Auth />} caseSensitive />
-      <Route errorElement={<Client />}>
+      <Route errorElement={<Error />}>
         <Route
           path={CLIENT_DASHBOARD_LINK}
           element={<Client />}
@@ -46,7 +44,6 @@ const router = createBrowserRouter(
 const App = () => {
   return (
     <div className="App">
-      <NavigationProgress />
       <RouterProvider router={router} />
     </div>
   )
