@@ -11,6 +11,8 @@ import {
   CLIENT_PATIENTS_LINK,
   CLIENT_DOCTORS_LINK,
   CLIENT_DEPARTMENTS_LINK,
+  CLIENT_AVAILABLE_SCHEDULES_LINK,
+  CLIENT_TRANSACTIONS_LINK,
 } from './services/constants/links'
 import Root from './routes/Root'
 import Error from './routes/Error'
@@ -33,6 +35,16 @@ const router = createBrowserRouter(
         <Route path={CLIENT_PATIENTS_LINK} element={<Client />} caseSensitive />
         <Route
           path={CLIENT_DEPARTMENTS_LINK}
+          element={<Client />}
+          caseSensitive
+        />
+        <Route
+          path={CLIENT_AVAILABLE_SCHEDULES_LINK}
+          element={<Client />}
+          caseSensitive
+        />
+        <Route
+          path={CLIENT_TRANSACTIONS_LINK}
           element={<Client />}
           caseSensitive
         />
