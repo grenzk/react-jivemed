@@ -37,8 +37,8 @@ const DepartmentsTable = () => {
   const [scrolled, setScrolled] = useState(false)
   const theme = useMantineTheme()
 
-  const rows = data.map((row) => (
-    <tr key={row.name}>
+  const rows = data.map((row, index) => (
+    <tr key={index}>
       <td>{row.id}</td>
       <td>{row.name}</td>
       <td>{row.email}</td>
