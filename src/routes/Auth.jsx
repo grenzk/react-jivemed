@@ -43,12 +43,12 @@ const Auth = () => {
     )
 
   return (
-    <div className={classes.wrapper}>
-      <Paper className={classes.form} radius={0} p={30}>
+    <div className={classes.authWrapper}>
+      <Paper className={classes.authForm} radius={0} p={30}>
         <Logo />
         <Title
           order={2}
-          className={classes.title}
+          className={classes.authTitle}
           align="center"
           mt="md"
           mb={50}

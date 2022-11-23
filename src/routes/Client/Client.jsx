@@ -7,7 +7,7 @@ const Client = () => {
   const [role, setRole] = useState('')
 
   useEffect(() => {
-    setRole('patient')
+    setRole('admin')
   }, [])
 
   const displayPage = () => {

@@ -74,8 +74,8 @@ const Navbar = ({ role }) => {
       <a
         key={link.label}
         href={link.link}
-        className={cx(classes.link, {
-          [classes.linkActive]: active === link.link,
+        className={cx(classes.navbarLink, {
+          [classes.navbarLinkActive]: active === link.link,
         })}
         onClick={() => {
           setActive(link.link)
@@ -88,12 +88,12 @@ const Navbar = ({ role }) => {
   }
 
   return (
-    <Header height={HEADER_HEIGHT} mb={30} className={classes.root}>
-      <Container size={1250} className={classes.header}>
+    <Header height={HEADER_HEIGHT} mb={30} className={classes.navbarRoot}>
+      <Container size={1250} className={classes.navbarHeader}>
         <Logo />
 
         <Group>
-          <Group spacing={8} className={classes.links}>
+          <Group spacing={8} className={classes.navbarLinks}>
             {showItems()}
           </Group>
 
@@ -108,13 +108,13 @@ const Navbar = ({ role }) => {
         <Burger
           opened={opened}
           onClick={toggle}
-          className={classes.burger}
+          className={classes.navbarBurger}
           size="sm"
         />
 
         <Transition transition="pop-top-right" duration={200} mounted={opened}>
           {(styles) => (
-            <Paper className={classes.dropdown} withBorder style={styles}>
+            <Paper className={classes.navbarDropdown} withBorder style={styles}>
               {showItems()}
             </Paper>
           )}
