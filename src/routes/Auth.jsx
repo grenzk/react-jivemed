@@ -1,7 +1,6 @@
 import { useLocation } from 'react-router-dom'
-import { Paper, createStyles, Title } from '@mantine/core'
+import { Paper, Title } from '@mantine/core'
 import Logo from '../components/Logo'
-import bgImage from '../assets/img/sign-in.svg'
 import SignInForm from '../components/SignIn/Form/SignInForm'
 import SignUpForm from '../components/SignUp/Form/SignUpForm'
 import { SIGN_IN_LINK } from '../services/constants/links'
@@ -11,36 +10,7 @@ import {
   USER_SIGN_UP_ENDPOINT,
 } from '../services/constants/endpoints'
 import { setCookie } from '../services/utilities/cookie'
-
-const useStyles = createStyles((theme) => ({
-  wrapper: {
-    minHeight: '100vh',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: '105%',
-    backgroundImage: `url(${bgImage})`,
-
-    [`@media (min-width: ${theme.breakpoints.xl}px)`]: {
-      backgroundPosition: '85%',
-    },
-  },
-
-  form: {
-    borderRight: `1px solid ${
-      theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[3]
-    }`,
-    minHeight: '100vh',
-    maxWidth: 450,
-    paddingTop: 80,
-
-    [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
-      maxWidth: '100%',
-    },
-  },
-
-  title: {
-    color: theme.colorScheme === 'dark' ? theme.white : theme.black,
-  },
-}))
+import useStyles from '../services/hooks/useStyles'
 
 const Auth = () => {
   const location = useLocation()

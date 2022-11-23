@@ -1,7 +1,36 @@
 import { createStyles } from '@mantine/core'
 import { HEADER_HEIGHT } from '../constants/styles'
+import bgImage from '../../assets/img/sign-in.svg'
 
 const useStyles = createStyles((theme) => ({
+  wrapper: {
+    minHeight: '100vh',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: '105%',
+    backgroundImage: `url(${bgImage})`,
+
+    [`@media (min-width: ${theme.breakpoints.xl}px)`]: {
+      backgroundPosition: '85%',
+    },
+  },
+
+  form: {
+    borderRight: `1px solid ${
+      theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[3]
+    }`,
+    minHeight: '100vh',
+    maxWidth: 450,
+    paddingTop: 80,
+
+    [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
+      maxWidth: '100%',
+    },
+  },
+
+  title: {
+    color: theme.colorScheme === 'dark' ? theme.white : theme.black,
+  },
+
   root: {
     position: 'relative',
     zIndex: 1,
