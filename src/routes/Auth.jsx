@@ -15,8 +15,11 @@ import {
 import { setCookie } from '../services/utilities/cookie'
 import useStyles from '../services/hooks/useStyles'
 import { accessTokenCookie } from '../services/constants/cookies'
+import useRedirect from '../services/hooks/useRedirect'
 
 const Auth = () => {
+  useRedirect()
+
   const location = useLocation()
   const { classes } = useStyles()
 

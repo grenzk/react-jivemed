@@ -5,7 +5,10 @@ import { SH0W_CURRENT_USER_ENDPOINT } from '../constants/endpoints'
 
 export const isLoggedIn = () => {
   const accessToken = getCookie(accessTokenCookie)
-  const headers = { Authorization: accessToken }
+  const headers = {
+    'Access-Control-Allow-Origin': '*',
+    Authorization: accessToken,
+  }
 
   if (accessToken === '') {
     return false
