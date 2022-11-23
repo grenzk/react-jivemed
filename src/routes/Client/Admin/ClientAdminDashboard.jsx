@@ -23,6 +23,7 @@ const data = [
 
 const ClientAdminDashboard = () => {
   const { classes } = useStyles()
+
   const stats = data.map((stat) => {
     const Icon = stat.icon
 
