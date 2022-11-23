@@ -5,6 +5,8 @@ import {
   CLIENT_PATIENTS_LINK,
 } from '../../../services/constants/links'
 import ClientDoctorDashboard from './ClientDoctorDashboard'
+import ClientDoctorAppointments from './ClientDoctorAppointments'
+import ClientDoctorPatients from './ClientDoctorPatients'
 
 const Doctor = () => {
   const location = useLocation()
@@ -13,9 +15,9 @@ const Doctor = () => {
     case CLIENT_DASHBOARD_LINK:
       return <ClientDoctorDashboard />
     case CLIENT_APPOINTMENTS_LINK:
-      return <ClientPatientAvailableSchedules />
+      return <ClientDoctorAppointments />
     case CLIENT_PATIENTS_LINK:
-      return <ClientPatientDoctors />
+      return <ClientDoctorPatients />
   }
 }
 
