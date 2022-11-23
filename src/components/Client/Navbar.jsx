@@ -20,6 +20,7 @@ import {
 import { useDisclosure } from '@mantine/hooks'
 import Logo from '../Logo'
 import { TbLogout } from 'react-icons/tb'
+import { adminNavLinks } from '../../services/constants/navLinks'
 
 const HEADER_HEIGHT = 70
 
@@ -102,28 +103,23 @@ const useStyles = createStyles((theme) => ({
   },
 }))
 
-const links = [
-  { link: CLIENT_DASHBOARD_LINK, label: 'Dashboard' },
-  { link: CLIENT_DOCTORS_LINK, label: 'Doctors' },
-  { link: CLIENT_PATIENTS_LINK, label: 'Patients' },
-  { link: CLIENT_DEPARTMENTS_LINK, label: 'Departments' },
-]
-
 const Navbar = () => {
   const [opened, { toggle, close }] = useDisclosure(false)
+
   const [active, setActive] = useState('')
+
   const { classes, cx } = useStyles()
+
   const location = useLocation()
 
-  const items = links.map((link) => (
+  const items = adminNavLinks.map((link) => (
     <a
       key={link.label}
       href={link.link}
       className={cx(classes.link, {
         [classes.linkActive]: active === link.link,
       })}
-      onClick={(event) => {
-        // event.preventDefault()
+      onClick={() => {
         setActive(link.link)
         close()
       }}
@@ -136,19 +132,20 @@ const Navbar = () => {
     const setActiveLink = () => {
       switch (location.pathname) {
         case CLIENT_DASHBOARD_LINK:
-          setActive(links[0].link)
+          setActive(CLIENT_DASHBOARD_LINK)
           break
         case CLIENT_DOCTORS_LINK:
-          setActive(links[1].link)
+          setActive(CLIENT_DOCTORS_LINK)
           break
         case CLIENT_PATIENTS_LINK:
-          setActive(links[2].link)
+          setActive(CLIENT_PATIENTS_LINK)
           break
         case CLIENT_DEPARTMENTS_LINK:
-          setActive(links[3].link)
+          setActive(CLIENT_DEPARTMENTS_LINK)
           break
       }
     }
+
     setActiveLink()
   }, [location])
 
