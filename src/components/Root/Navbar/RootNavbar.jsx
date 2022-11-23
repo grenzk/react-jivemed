@@ -11,23 +11,9 @@ import {
   ScrollArea,
 } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import { TbCalendarPlus } from 'react-icons/tb'
 import Logo from '../../Logo'
 import { SIGN_IN_LINK, SIGN_UP_LINK } from '../../../services/constants/links'
-
-const useStyles = createStyles((theme) => ({
-  hiddenMobile: {
-    [theme.fn.smallerThan('sm')]: {
-      display: 'none',
-    },
-  },
-
-  hiddenDesktop: {
-    [theme.fn.largerThan('sm')]: {
-      display: 'none',
-    },
-  },
-}))
+import useStyles from '../../../services/hooks/useStyles'
 
 const RootNavbar = () => {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =

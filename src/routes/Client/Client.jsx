@@ -18,9 +18,10 @@ const Client = () => {
         return <Patient />
     }
   }
+
   return (
     <>
-      <Navbar />
+      <Navbar role={role} />
       {displayPage()}
     </>
   )
