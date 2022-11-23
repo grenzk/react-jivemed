@@ -16,6 +16,7 @@ import {
   Transition,
   Avatar,
   Divider,
+  ActionIcon,
 } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import Logo from '../Logo'
@@ -167,7 +168,9 @@ const Navbar = () => {
           <Avatar color="cyan" radius="xl">
             MK
           </Avatar>
-          <TbLogout size={24} color="gray" />
+          <ActionIcon variant="transparent">
+            <TbLogout size={24} color="gray" />
+          </ActionIcon>
         </Group>
 
         <Burger
