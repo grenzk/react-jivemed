@@ -11,7 +11,7 @@ import {
   TbStethoscope,
   TbUser,
   TbClipboardList,
-  TbCreditCard,
+  TbMedicalCross,
 } from 'react-icons/tb'
 
 const useStyles = createStyles((theme) => ({
@@ -41,8 +41,7 @@ const useStyles = createStyles((theme) => ({
 const data = [
   { title: 'Doctors', icon: TbStethoscope, value: 25 },
   { title: 'Patients', icon: TbUser, value: 40 },
-  { title: 'Appointments', icon: TbClipboardList, value: 25 },
-  { title: 'Transactions', icon: TbCreditCard, value: 30 },
+  { title: 'Departments', icon: TbMedicalCross, value: 25 },
 ]
 
 const ClientAdminDashboard = () => {
@@ -70,7 +69,7 @@ const ClientAdminDashboard = () => {
       <Stack>
         <Title order={2}>Dashboard</Title>
         <SimpleGrid
-          cols={4}
+          cols={3}
           breakpoints={[
             { maxWidth: 'md', cols: 2 },
             { maxWidth: 'xs', cols: 1 },
