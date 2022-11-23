@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import {
   CLIENT_DASHBOARD_LINK,
   CLIENT_DOCTORS_LINK,
@@ -18,7 +19,7 @@ import {
 } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import Logo from '../Logo'
-import { TbLogout } from "react-icons/tb";
+import { TbLogout } from 'react-icons/tb'
 
 const HEADER_HEIGHT = 70
 
@@ -110,8 +111,9 @@ const links = [
 
 const Navbar = () => {
   const [opened, { toggle, close }] = useDisclosure(false)
-  const [active, setActive] = useState(links[0].link)
+  const [active, setActive] = useState('')
   const { classes, cx } = useStyles()
+  const location = useLocation()
 
   const items = links.map((link) => (
     <a
@@ -130,6 +132,26 @@ const Navbar = () => {
     </a>
   ))
 
+  useEffect(() => {
+    const setActiveLink = () => {
+      switch (location.pathname) {
+        case CLIENT_DASHBOARD_LINK:
+          setActive(links[0].link)
+          break
+        case CLIENT_DOCTORS_LINK:
+          setActive(links[1].link)
+          break
+        case CLIENT_PATIENTS_LINK:
+          setActive(links[2].link)
+          break
+        case CLIENT_DEPARTMENTS_LINK:
+          setActive(links[3].link)
+          break
+      }
+    }
+    setActiveLink()
+  }, [location])
+
   return (
     <Header height={HEADER_HEIGHT} mb={30} className={classes.root}>
       <Container size={1250} className={classes.header}>
@@ -145,7 +167,7 @@ const Navbar = () => {
           <Avatar color="cyan" radius="xl">
             MK
           </Avatar>
-          <TbLogout size={24} color='gray' />
+          <TbLogout size={24} color="gray" />
         </Group>
 
         <Burger
