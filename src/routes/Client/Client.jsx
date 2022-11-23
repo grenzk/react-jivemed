@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react'
+import Navbar from '../../components/Client/Navbar'
 import Admin from './Admin/Admin'
 import Patient from './Patient/Patient'
-import Navbar from '../../components/Client/Navbar'
+import Doctor from './Doctor/Doctor'
 
 const Client = () => {
   const [role, setRole] = useState('')
 
   useEffect(() => {
-    setRole('admin')
+    setRole('doctor')
   }, [])
 
   const displayPage = () => {
@@ -16,6 +17,8 @@ const Client = () => {
         return <Admin />
       case 'patient':
         return <Patient />
+      case 'doctor':
+        return <Doctor />
     }
   }
 
