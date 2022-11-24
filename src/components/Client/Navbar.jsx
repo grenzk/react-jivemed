@@ -20,7 +20,7 @@ import { adminNavLinks, userNavLinks, doctorNavLinks } from '../../services/cons
 import { deleteCookie } from '../../services/utilities/cookie'
 import { accessTokenCookie } from '../../services/constants/cookies'
 
-const Navbar = ({ user, avatar, role }) => {
+const Navbar = ({ avatar, role }) => {
   const [opened, { toggle, close }] = useDisclosure(false)
 
   const [active, setActive] = useState('')
@@ -104,14 +104,11 @@ const Navbar = ({ user, avatar, role }) => {
     <Header height={HEADER_HEIGHT} mb={30} className={classes.navbarRoot}>
       <Container size={1250} className={classes.navbarHeader}>
         <Logo />
-
         <Group>
           <Group spacing={8} className={classes.navbarLinks}>
             {showItems()}
           </Group>
-
           <Divider orientation="vertical" />
-
           <ActionIcon>
             <Avatar color="cyan" radius="xl">
               {avatar}
@@ -121,9 +118,7 @@ const Navbar = ({ user, avatar, role }) => {
             <TbLogout size={18} />
           </ActionIcon>
         </Group>
-
         <Burger opened={opened} onClick={toggle} className={classes.navbarBurger} size="sm" />
-
         <Transition transition="pop-top-right" duration={200} mounted={opened}>
           {(styles) => (
             <Paper className={classes.navbarDropdown} withBorder style={styles}>
