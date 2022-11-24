@@ -96,7 +96,18 @@ const PatientsTable = () => {
   }
 
   const handleSubmitEditPatient = (userInfo) => {
-    axiosPut(`${USERS_ENDPOINT}/${id}`, userInfo, headers).then((response) => {
+    axiosPut(
+      `${PATIENTS_ENDPOINT}/${userInfo.id}`,
+      {
+        user: {
+          first_name: userInfo.values.firstName,
+          last_name: userInfo.values.lastName,
+          email: userInfo.values.email,
+          password: userInfo.values.password,
+        },
+      },
+      headers
+    ).then((response) => {
       if (response.status === 200) {
         showSuccessNotification('User has been successfully updated!')
         getUsers()
@@ -181,7 +192,6 @@ const PatientsTable = () => {
               Add Patient
             </Button>
           </Group>
-
           <Paper shadow="xs" p="md">
             <ScrollArea sx={{ height: 450 }} onScrollPositionChange={({ y }) => setScrolled(y !== 0)}>
               <Table sx={{ minWidth: 1000 }} verticalSpacing="md">

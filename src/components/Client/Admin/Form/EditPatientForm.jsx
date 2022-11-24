@@ -18,7 +18,10 @@ const EditPatientForm = ({ user, onSubmit }) => {
   return (
     <form
       onSubmit={form.onSubmit((values) => {
-        onSubmit(values)
+        onSubmit({
+          id: user.id,
+          values,
+        })
         form.reset()
       })}
     >
