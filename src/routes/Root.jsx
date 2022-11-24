@@ -13,8 +13,11 @@ import { SIGN_UP_LINK } from '../services/constants/links.js'
 import { TbCheck } from 'react-icons/tb'
 import image from '../assets/img/hero.svg'
 import useStyles from '../services/hooks/useStyles.jsx'
+import useRedirect from '../services/hooks/useRedirect.jsx'
 
 const Root = () => {
+  useRedirect()
+
   const { classes } = useStyles()
 
   const handleGetStarted = () => window.location.assign(SIGN_UP_LINK)

@@ -17,6 +17,7 @@ import Logo from '../Logo'
 import { HEADER_HEIGHT } from '../../services/constants/styles'
 import useStyles from '../../services/hooks/useStyles'
 import {
+  SIGN_IN_LINK,
   CLIENT_DASHBOARD_LINK,
   CLIENT_PATIENTS_LINK,
   CLIENT_DOCTORS_LINK,
@@ -30,6 +31,8 @@ import {
   userNavLinks,
   doctorNavLinks,
 } from '../../services/constants/navLinks'
+import { deleteCookie } from '../../services/utilities/cookie'
+import { accessTokenCookie } from '../../services/constants/cookies'
 
 const Navbar = ({ role }) => {
   const [opened, { toggle, close }] = useDisclosure(false)
@@ -88,6 +91,11 @@ const Navbar = ({ role }) => {
     setActiveLink()
   }, [location])
 
+  const signOut = () => {
+    deleteCookie(accessTokenCookie)
+    window.location.assign(SIGN_IN_LINK)
+  }
+
   const showItems = () => {
     return navLinks.map((link) => (
       <a
@@ -121,7 +129,7 @@ const Navbar = ({ role }) => {
           <Avatar color="cyan" radius="xl">
             MK
           </Avatar>
-          <ActionIcon>
+          <ActionIcon onClick={signOut}>
             <TbLogout size={18} />
           </ActionIcon>
         </Group>
