@@ -1,18 +1,5 @@
-import {
-  Title,
-  createStyles,
-  Group,
-  Paper,
-  SimpleGrid,
-  Text,
-  Stack,
-} from '@mantine/core'
-import {
-  TbStethoscope,
-  TbUser,
-  TbClipboardList,
-  TbMedicalCross,
-} from 'react-icons/tb'
+import { Title, Group, Paper, SimpleGrid, Text, Stack } from '@mantine/core'
+import { TbStethoscope, TbUser, TbMedicalCross } from 'react-icons/tb'
 import useStyles from '../../../services/hooks/useStyles'
 
 const data = [
