@@ -18,9 +18,9 @@ const Client = () => {
   const [role, setRole] = useState('')
 
   useEffect(() => {
-    axiosGet(SH0W_CURRENT_USER_ENDPOINT, headers).then((response) => {
-      response.status === 200 && setRole(response.data.role.name)
-    })
+    axiosGet(SH0W_CURRENT_USER_ENDPOINT, headers).then(
+      (response) => response.status === 200 && setRole(response.data.role.name)
+    )
   }, [])
 
   const displayPage = () => {
