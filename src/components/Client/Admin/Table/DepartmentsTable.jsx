@@ -63,11 +63,7 @@ const DepartmentsTable = () => {
   return (
     <div>
       <Modal
-        overlayColor={
-          theme.colorScheme === 'dark'
-            ? theme.colors.dark[9]
-            : theme.colors.gray[2]
-        }
+        overlayColor={theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[2]}
         overlayOpacity={0.55}
         overlayBlur={3}
         centered
@@ -82,25 +78,11 @@ const DepartmentsTable = () => {
           })}
         >
           <Group mb="sm">
-            <TextInput
-              required
-              label="First Name"
-              {...form.getInputProps('firstName')}
-            />
-            <TextInput
-              required
-              label="Last Name"
-              {...form.getInputProps('lastName')}
-            />
+            <TextInput required label="First Name" {...form.getInputProps('firstName')} />
+            <TextInput required label="Last Name" {...form.getInputProps('lastName')} />
           </Group>
 
-          <TextInput
-            required
-            label="Email"
-            mb="sm"
-            icon={<TbMail size={16} />}
-            {...form.getInputProps('email')}
-          />
+          <TextInput required label="Email" mb="sm" icon={<TbMail size={16} />} {...form.getInputProps('email')} />
 
           <PasswordInput
             required
@@ -118,11 +100,7 @@ const DepartmentsTable = () => {
             {...form.getInputProps('confirmPassword')}
           />
 
-          <Button
-            variant="gradient"
-            gradient={{ from: 'indigo', to: 'cyan' }}
-            fullWidth={true}
-          >
+          <Button variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }} fullWidth={true}>
             Add Department
           </Button>
         </form>
@@ -132,20 +110,13 @@ const DepartmentsTable = () => {
         <Stack>
           <Group position="apart">
             <Title order={2}>Departments</Title>
-            <Button
-              variant="gradient"
-              gradient={{ from: 'indigo', to: 'cyan' }}
-              onClick={() => setOpened(true)}
-            >
+            <Button variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }} onClick={() => setOpened(true)}>
               Add Department
             </Button>
           </Group>
 
           <Paper shadow="xs" p="md">
-            <ScrollArea
-              sx={{ height: 450 }}
-              onScrollPositionChange={({ y }) => setScrolled(y !== 0)}
-            >
+            <ScrollArea sx={{ height: 450 }} onScrollPositionChange={({ y }) => setScrolled(y !== 0)}>
               <Table sx={{ minWidth: 1000 }} verticalSpacing="md">
                 <thead
                   className={cx(classes.tableHeader, {

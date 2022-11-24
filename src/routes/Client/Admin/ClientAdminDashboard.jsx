@@ -1,12 +1,4 @@
-import {
-  Title,
-  createStyles,
-  Group,
-  Paper,
-  SimpleGrid,
-  Text,
-  Stack,
-} from '@mantine/core'
+import { Title, Group, Paper, SimpleGrid, Text, Stack } from '@mantine/core'
 import { TbStethoscope, TbUser, TbMedicalCross } from 'react-icons/tb'
 import { VictoryPie } from 'victory'
 import useStyles from '../../../services/hooks/useStyles'
@@ -33,16 +25,11 @@ const ClientAdminDashboard = () => {
     return (
       <Paper withBorder p="md" radius="md" key={stat.title}>
         <Group position="apart">
-          <Text
-            size="xs"
-            color="dimmed"
-            className={classes.adminDashboardTitle}
-          >
+          <Text size="xs" color="dimmed" className={classes.adminDashboardTitle}>
             {stat.title}
           </Text>
           <Icon className={classes.adminDashboardIcon} size={22} />
         </Group>
-
         <Group align="flex-end" spacing="xs" mt={25}>
           <Text className={classes.adminDashboardValue}>{stat.value}</Text>
         </Group>
@@ -63,14 +50,8 @@ const ClientAdminDashboard = () => {
         >
           {stats}
         </SimpleGrid>
-
         <Paper withBorder={true}>
-          <VictoryPie
-            style={style}
-            colorScale="blue"
-            width={1200}
-            data={pieChartData}
-          />
+          <VictoryPie style={style} colorScale="blue" width={1200} data={pieChartData} />
         </Paper>
       </Stack>
     </div>

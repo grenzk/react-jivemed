@@ -1,9 +1,4 @@
-import {
-  createRoutesFromElements,
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-} from 'react-router-dom'
+import { createRoutesFromElements, createBrowserRouter, RouterProvider, Route } from 'react-router-dom'
 import {
   SIGN_IN_LINK,
   SIGN_UP_LINK,
@@ -29,41 +24,13 @@ const router = createBrowserRouter(
       <Route path={SIGN_UP_LINK} element={<Auth />} caseSensitive />
       <Route element={<ProtectedRoute />}>
         <Route errorElement={<Error />}>
-          <Route
-            path={CLIENT_DASHBOARD_LINK}
-            element={<Client />}
-            caseSensitive
-          />
-          <Route
-            path={CLIENT_DOCTORS_LINK}
-            element={<Client />}
-            caseSensitive
-          />
-          <Route
-            path={CLIENT_PATIENTS_LINK}
-            element={<Client />}
-            caseSensitive
-          />
-          <Route
-            path={CLIENT_DEPARTMENTS_LINK}
-            element={<Client />}
-            caseSensitive
-          />
-          <Route
-            path={CLIENT_AVAILABLE_SCHEDULES_LINK}
-            element={<Client />}
-            caseSensitive
-          />
-          <Route
-            path={CLIENT_APPOINTMENTS_LINK}
-            element={<Client />}
-            caseSensitive
-          />
-          <Route
-            path={CLIENT_TRANSACTIONS_LINK}
-            element={<Client />}
-            caseSensitive
-          />
+          <Route path={CLIENT_DASHBOARD_LINK} element={<Client />} caseSensitive />
+          <Route path={CLIENT_DOCTORS_LINK} element={<Client />} caseSensitive />
+          <Route path={CLIENT_PATIENTS_LINK} element={<Client />} caseSensitive />
+          <Route path={CLIENT_DEPARTMENTS_LINK} element={<Client />} caseSensitive />
+          <Route path={CLIENT_AVAILABLE_SCHEDULES_LINK} element={<Client />} caseSensitive />
+          <Route path={CLIENT_APPOINTMENTS_LINK} element={<Client />} caseSensitive />
+          <Route path={CLIENT_TRANSACTIONS_LINK} element={<Client />} caseSensitive />
         </Route>
       </Route>
     </>

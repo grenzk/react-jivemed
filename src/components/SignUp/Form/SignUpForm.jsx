@@ -1,11 +1,4 @@
-import {
-  TextInput,
-  PasswordInput,
-  Button,
-  Text,
-  Anchor,
-  Group,
-} from '@mantine/core'
+import { TextInput, PasswordInput, Button, Text, Anchor, Group } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { SIGN_IN_LINK } from '../../../services/constants/links'
 
@@ -41,29 +34,11 @@ const SignUpForm = ({ handleSignUp }) => {
       })}
     >
       <Group align="baseline" grow>
-        <TextInput
-          label="First Name"
-          size="md"
-          {...form.getInputProps('firstName')}
-        />
-        <TextInput
-          label="Last Name"
-          size="md"
-          {...form.getInputProps('lastName')}
-        />
+        <TextInput label="First Name" size="md" {...form.getInputProps('firstName')} />
+        <TextInput label="Last Name" size="md" {...form.getInputProps('lastName')} />
       </Group>
-      <TextInput
-        label="Email"
-        mt="md"
-        size="md"
-        {...form.getInputProps('email')}
-      />
-      <PasswordInput
-        label="Password"
-        mt="md"
-        size="md"
-        {...form.getInputProps('password')}
-      />
+      <TextInput label="Email" mt="md" size="md" {...form.getInputProps('email')} />
+      <PasswordInput label="Password" mt="md" size="md" {...form.getInputProps('password')} />
 
       <Button fullWidth mt="xl" size="md" type="submit">
         Sign up

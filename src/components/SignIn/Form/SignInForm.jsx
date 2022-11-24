@@ -23,12 +23,7 @@ const SignInForm = ({ handleSignIn }) => {
       })}
     >
       <TextInput label="Email" size="md" {...form.getInputProps('email')} />
-      <PasswordInput
-        label="Password"
-        mt="md"
-        size="md"
-        {...form.getInputProps('password')}
-      />
+      <PasswordInput label="Password" mt="md" size="md" {...form.getInputProps('password')} />
       <Button fullWidth mt="xl" size="md" type="submit">
         Sign in
       </Button>

@@ -1,16 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import {
-  Header,
-  Container,
-  Group,
-  Burger,
-  Paper,
-  Transition,
-  Avatar,
-  Divider,
-  ActionIcon,
-} from '@mantine/core'
+import { Header, Container, Group, Burger, Paper, Transition, Avatar, Divider, ActionIcon } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { TbLogout } from 'react-icons/tb'
 import Logo from '../Logo'
@@ -26,15 +16,11 @@ import {
   CLIENT_APPOINTMENTS_LINK,
   CLIENT_TRANSACTIONS_LINK,
 } from '../../services/constants/links'
-import {
-  adminNavLinks,
-  userNavLinks,
-  doctorNavLinks,
-} from '../../services/constants/navLinks'
+import { adminNavLinks, userNavLinks, doctorNavLinks } from '../../services/constants/navLinks'
 import { deleteCookie } from '../../services/utilities/cookie'
 import { accessTokenCookie } from '../../services/constants/cookies'
 
-const Navbar = ({ role }) => {
+const Navbar = ({ user, avatar, role }) => {
   const [opened, { toggle, close }] = useDisclosure(false)
 
   const [active, setActive] = useState('')
@@ -126,20 +112,17 @@ const Navbar = ({ role }) => {
 
           <Divider orientation="vertical" />
 
-          <Avatar color="cyan" radius="xl">
-            MK
-          </Avatar>
+          <ActionIcon>
+            <Avatar color="cyan" radius="xl">
+              {avatar}
+            </Avatar>
+          </ActionIcon>
           <ActionIcon onClick={signOut}>
             <TbLogout size={18} />
           </ActionIcon>
         </Group>
 
-        <Burger
-          opened={opened}
-          onClick={toggle}
-          className={classes.navbarBurger}
-          size="sm"
-        />
+        <Burger opened={opened} onClick={toggle} className={classes.navbarBurger} size="sm" />
 
         <Transition transition="pop-top-right" duration={200} mounted={opened}>
           {(styles) => (

@@ -1,23 +1,11 @@
-import {
-  createStyles,
-  Header,
-  Group,
-  Button,
-  Text,
-  Divider,
-  Box,
-  Burger,
-  Drawer,
-  ScrollArea,
-} from '@mantine/core'
+import { createStyles, Header, Group, Button, Text, Divider, Box, Burger, Drawer, ScrollArea } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import Logo from '../../Logo'
 import { SIGN_IN_LINK, SIGN_UP_LINK } from '../../../services/constants/links'
 import useStyles from '../../../services/hooks/useStyles'
 
 const RootNavbar = () => {
-  const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
-    useDisclosure(false)
+  const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false)
   const { classes, theme } = useStyles()
 
   const handleLogo = () => {
@@ -61,10 +49,7 @@ const RootNavbar = () => {
         zIndex={1000000}
       >
         <ScrollArea xsx={{ height: 'calc(100vh - 60px)' }} mx="-md">
-          <Divider
-            my="sm"
-            color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'}
-          />
+          <Divider my="sm" color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'} />
           <Group position="center" grow pb="xl" px="md">
             <Button variant="default" onClick={handleSignIn}>
               Sign in

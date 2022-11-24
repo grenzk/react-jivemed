@@ -73,9 +73,7 @@ const useStyles = createStyles((theme) => ({
   },
 
   authForm: {
-    borderRight: `1px solid ${
-      theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[3]
-    }`,
+    borderRight: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[3]}`,
     minHeight: '100vh',
     maxWidth: 450,
     paddingTop: 80,
@@ -101,10 +99,7 @@ const useStyles = createStyles((theme) => ({
   },
 
   adminDashboardIcon: {
-    color:
-      theme.colorScheme === 'dark'
-        ? theme.colors.dark[3]
-        : theme.colors.gray[4],
+    color: theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[4],
   },
 
   adminDashboardTitle: {
@@ -159,18 +154,12 @@ const useStyles = createStyles((theme) => ({
     padding: '8px 12px',
     borderRadius: theme.radius.sm,
     textDecoration: 'none',
-    color:
-      theme.colorScheme === 'dark'
-        ? theme.colors.dark[0]
-        : theme.colors.gray[7],
+    color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[7],
     fontSize: theme.fontSizes.sm,
     fontWeight: 500,
 
     '&:hover': {
-      backgroundColor:
-        theme.colorScheme === 'dark'
-          ? theme.colors.dark[6]
-          : theme.colors.gray[0],
+      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
     },
 
     [theme.fn.smallerThan('sm')]: {
@@ -185,8 +174,7 @@ const useStyles = createStyles((theme) => ({
         variant: 'light',
         color: theme.primaryColor,
       }).background,
-      color: theme.fn.variant({ variant: 'light', color: theme.primaryColor })
-        .color,
+      color: theme.fn.variant({ variant: 'light', color: theme.primaryColor }).color,
     },
   },
 
@@ -194,8 +182,7 @@ const useStyles = createStyles((theme) => ({
   tableHeader: {
     position: 'sticky',
     top: 0,
-    backgroundColor:
-      theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
     transition: 'box-shadow 150ms ease',
 
     '&::after': {
@@ -204,11 +191,7 @@ const useStyles = createStyles((theme) => ({
       left: 0,
       right: 0,
       bottom: 0,
-      borderBottom: `1px solid ${
-        theme.colorScheme === 'dark'
-          ? theme.colors.dark[3]
-          : theme.colors.gray[2]
-      }`,
+      borderBottom: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[3] : theme.colors.gray[2]}`,
     },
   },
 

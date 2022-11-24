@@ -1,10 +1,6 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import {
-  SIGN_IN_LINK,
-  SIGN_UP_LINK,
-  CLIENT_DASHBOARD_LINK,
-} from '../constants/links'
+import { SIGN_IN_LINK, SIGN_UP_LINK, CLIENT_DASHBOARD_LINK } from '../constants/links'
 import { accessTokenCookie } from '../constants/cookies'
 import { isLoggedIn } from '../utilities/isLoggedIn'
 import { getCookie } from '../utilities/cookie'
