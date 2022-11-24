@@ -13,8 +13,8 @@ export const isLoggedIn = () => {
   if (accessToken === '') {
     return false
   } else {
-    return axiosGet(SH0W_CURRENT_USER_ENDPOINT, headers).then((response) => {
-      return response.status === 200 ? true : false
-    })
+    return axiosGet(SH0W_CURRENT_USER_ENDPOINT, headers).then((response) =>
+      response.status === 200 ? true : false
+    )
   }
 }

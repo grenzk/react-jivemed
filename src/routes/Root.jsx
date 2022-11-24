@@ -66,13 +66,6 @@ const Root = () => {
               >
                 Get started
               </Button>
-              <Button
-                variant="default"
-                size="md"
-                className={classes.rootControl}
-              >
-                Source code
-              </Button>
             </Group>
           </div>
           <Image

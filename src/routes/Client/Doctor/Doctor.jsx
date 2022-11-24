@@ -7,6 +7,7 @@ import {
 import ClientDoctorDashboard from './ClientDoctorDashboard'
 import ClientDoctorAppointments from './ClientDoctorAppointments'
 import ClientDoctorPatients from './ClientDoctorPatients'
+import Error from '../../Error'
 
 const Doctor = () => {
   const location = useLocation()
@@ -18,6 +19,8 @@ const Doctor = () => {
       return <ClientDoctorAppointments />
     case CLIENT_PATIENTS_LINK:
       return <ClientDoctorPatients />
+    default:
+      return <Error />
   }
 }
 

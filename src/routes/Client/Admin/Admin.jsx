@@ -9,6 +9,7 @@ import ClientAdminDashboard from './ClientAdminDashboard'
 import ClientAdminDoctors from './ClientAdminDoctors'
 import ClientAdminPatients from './ClientAdminPatients'
 import ClientAdminDepartments from './ClientAdminDepartments'
+import Error from '../../Error'
 
 const Admin = () => {
   const location = useLocation()
@@ -22,6 +23,8 @@ const Admin = () => {
       return <ClientAdminPatients />
     case CLIENT_DEPARTMENTS_LINK:
       return <ClientAdminDepartments />
+    default:
+      return <Error />
   }
 }
 
