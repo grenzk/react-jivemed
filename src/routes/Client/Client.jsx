@@ -9,7 +9,7 @@ import { getCookie } from '../../services/utilities/cookie'
 import { axiosGet } from '../../services/utilities/axios'
 import { SH0W_CURRENT_USER_ENDPOINT } from '../../services/constants/endpoints'
 import VerifyEmail from './VerifyEmail'
-import { VERIFY_EMAIL_LINK } from '../../services/constants/links'
+import { CLIENT_DASHBOARD_LINK, VERIFY_EMAIL_LINK } from '../../services/constants/links'
 
 const Client = () => {
   const accessToken = getCookie(accessTokenCookie)
@@ -26,22 +26,23 @@ const Client = () => {
   const [role, setRole] = useState('')
 
   useEffect(() => {
+    const urlPath = `/${window.location.pathname.split('/')[1]}`
+
     axiosGet(SH0W_CURRENT_USER_ENDPOINT, headers).then((response) => {
       if (response.status === 200) {
         setAvatar(`${response.data.user.first_name.charAt(0)}${response.data.user.last_name.charAt(0)}`)
         setEmail(response.data.user.email)
-        setIsEmailVerified(response.data.user.email_verified)
         setRole(response.data.role.name)
+
+        if (response.data.user.email_verified) {
+          setIsEmailVerified(true)
+          navigate(CLIENT_DASHBOARD_LINK)
+        } else {
+          setIsEmailVerified(false)
+          navigate(VERIFY_EMAIL_LINK)
+        }
       }
     })
-  }, [])
-
-  useEffect(() => {
-    const urlPath = `/${window.location.pathname.split('/')[1]}`
-
-    if (!isEmailVerified && urlPath !== VERIFY_EMAIL_LINK) {
-      navigate(VERIFY_EMAIL_LINK)
-    }
   }, [])
 
   const displayPage = () => {
