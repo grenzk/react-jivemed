@@ -2,6 +2,7 @@ import { createRoutesFromElements, createBrowserRouter, RouterProvider, Route } 
 import {
   SIGN_IN_LINK,
   SIGN_UP_LINK,
+  VERIFY_EMAIL_LINK,
   CLIENT_DASHBOARD_LINK,
   CLIENT_PATIENTS_LINK,
   CLIENT_DOCTORS_LINK,
@@ -31,6 +32,7 @@ const router = createBrowserRouter(
           <Route path={CLIENT_AVAILABLE_SCHEDULES_LINK} element={<Client />} caseSensitive />
           <Route path={CLIENT_APPOINTMENTS_LINK} element={<Client />} caseSensitive />
           <Route path={CLIENT_TRANSACTIONS_LINK} element={<Client />} caseSensitive />
+          <Route path={VERIFY_EMAIL_LINK} element={<Client />} caseSensitive />
         </Route>
       </Route>
     </>

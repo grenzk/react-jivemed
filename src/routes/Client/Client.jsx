@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Navbar from '../../components/Client/Navbar'
 import Admin from './Admin/Admin'
 import Patient from './Patient/Patient'
@@ -8,6 +9,7 @@ import { getCookie } from '../../services/utilities/cookie'
 import { axiosGet } from '../../services/utilities/axios'
 import { SH0W_CURRENT_USER_ENDPOINT } from '../../services/constants/endpoints'
 import VerifyEmail from './VerifyEmail'
+import { VERIFY_EMAIL_LINK } from '../../services/constants/links'
 
 const Client = () => {
   const accessToken = getCookie(accessTokenCookie)
@@ -15,6 +17,8 @@ const Client = () => {
     'Access-Control-Allow-Origin': '*',
     Authorization: accessToken,
   }
+
+  const navigate = useNavigate()
 
   const [email, setEmail] = useState('')
   const [isEmailVerified, setIsEmailVerified] = useState(false)
@@ -30,6 +34,14 @@ const Client = () => {
         setRole(response.data.role.name)
       }
     })
+  }, [])
+
+  useEffect(() => {
+    const urlPath = `/${window.location.pathname.split('/')[1]}`
+
+    if (!isEmailVerified && urlPath !== VERIFY_EMAIL_LINK) {
+      navigate(VERIFY_EMAIL_LINK)
+    }
   }, [])
 
   const displayPage = () => {
@@ -51,8 +63,9 @@ const Client = () => {
           {displayPage()}
         </>
       )
+    } else {
+      return <VerifyEmail avatar={avatar} email={email} />
     }
-    return <VerifyEmail avatar={avatar} email={email} />
   }
 
   return checkEmailVerified()
