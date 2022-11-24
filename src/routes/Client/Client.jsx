@@ -19,9 +19,7 @@ const Client = () => {
 
   useEffect(() => {
     axiosGet(SH0W_CURRENT_USER_ENDPOINT, headers).then((response) => {
-      if (response.status === 200) {
-        setRole(response.data.role.name)
-      }
+      response.status === 200 && setRole(response.data.role.name)
     })
   }, [])
 
