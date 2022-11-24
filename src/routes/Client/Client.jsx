@@ -17,7 +17,7 @@ const Client = () => {
   }
 
   const [email, setEmail] = useState('')
-  const [emailVerified, setEmailVerified] = useState(false)
+  const [isEmailVerified, setIsEmailVerified] = useState(false)
   const [avatar, setAvatar] = useState('')
   const [role, setRole] = useState('')
 
@@ -26,7 +26,7 @@ const Client = () => {
       if (response.status === 200) {
         setAvatar(`${response.data.user.first_name.charAt(0)}${response.data.user.last_name.charAt(0)}`)
         setEmail(response.data.user.email)
-        setEmailVerified(response.data.user.email_verified)
+        setIsEmailVerified(response.data.user.email_verified)
         setRole(response.data.role.name)
       }
     })
@@ -44,7 +44,7 @@ const Client = () => {
   }
 
   const checkEmailVerified = () => {
-    if (emailVerified) {
+    if (isEmailVerified) {
       return (
         <>
           <Navbar avatar={avatar} role={role} />
