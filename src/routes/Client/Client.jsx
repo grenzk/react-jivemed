@@ -23,11 +23,7 @@ const Client = () => {
     axiosGet(SH0W_CURRENT_USER_ENDPOINT, headers).then((response) => {
       if (response.status === 200) {
         setUser(response.data.user)
-        setAvatar(
-          `${response.data.user.first_name.charAt(
-            0
-          )}${response.data.user.last_name.charAt(0)}`
-        )
+        setAvatar(`${response.data.user.first_name.charAt(0)}${response.data.user.last_name.charAt(0)}`)
         setRole(response.data.role.name)
       }
     })

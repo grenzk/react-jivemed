@@ -1,13 +1,4 @@
-import {
-  Image,
-  Container,
-  Title,
-  Button,
-  Group,
-  Text,
-  List,
-  ThemeIcon,
-} from '@mantine/core'
+import { Image, Container, Title, Button, Group, Text, List, ThemeIcon } from '@mantine/core'
 import RootNavbar from '../components/Root/Navbar/RootNavbar'
 import { SIGN_UP_LINK } from '../services/constants/links'
 import { TbCheck } from 'react-icons/tb'
@@ -28,9 +19,7 @@ const Root = () => {
       <Container>
         <div className={classes.rootInner}>
           <div className={classes.rootContent}>
-            <Title className={classes.rootTitle}>
-              Skip the lines, and meet your doctor
-            </Title>
+            <Title className={classes.rootTitle}>Skip the lines, and meet your doctor</Title>
             <Text color="dimmed" mt="xl" size="lg">
               No stress added. Focus on what really matters.
               <br />
@@ -59,21 +48,12 @@ const Root = () => {
             </List>
 
             <Group mt={30}>
-              <Button
-                size="md"
-                className={classes.rootControl}
-                onClick={handleGetStarted}
-              >
+              <Button size="md" className={classes.rootControl} onClick={handleGetStarted}>
                 Get started
               </Button>
             </Group>
           </div>
-          <Image
-            src={image}
-            className={classes.rootImage}
-            width={400}
-            height={400}
-          />
+          <Image src={image} className={classes.rootImage} width={400} height={400} />
         </div>
       </Container>
     </div>

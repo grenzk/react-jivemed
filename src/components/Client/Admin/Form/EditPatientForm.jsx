@@ -23,32 +23,11 @@ const EditPatientForm = ({ user, onSubmit }) => {
       })}
     >
       <Group mb="sm">
-        <TextInput
-          required
-          label="First Name"
-          icon={<TbUser />}
-          {...form.getInputProps('firstName')}
-        />
-        <TextInput
-          required
-          label="Last Name"
-          icon={<TbUser />}
-          {...form.getInputProps('lastName')}
-        />
+        <TextInput required label="First Name" icon={<TbUser />} {...form.getInputProps('firstName')} />
+        <TextInput required label="Last Name" icon={<TbUser />} {...form.getInputProps('lastName')} />
       </Group>
-      <TextInput
-        required
-        label="Email"
-        mb="xl"
-        icon={<TbMail />}
-        {...form.getInputProps('email')}
-      />
-      <Button
-        variant="gradient"
-        gradient={{ from: 'indigo', to: 'cyan' }}
-        fullWidth={true}
-        type="submit"
-      >
+      <TextInput required label="Email" mb="xl" icon={<TbMail />} {...form.getInputProps('email')} />
+      <Button variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }} fullWidth={true} type="submit">
         Submit
       </Button>
     </form>

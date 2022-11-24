@@ -17,11 +17,7 @@ const ClientAdminDashboard = () => {
     return (
       <Paper withBorder p="md" radius="md" key={stat.title}>
         <Group position="apart">
-          <Text
-            size="xs"
-            color="dimmed"
-            className={classes.adminDashboardTitle}
-          >
+          <Text size="xs" color="dimmed" className={classes.adminDashboardTitle}>
             {stat.title}
           </Text>
           <Icon className={classes.adminDashboardIcon} size={22} />

@@ -34,39 +34,12 @@ const AddPatientForm = ({ onSubmit }) => {
       })}
     >
       <Group mb="sm">
-        <TextInput
-          required
-          label="First Name"
-          icon={<TbUser />}
-          {...form.getInputProps('firstName')}
-        />
-        <TextInput
-          required
-          label="Last Name"
-          icon={<TbUser />}
-          {...form.getInputProps('lastName')}
-        />
+        <TextInput required label="First Name" icon={<TbUser />} {...form.getInputProps('firstName')} />
+        <TextInput required label="Last Name" icon={<TbUser />} {...form.getInputProps('lastName')} />
       </Group>
-      <TextInput
-        required
-        label="Email"
-        mb="sm"
-        icon={<TbMail />}
-        {...form.getInputProps('email')}
-      />
-      <PasswordInput
-        required
-        label="Password"
-        mb="xl"
-        icon={<TbLock />}
-        {...form.getInputProps('password')}
-      />
-      <Button
-        variant="gradient"
-        gradient={{ from: 'indigo', to: 'cyan' }}
-        fullWidth={true}
-        type="submit"
-      >
+      <TextInput required label="Email" mb="sm" icon={<TbMail />} {...form.getInputProps('email')} />
+      <PasswordInput required label="Password" mb="xl" icon={<TbLock />} {...form.getInputProps('password')} />
+      <Button variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }} fullWidth={true} type="submit">
         Submit
       </Button>
     </form>

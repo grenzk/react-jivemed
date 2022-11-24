@@ -16,15 +16,8 @@ import { TbPencil, TbTrash } from 'react-icons/tb'
 import useStyles from '../../../../services/hooks/useStyles'
 import { accessTokenCookie } from '../../../../services/constants/cookies'
 import { getCookie } from '../../../../services/utilities/cookie'
-import {
-  axiosGet,
-  axiosPost,
-  axiosDelete,
-} from '../../../../services/utilities/axios'
-import {
-  PATIENTS_ENDPOINT,
-  USER_ENDPOINT,
-} from '../../../../services/constants/endpoints'
+import { axiosGet, axiosPost, axiosDelete } from '../../../../services/utilities/axios'
+import { PATIENTS_ENDPOINT, USER_ENDPOINT } from '../../../../services/constants/endpoints'
 import EditPatientForm from '../Form/EditPatientForm'
 import AddPatientForm from '../Form/AddPatientForm'
 import DeletePatientForm from '../Form/DeletePatientForm'
@@ -105,13 +98,9 @@ const PatientsTable = () => {
       case 'add':
         return <AddPatientForm onSubmit={handleSubmitAddPatient} />
       case 'edit':
-        return (
-          <EditPatientForm user={user} onSubmit={handleSubmitEditPatient} />
-        )
+        return <EditPatientForm user={user} onSubmit={handleSubmitEditPatient} />
       case 'delete':
-        return (
-          <DeletePatientForm user={user} onSubmit={handleSubmitDeletePatient} />
-        )
+        return <DeletePatientForm user={user} onSubmit={handleSubmitDeletePatient} />
     }
   }
 
@@ -147,11 +136,7 @@ const PatientsTable = () => {
   return (
     <div>
       <Modal
-        overlayColor={
-          theme.colorScheme === 'dark'
-            ? theme.colors.dark[9]
-            : theme.colors.gray[2]
-        }
+        overlayColor={theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[2]}
         overlayOpacity={0.55}
         overlayBlur={3}
         centered
@@ -166,20 +151,13 @@ const PatientsTable = () => {
         <Stack>
           <Group position="apart">
             <Title order={2}>Patients</Title>
-            <Button
-              variant="gradient"
-              gradient={{ from: 'indigo', to: 'cyan' }}
-              onClick={handleAddModal}
-            >
+            <Button variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }} onClick={handleAddModal}>
               Add Patient
             </Button>
           </Group>
 
           <Paper shadow="xs" p="md">
-            <ScrollArea
-              sx={{ height: 450 }}
-              onScrollPositionChange={({ y }) => setScrolled(y !== 0)}
-            >
+            <ScrollArea sx={{ height: 450 }} onScrollPositionChange={({ y }) => setScrolled(y !== 0)}>
               <Table sx={{ minWidth: 1000 }} verticalSpacing="md">
                 <thead
                   className={cx(classes.header, {
