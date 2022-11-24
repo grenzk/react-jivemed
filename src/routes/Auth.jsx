@@ -10,7 +10,7 @@ import {
 import { axiosPost } from '../services/utilities/axios'
 import {
   SIGN_IN_ENDPOINT,
-  SIGN_UP_ENDPOINT,
+  PATIENTS_ENDPOINT,
 } from '../services/constants/endpoints'
 import { setCookie } from '../services/utilities/cookie'
 import useStyles from '../services/hooks/useStyles'
@@ -24,7 +24,7 @@ const Auth = () => {
   const { classes } = useStyles()
 
   const handleSignUp = (userInfo) => {
-    axiosPost(SIGN_UP_ENDPOINT, userInfo).then((response) => {
+    axiosPost(PATIENTS_ENDPOINT, userInfo).then((response) => {
       console.log(response.data)
     })
   }
