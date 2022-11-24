@@ -4,12 +4,12 @@ import Navbar from '../../components/Client/Navbar'
 import Admin from './Admin/Admin'
 import Patient from './Patient/Patient'
 import Doctor from './Doctor/Doctor'
+import VerifyEmail from './VerifyEmail'
 import { accessTokenCookie } from '../../services/constants/cookies'
+import { SH0W_CURRENT_USER_ENDPOINT } from '../../services/constants/endpoints'
+import { CLIENT_DASHBOARD_LINK, VERIFY_EMAIL_LINK } from '../../services/constants/links'
 import { getCookie } from '../../services/utilities/cookie'
 import { axiosGet } from '../../services/utilities/axios'
-import { SH0W_CURRENT_USER_ENDPOINT } from '../../services/constants/endpoints'
-import VerifyEmail from './VerifyEmail'
-import { CLIENT_DASHBOARD_LINK, VERIFY_EMAIL_LINK } from '../../services/constants/links'
 
 const Client = () => {
   const accessToken = getCookie(accessTokenCookie)
@@ -36,7 +36,10 @@ const Client = () => {
 
         if (response.data.user.email_verified) {
           setIsEmailVerified(true)
-          navigate(CLIENT_DASHBOARD_LINK)
+
+          if (urlPath === VERIFY_EMAIL_LINK) {
+            navigate(CLIENT_DASHBOARD_LINK)
+          }
         } else {
           setIsEmailVerified(false)
           navigate(VERIFY_EMAIL_LINK)

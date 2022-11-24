@@ -13,14 +13,19 @@ import {
   ActionIcon,
 } from '@mantine/core'
 import { TbPencil, TbTrash } from 'react-icons/tb'
-import useStyles from '../../../../services/hooks/useStyles'
-import { accessTokenCookie } from '../../../../services/constants/cookies'
-import { getCookie } from '../../../../services/utilities/cookie'
-import { axiosGet, axiosPost, axiosPut, axiosDelete } from '../../../../services/utilities/axios'
-import { PATIENTS_ENDPOINT, USER_ENDPOINT } from '../../../../services/constants/endpoints'
 import EditPatientForm from '../Form/EditPatientForm'
 import AddPatientForm from '../Form/AddPatientForm'
 import DeletePatientForm from '../Form/DeletePatientForm'
+import { showSuccessNotification, showErrorNotification } from '../../../Notification'
+import {
+  PATIENTS_ENDPOINT,
+  ADMIN_CREATE_PATIENT_ENDPOINT,
+  USERS_ENDPOINT,
+} from '../../../../services/constants/endpoints'
+import { accessTokenCookie } from '../../../../services/constants/cookies'
+import { getCookie } from '../../../../services/utilities/cookie'
+import { axiosGet, axiosPost, axiosPut, axiosDelete } from '../../../../services/utilities/axios'
+import useStyles from '../../../../services/hooks/useStyles'
 
 const PatientsTable = () => {
   const { classes, cx } = useStyles()
@@ -46,7 +51,11 @@ const PatientsTable = () => {
 
   const getUsers = () => {
     axiosGet(PATIENTS_ENDPOINT, headers).then((response) => {
-      response.status === 200 && setData(response.data.users)
+      if (response.status === 200) {
+        setData(response.data.users)
+      } else {
+        showErrorNotification(response.response.data.errors.messages)
+      }
     })
   }
 
@@ -75,23 +84,37 @@ const PatientsTable = () => {
   }
 
   const handleSubmitAddPatient = (userInfo) => {
-    axiosPost(PATIENTS_ENDPOINT, userInfo).then((response) => {
+    axiosPost(ADMIN_CREATE_PATIENT_ENDPOINT, userInfo, headers).then((response) => {
       if (response.status === 201) {
+        showSuccessNotification('User has been successfully created!')
         getUsers()
         resetModal()
+      } else {
+        showErrorNotification(response.response.data.errors.messages)
       }
     })
   }
 
   const handleSubmitEditPatient = (userInfo) => {
-    console.log(userInfo)
+    axiosPut(`${USERS_ENDPOINT}/${id}`, userInfo, headers).then((response) => {
+      if (response.status === 200) {
+        showSuccessNotification('User has been successfully updated!')
+        getUsers()
+        resetModal()
+      } else {
+        showErrorNotification(response.response.data.errors.messages)
+      }
+    })
   }
 
   const handleSubmitDeletePatient = (id) => {
-    axiosDelete(`${USER_ENDPOINT}/${id}`, headers).then((response) => {
+    axiosDelete(`${USERS_ENDPOINT}/${id}`, headers).then((response) => {
       if (response.status === 200) {
+        showSuccessNotification('User has been successfully deleted!')
         getUsers()
         resetModal()
+      } else {
+        showErrorNotification(response.response.data.errors.messages)
       }
     })
   }

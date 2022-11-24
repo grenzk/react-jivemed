@@ -1,26 +1,31 @@
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Paper, Title } from '@mantine/core'
 import Logo from '../components/Logo'
 import SignInForm from '../components/SignIn/Form/SignInForm'
 import SignUpForm from '../components/SignUp/Form/SignUpForm'
+import { showSuccessNotification, showErrorNotification } from '../components/Notification'
 import { CLIENT_DASHBOARD_LINK, SIGN_IN_LINK, VERIFY_EMAIL_LINK } from '../services/constants/links'
-import { axiosPost } from '../services/utilities/axios'
 import { SIGN_IN_ENDPOINT, PATIENTS_ENDPOINT } from '../services/constants/endpoints'
-import { setCookie } from '../services/utilities/cookie'
-import useStyles from '../services/hooks/useStyles'
 import { accessTokenCookie } from '../services/constants/cookies'
+import { setCookie } from '../services/utilities/cookie'
+import { axiosPost } from '../services/utilities/axios'
+import useStyles from '../services/hooks/useStyles'
 import useRedirect from '../services/hooks/useRedirect'
 
 const Auth = () => {
   useRedirect()
 
   const location = useLocation()
+  const navigate = useNavigate()
   const { classes } = useStyles()
 
   const handleSignUp = (userInfo) => {
     axiosPost(PATIENTS_ENDPOINT, userInfo).then((response) => {
       if (response.status === 201) {
-        window.location.assign(SIGN_IN_LINK)
+        navigate(SIGN_IN_LINK)
+        showSuccessNotification('A confirmation email has been sent!')
+      } else {
+        showErrorNotification(response.response.data.errors.messages)
       }
     })
   }
@@ -35,6 +40,8 @@ const Auth = () => {
         } else {
           window.location.assign(VERIFY_EMAIL_LINK)
         }
+      } else {
+        showErrorNotification(response.response.data.errors.messages)
       }
     })
   }

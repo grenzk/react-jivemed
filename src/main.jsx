@@ -1,8 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
-import { MantineProvider } from '@mantine/core'
 import CustomFonts from './components/CustomFonts'
+import { MantineProvider } from '@mantine/core'
+import { NotificationsProvider } from '@mantine/notifications'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -13,8 +14,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         headings: { fontFamily: 'Greycliff CF, sans-serif' },
       }}
     >
-      <CustomFonts />
-      <App />
+      <NotificationsProvider position="top-right" zIndex={2077}>
+        <CustomFonts />
+        <App />
+      </NotificationsProvider>
     </MantineProvider>
   </React.StrictMode>
 )

@@ -1,8 +1,8 @@
 import { Image, Container, Title, Button, Group, Text, List, ThemeIcon } from '@mantine/core'
-import RootNavbar from '../components/Root/Navbar/RootNavbar'
-import { SIGN_UP_LINK } from '../services/constants/links'
 import { TbCheck } from 'react-icons/tb'
+import RootNavbar from '../components/Root/Navbar/RootNavbar'
 import image from '../assets/img/hero.svg'
+import { SIGN_UP_LINK } from '../services/constants/links'
 import useStyles from '../services/hooks/useStyles'
 import useRedirect from '../services/hooks/useRedirect'
 
