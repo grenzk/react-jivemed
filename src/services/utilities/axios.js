@@ -30,18 +30,10 @@ export const axiosPut = async (endpoint, body, headers) => {
     .catch((error) => error)
 }
 
-export const axiosPatch = async (endpoint, body, headers) => {
-  return JivemedRef.patch(endpoint, body, {
+export const axiosDelete = async (endpoint, headers) => {
+  return JivemedRef.delete(endpoint, {
     headers,
   })
-    .then((response) => response)
-    .catch((error) => {
-      throw error.response.data.error
-    })
-}
-
-export const axiosDelete = async (endpoint, id) => {
-  return JivemedRef.delete(`${endpoint}${id}`)
     .then((response) => response)
     .catch((error) => error)
 }

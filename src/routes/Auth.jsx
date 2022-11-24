@@ -19,14 +19,18 @@ const Auth = () => {
 
   const handleSignUp = (userInfo) => {
     axiosPost(PATIENTS_ENDPOINT, userInfo).then((response) => {
-      console.log(response.data)
+      if (response.status === 200) {
+        console.log(response.data)
+      }
     })
   }
 
   const handleSignIn = (userInfo) => {
     axiosPost(SIGN_IN_ENDPOINT, userInfo).then((response) => {
-      setCookie(accessTokenCookie, response.data.access_token, response.data.access_token_expiration)
-      window.location.assign(CLIENT_DASHBOARD_LINK)
+      if (response.status === 200) {
+        setCookie(accessTokenCookie, response.data.access_token, response.data.access_token_expiration)
+        window.location.assign(CLIENT_DASHBOARD_LINK)
+      }
     })
   }
 

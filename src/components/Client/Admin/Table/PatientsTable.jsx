@@ -16,7 +16,7 @@ import { TbPencil, TbTrash } from 'react-icons/tb'
 import useStyles from '../../../../services/hooks/useStyles'
 import { accessTokenCookie } from '../../../../services/constants/cookies'
 import { getCookie } from '../../../../services/utilities/cookie'
-import { axiosGet, axiosPost, axiosDelete } from '../../../../services/utilities/axios'
+import { axiosGet, axiosPost, axiosPut, axiosDelete } from '../../../../services/utilities/axios'
 import { PATIENTS_ENDPOINT, USER_ENDPOINT } from '../../../../services/constants/endpoints'
 import EditPatientForm from '../Form/EditPatientForm'
 import AddPatientForm from '../Form/AddPatientForm'
@@ -76,21 +76,24 @@ const PatientsTable = () => {
 
   const handleSubmitAddPatient = (userInfo) => {
     axiosPost(PATIENTS_ENDPOINT, userInfo).then(() => {
-      getUsers()
-      resetModal()
+      if (response.status === 200) {
+        getUsers()
+        resetModal()
+      }
     })
   }
 
   const handleSubmitEditPatient = (userInfo) => {
     console.log(userInfo)
-    getUsers()
-    resetModal()
   }
 
   const handleSubmitDeletePatient = (id) => {
-    console.log(id)
-    getUsers()
-    resetModal()
+    axiosDelete(`${USER_ENDPOINT}/${id}`, headers).then((response) => {
+      if (response.status === 200) {
+        getUsers()
+        resetModal()
+      }
+    })
   }
 
   const displayForm = () => {
@@ -134,7 +137,7 @@ const PatientsTable = () => {
   ))
 
   return (
-    <div>
+    <>
       <Modal
         overlayColor={theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[2]}
         overlayOpacity={0.55}
@@ -177,7 +180,7 @@ const PatientsTable = () => {
           </Paper>
         </Stack>
       </Center>
-    </div>
+    </>
   )
 }
 
