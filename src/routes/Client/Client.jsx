@@ -52,11 +52,7 @@ const Client = () => {
         </>
       )
     }
-    return (
-      <>
-        <VerifyEmail avatar={avatar} email={email} />
-      </>
-    )
+    return <VerifyEmail avatar={avatar} email={email} />
   }
 
   return checkEmailVerified()
