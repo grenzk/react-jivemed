@@ -34,7 +34,7 @@ import {
 import { deleteCookie } from '../../services/utilities/cookie'
 import { accessTokenCookie } from '../../services/constants/cookies'
 
-const Navbar = ({ role }) => {
+const Navbar = ({ user, avatar, role }) => {
   const [opened, { toggle, close }] = useDisclosure(false)
 
   const [active, setActive] = useState('')
@@ -126,9 +126,11 @@ const Navbar = ({ role }) => {
 
           <Divider orientation="vertical" />
 
-          <Avatar color="cyan" radius="xl">
-            MK
-          </Avatar>
+          <ActionIcon>
+            <Avatar color="cyan" radius="xl">
+              {avatar}
+            </Avatar>
+          </ActionIcon>
           <ActionIcon onClick={signOut}>
             <TbLogout size={18} />
           </ActionIcon>
