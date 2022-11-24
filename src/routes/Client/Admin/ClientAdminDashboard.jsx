@@ -30,7 +30,6 @@ const ClientAdminDashboard = () => {
           </Text>
           <Icon className={classes.adminDashboardIcon} size={22} />
         </Group>
-
         <Group align="flex-end" spacing="xs" mt={25}>
           <Text className={classes.adminDashboardValue}>{stat.value}</Text>
         </Group>
@@ -51,7 +50,6 @@ const ClientAdminDashboard = () => {
         >
           {stats}
         </SimpleGrid>
-
         <Paper withBorder={true}>
           <VictoryPie style={style} colorScale="blue" width={1200} data={pieChartData} />
         </Paper>
