@@ -19,7 +19,7 @@ const Auth = () => {
 
   const handleSignUp = (userInfo) => {
     axiosPost(PATIENTS_ENDPOINT, userInfo).then((response) => {
-      if (response.status === 200) {
+      if (response.status === 201) {
         console.log(response.data)
       }
     })

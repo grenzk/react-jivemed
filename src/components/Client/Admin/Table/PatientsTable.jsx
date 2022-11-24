@@ -76,7 +76,7 @@ const PatientsTable = () => {
 
   const handleSubmitAddPatient = (userInfo) => {
     axiosPost(PATIENTS_ENDPOINT, userInfo).then((response) => {
-      if (response.status === 200) {
+      if (response.status === 201) {
         getUsers()
         resetModal()
       }
