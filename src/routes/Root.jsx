@@ -8,12 +8,12 @@ import {
   List,
   ThemeIcon,
 } from '@mantine/core'
-import RootNavbar from '../components/Root/Navbar/RootNavbar.jsx'
-import { SIGN_UP_LINK } from '../services/constants/links.js'
+import RootNavbar from '../components/Root/Navbar/RootNavbar'
+import { SIGN_UP_LINK } from '../services/constants/links'
 import { TbCheck } from 'react-icons/tb'
 import image from '../assets/img/hero.svg'
-import useStyles from '../services/hooks/useStyles.jsx'
-import useRedirect from '../services/hooks/useRedirect.jsx'
+import useStyles from '../services/hooks/useStyles'
+import useRedirect from '../services/hooks/useRedirect'
 
 const Root = () => {
   useRedirect()
