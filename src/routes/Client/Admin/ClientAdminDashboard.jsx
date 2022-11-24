@@ -7,18 +7,21 @@ import {
   Text,
   Stack,
 } from '@mantine/core'
-import {
-  TbStethoscope,
-  TbUser,
-  TbClipboardList,
-  TbMedicalCross,
-} from 'react-icons/tb'
+import { TbStethoscope, TbUser, TbMedicalCross } from 'react-icons/tb'
+import { VictoryPie } from 'victory'
 import useStyles from '../../../services/hooks/useStyles'
+import style from '../../../assets/js/pieChart'
 
 const data = [
   { title: 'Doctors', icon: TbStethoscope, value: 25 },
   { title: 'Patients', icon: TbUser, value: 40 },
   { title: 'Departments', icon: TbMedicalCross, value: 25 },
+]
+
+const pieChartData = [
+  { x: 'Doctors', y: data[0].value },
+  { x: 'Patients', y: data[1].value },
+  { x: 'Departments', y: data[2].value },
 ]
 
 const ClientAdminDashboard = () => {
@@ -54,12 +57,21 @@ const ClientAdminDashboard = () => {
         <SimpleGrid
           cols={3}
           breakpoints={[
-            { maxWidth: 'md', cols: 2 },
+            { maxWidth: 'md', cols: 1 },
             { maxWidth: 'xs', cols: 1 },
           ]}
         >
           {stats}
         </SimpleGrid>
+
+        <Paper withBorder={true}>
+          <VictoryPie
+            style={style}
+            colorScale="blue"
+            width={1200}
+            data={pieChartData}
+          />
+        </Paper>
       </Stack>
     </div>
   )
