@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Header, Container, Group, Burger, Paper, Transition, Avatar, Divider, ActionIcon } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { TbLogout } from 'react-icons/tb'
@@ -29,6 +29,7 @@ const Navbar = ({ avatar, role }) => {
   const { classes, cx } = useStyles()
 
   const location = useLocation()
+  const navigate = useNavigate()
 
   useEffect(() => {
     const getNavLinks = () => {
@@ -86,12 +87,12 @@ const Navbar = ({ avatar, role }) => {
     return navLinks.map((link) => (
       <a
         key={link.label}
-        href={link.link}
         className={cx(classes.navbarLink, {
           [classes.navbarLinkActive]: active === link.link,
         })}
         onClick={() => {
           setActive(link.link)
+          navigate(link.link)
           close()
         }}
       >

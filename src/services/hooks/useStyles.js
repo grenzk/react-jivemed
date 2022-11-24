@@ -140,6 +140,7 @@ const useStyles = createStyles((theme) => ({
     [theme.fn.smallerThan('sm')]: {
       display: 'none',
     },
+    cursor: 'pointer',
   },
 
   navbarBurger: {
