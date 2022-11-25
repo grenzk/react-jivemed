@@ -1,22 +1,6 @@
 import { useState } from 'react'
-import {
-  createStyles,
-  Table,
-  ScrollArea,
-  Center,
-  Paper,
-  Title,
-  Stack,
-  Button,
-  Group,
-  Modal,
-  TextInput,
-  PasswordInput,
-  useMantineTheme,
-} from '@mantine/core'
+import { createStyles, Table, ScrollArea, Center, Paper, Title, Stack, Group, useMantineTheme } from '@mantine/core'
 import { useForm } from '@mantine/form'
-import { TbMail } from 'react-icons/tb'
-import { TbLock } from 'react-icons/tb'
 import useStyles from '../../../../services/hooks/useStyles'
 
 const data = [
@@ -33,10 +17,8 @@ const data = [
 ]
 
 const DoctorsTable = () => {
-  const [opened, setOpened] = useState(false)
   const { classes, cx } = useStyles()
   const [scrolled, setScrolled] = useState(false)
-  const theme = useMantineTheme()
 
   const rows = data.map((row, index) => (
     <tr key={index}>
@@ -45,21 +27,6 @@ const DoctorsTable = () => {
       <td>{row.email}</td>
     </tr>
   ))
-
-  const form = useForm({
-    initialValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-    },
-
-    validate: {
-      email: (value) => (value === '' ? 'Invalid email' : null),
-      password: (value) => (value === '' ? 'Invalid password' : null),
-    },
-  })
 
   return (
     <div>
