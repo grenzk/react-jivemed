@@ -20,17 +20,28 @@ const SignUpForm = ({ handleSignUp }) => {
     },
   })
 
+  const submitForm = (values) =>
+    handleSignUp({
+      user: {
+        first_name: values.firstName,
+        last_name: values.lastName,
+        email: values.email,
+        password: values.password,
+      },
+    })
+
   return (
     <form
+      onKeyDown={(event) => {
+        if (event.key === 'Enter') {
+          form.onSubmit((values) => {
+            submitForm(values)
+            form.reset()
+          })
+        }
+      }}
       onSubmit={form.onSubmit((values) => {
-        handleSignUp({
-          user: {
-            first_name: values.firstName,
-            last_name: values.lastName,
-            email: values.email,
-            password: values.password,
-          },
-        })
+        submitForm(values)
         form.reset()
       })}
     >

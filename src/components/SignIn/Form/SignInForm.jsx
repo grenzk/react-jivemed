@@ -16,10 +16,20 @@ const SignInForm = ({ handleSignIn }) => {
     },
   })
 
+  const submitForm = (values) => handleSignIn({ user: values })
+
   return (
     <form
+      onKeyDown={(event) => {
+        if (event.key === 'Enter') {
+          form.onSubmit((values) => {
+            submitForm(values)
+            form.reset()
+          })
+        }
+      }}
       onSubmit={form.onSubmit((values) => {
-        handleSignIn({ user: values })
+        submitForm(values)
         form.reset()
       })}
     >
