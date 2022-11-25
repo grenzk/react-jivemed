@@ -44,7 +44,7 @@ const PatientTransactionsTable = () => {
       <Center>
         <Stack>
           <Group position="apart">
-            <Title order={2}>Patients</Title>
+            <Title order={2}>Transactions</Title>
           </Group>
           <Paper shadow="xs" p="md">
             <ScrollArea sx={{ height: 450 }} onScrollPositionChange={({ y }) => setScrolled(y !== 0)}>
