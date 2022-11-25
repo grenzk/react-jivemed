@@ -89,7 +89,7 @@ const EditDoctorForm = ({ doctor, onSubmit }) => {
       <MultiSelect
         required
         mb="xl"
-        label="Departments"
+        label="Department"
         icon={<TbMedicalCross />}
         data={departments}
         value={department}
