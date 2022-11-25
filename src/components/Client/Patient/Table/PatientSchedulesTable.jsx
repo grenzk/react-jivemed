@@ -1,132 +1,123 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
+  useMantineTheme,
   Table,
   ScrollArea,
   Center,
   Paper,
   Title,
   Stack,
-  Button,
   Group,
+  Badge,
+  Button,
   Modal,
-  TextInput,
-  PasswordInput,
-  useMantineTheme,
 } from '@mantine/core'
-import { useForm } from '@mantine/form'
-import { TbMail } from 'react-icons/tb'
-import { TbLock } from 'react-icons/tb'
+import AddAppointmentForm from '../../Patient/Form/AddAppointmentForm'
+import { showSuccessNotification, showErrorNotification } from '../../../Notification'
+import { SCHEDULES_ENDPOINT, APPOINTMENTS_ENDPOINT } from '../../../../services/constants/endpoints'
+import { headers } from '../../../../services/constants/headers'
+import { axiosGet, axiosPost } from '../../../../services/utilities/axios'
 import useStyles from '../../../../services/hooks/useStyles'
 
-const data = [
-  { id: 1, name: 'Maria Dela cruz', email: 'mdc.doctor@email.com' },
-  { id: 2, name: 'Juan Dela Cruz', email: 'jdc@email.com' },
-  { id: 2, name: 'Juan Dela Cruz', email: 'jdc@email.com' },
-  { id: 2, name: 'Juan Dela Cruz', email: 'jdc@email.com' },
-  { id: 2, name: 'Juan Dela Cruz', email: 'jdc@email.com' },
-  { id: 2, name: 'Juan Dela Cruz', email: 'jdc@email.com' },
-  { id: 2, name: 'Juan Dela Cruz', email: 'jdc@email.com' },
-  { id: 2, name: 'Juan Dela Cruz', email: 'jdc@email.com' },
-  { id: 2, name: 'Juan Dela Cruz', email: 'jdc@email.com' },
-  { id: 2, name: 'Juan Dela Cruz', email: 'jdc@email.com' },
-]
-
 const PatientSchedulesTable = () => {
-  const [opened, setOpened] = useState(false)
   const { classes, cx } = useStyles()
-  const [scrolled, setScrolled] = useState(false)
+
   const theme = useMantineTheme()
 
-  const rows = data.map((row, index) => (
+  const [opened, setOpened] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const [schedules, setSchedules] = useState([])
+  const [schedule, setSchedule] = useState({})
+
+  useEffect(() => {
+    getAppointments()
+  }, [])
+
+  const rows = schedules.map((schedule, index) => (
     <tr key={index}>
-      <td>{row.id}</td>
-      <td>{row.name}</td>
-      <td>{row.email}</td>
+      <td>{schedule.schedule.id}</td>
+      <td>{schedule.schedule.date}</td>
+      <td>{`${schedule.user.first_name} ${schedule.user.last_name}`}</td>
+      <td>
+        {schedule.departments.map((department, index) => (
+          <Badge key={index} mx={6}>
+            {department.name}
+          </Badge>
+        ))}
+      </td>
+      <td>
+        <Button
+          variant="gradient"
+          gradient={{ from: 'indigo', to: 'cyan' }}
+          compact
+          onClick={() => {
+            handleAddModal()
+            setSchedule(schedule.schedule)
+          }}
+        >
+          Create
+        </Button>
+      </td>
     </tr>
   ))
 
-  const form = useForm({
-    initialValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-    },
+  const handleAddModal = () => {
+    setOpened(true)
+  }
 
-    validate: {
-      email: (value) => (value === '' ? 'Invalid email' : null),
-      password: (value) => (value === '' ? 'Invalid password' : null),
-    },
-  })
+  const handleAddAppointment = (appointment) => {
+    console.log(appointment)
+    // axiosPost(APPOINTMENTS_ENDPOINT, appointment, headers).then((response) => {
+    //   if (response.status === 200) {
+    //     showSuccessNotification('Your appointment has been successfully created!')
+    //     setOpened(false)
+    //   } else {
+    //     showErrorNotification(response.response.data.errors.messages)
+    //   }
+    // })
+  }
+
+  const getAppointments = () => {
+    axiosGet(SCHEDULES_ENDPOINT, headers).then((response) => {
+      response.status === 200
+        ? setSchedules(response.data.schedules)
+        : showErrorNotification(response.response.data.errors.messages)
+    })
+  }
 
   return (
-    <div>
+    <>
       <Modal
         overlayColor={theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[2]}
         overlayOpacity={0.55}
         overlayBlur={3}
         centered
         opened={opened}
-        title="Add New Doctor"
+        title="Enter Credit Card details"
         onClose={() => setOpened(false)}
         size="auto"
       >
-        <form
-          onSubmit={form.onSubmit((values) => {
-            form.reset()
-          })}
-        >
-          <Group mb="sm">
-            <TextInput required label="First Name" {...form.getInputProps('firstName')} />
-            <TextInput required label="Last Name" {...form.getInputProps('lastName')} />
-          </Group>
-
-          <TextInput required label="Email" mb="sm" icon={<TbMail size={16} />} {...form.getInputProps('email')} />
-
-          <PasswordInput
-            required
-            mb="sm"
-            label="Password"
-            icon={<TbLock size={16} />}
-            {...form.getInputProps('password')}
-          />
-
-          <PasswordInput
-            required
-            mb="xl"
-            label="Confirm Password"
-            icon={<TbLock size={16} />}
-            {...form.getInputProps('confirmPassword')}
-          />
-
-          <Button variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }} fullWidth={true}>
-            Add Department
-          </Button>
-        </form>
+        <AddAppointmentForm schedule={schedule} onSubmit={handleAddAppointment} />
       </Modal>
-
       <Center>
         <Stack>
           <Group position="apart">
             <Title order={2}>Available Schedules</Title>
-            <Button variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }} onClick={() => setOpened(true)}>
-              Add Department
-            </Button>
           </Group>
-
           <Paper shadow="xs" p="md">
             <ScrollArea sx={{ height: 450 }} onScrollPositionChange={({ y }) => setScrolled(y !== 0)}>
               <Table sx={{ minWidth: 1000 }} verticalSpacing="md">
                 <thead
-                  className={cx(classes.tableHeader, {
-                    [classes.tableScrolled]: scrolled,
+                  className={cx(classes.header, {
+                    [classes.scrolled]: scrolled,
                   })}
                 >
                   <tr>
                     <th>Id</th>
+                    <th>Schedule</th>
                     <th>Name</th>
-                    <th>Email</th>
+                    <th>Department</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>{rows}</tbody>
@@ -135,7 +126,7 @@ const PatientSchedulesTable = () => {
           </Paper>
         </Stack>
       </Center>
-    </div>
+    </>
   )
 }
 

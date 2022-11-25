@@ -27,7 +27,7 @@ const UpdateDoctorForm = ({ doctor, onSubmit }) => {
       firstName: (value) => (value !== '' ? null : 'Invalid first name'),
       lastName: (value) => (value !== '' ? null : 'Invalid last name'),
       email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-      doctorFee: (value) => (value != '' ? null : 'Invalid amount'),
+      doctorFee: (value) => (value !== '' ? null : 'Invalid amount'),
     },
   })
 

@@ -15,7 +15,7 @@ const AddPatientForm = ({ onSubmit }) => {
       firstName: (value) => (value !== '' ? null : 'Invalid first name'),
       lastName: (value) => (value !== '' ? null : 'Invalid last name'),
       email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-      password: (value) => (value != '' ? null : 'Invalid password'),
+      password: (value) => (value !== '' ? null : 'Invalid password'),
     },
   })
 
