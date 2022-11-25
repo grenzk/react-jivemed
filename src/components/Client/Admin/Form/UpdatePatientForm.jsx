@@ -2,7 +2,7 @@ import { useForm } from '@mantine/form'
 import { Button, Group, TextInput, PasswordInput } from '@mantine/core'
 import { TbUser, TbMail, TbLock } from 'react-icons/tb'
 
-const EditPatientForm = ({ patient, onSubmit }) => {
+const UpdatePatientForm = ({ patient, onSubmit }) => {
   const form = useForm({
     initialValues: {
       firstName: patient.first_name,
@@ -62,4 +62,4 @@ const EditPatientForm = ({ patient, onSubmit }) => {
   )
 }
 
-export default EditPatientForm
+export default UpdatePatientForm

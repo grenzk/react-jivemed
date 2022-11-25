@@ -6,7 +6,7 @@ import { DEPARTMENTS_ENDPOINT } from '../../../../services/constants/endpoints'
 import { axiosGet } from '../../../../services/utilities/axios'
 import { headers } from '../../../../services/constants/headers'
 
-const EditDoctorForm = ({ doctor, onSubmit }) => {
+const UpdateDoctorForm = ({ doctor, onSubmit }) => {
   const [departments, setDepartments] = useState([])
   const [department, setDepartment] = useState(doctor.departments.map((department) => department.id))
 
@@ -128,4 +128,4 @@ const EditDoctorForm = ({ doctor, onSubmit }) => {
   )
 }
 
-export default EditDoctorForm
+export default UpdateDoctorForm

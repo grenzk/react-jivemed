@@ -14,7 +14,7 @@ import {
 } from '@mantine/core'
 import { TbPencil, TbTrash } from 'react-icons/tb'
 import AddDepartmentForm from '../Form/AddDepartmentForm'
-import EditDepartmentForm from '../Form/EditDepartmentForm'
+import UpdateDepartmentForm from '../Form/UpdateDepartmentForm'
 import DeleteDepartmentForm from '../Form/DeleteDepartmentForm'
 import { showSuccessNotification, showErrorNotification } from '../../../Notification'
 import { headers } from '../../../../services/constants/headers'
@@ -47,7 +47,7 @@ const DepartmentsTable = () => {
           <ActionIcon
             onClick={() => {
               setDepartment(department)
-              handleEditModal()
+              handleUpdateModal()
             }}
           >
             <TbPencil />
@@ -87,9 +87,9 @@ const DepartmentsTable = () => {
     setOpened(true)
   }
 
-  const handleEditModal = () => {
-    setTitle('Edit Department')
-    setForm('edit')
+  const handleUpdateModal = () => {
+    setTitle('Update Department')
+    setForm('update')
     setOpened(true)
   }
 
@@ -111,7 +111,7 @@ const DepartmentsTable = () => {
     })
   }
 
-  const handleSubmitEditDepartment = (department) => {
+  const handleSubmitUpdateDepartment = (department) => {
     axiosPut(`${DEPARTMENTS_ENDPOINT}/${department.id}`, department.values, headers).then((response) => {
       if (response.status === 200) {
         showSuccessNotification('Department has been successfully updated!')
@@ -139,8 +139,8 @@ const DepartmentsTable = () => {
     switch (form) {
       case 'add':
         return <AddDepartmentForm onSubmit={handleSubmitAddDepartment} />
-      case 'edit':
-        return <EditDepartmentForm department={department} onSubmit={handleSubmitEditDepartment} />
+      case 'update':
+        return <UpdateDepartmentForm department={department} onSubmit={handleSubmitUpdateDepartment} />
       case 'delete':
         return <DeleteDepartmentForm department={department} onSubmit={handleSubmitDeleteDepartment} />
     }

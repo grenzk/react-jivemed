@@ -14,7 +14,7 @@ import {
 } from '@mantine/core'
 import { TbPencil, TbTrash } from 'react-icons/tb'
 import AddPatientForm from '../Form/AddPatientForm'
-import EditPatientForm from '../Form/EditPatientForm'
+import UpdatePatientForm from '../Form/UpdatePatientForm'
 import DeletePatientForm from '../Form/DeletePatientForm'
 import { showSuccessNotification, showErrorNotification } from '../../../Notification'
 import {
@@ -52,7 +52,7 @@ const PatientsTable = () => {
           <ActionIcon
             onClick={() => {
               setPatient(patient.user)
-              handleEditModal()
+              handleUpdateModal()
             }}
           >
             <TbPencil />
@@ -92,9 +92,9 @@ const PatientsTable = () => {
     setOpened(true)
   }
 
-  const handleEditModal = () => {
-    setTitle('Edit Patient')
-    setForm('edit')
+  const handleUpdateModal = () => {
+    setTitle('Update Patient')
+    setForm('update')
     setOpened(true)
   }
 
@@ -116,7 +116,7 @@ const PatientsTable = () => {
     })
   }
 
-  const handleSubmitEditPatient = (patient) => {
+  const handleSubmitUpdatePatient = (patient) => {
     axiosPut(`${PATIENTS_ENDPOINT}/${patient.id}`, patient.values, headers).then((response) => {
       if (response.status === 200) {
         showSuccessNotification('Patient has been successfully updated!')
@@ -144,8 +144,8 @@ const PatientsTable = () => {
     switch (form) {
       case 'add':
         return <AddPatientForm onSubmit={handleSubmitAddPatient} />
-      case 'edit':
-        return <EditPatientForm patient={patient} onSubmit={handleSubmitEditPatient} />
+      case 'update':
+        return <UpdatePatientForm patient={patient} onSubmit={handleSubmitUpdatePatient} />
       case 'delete':
         return <DeletePatientForm patient={patient} onSubmit={handleSubmitDeletePatient} />
     }
