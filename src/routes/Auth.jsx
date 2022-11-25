@@ -6,8 +6,7 @@ import SignUpForm from '../components/SignUp/Form/SignUpForm'
 import { showSuccessNotification, showErrorNotification } from '../components/Notification'
 import {
   CLIENT_DASHBOARD_LINK,
-  CLIENT_SCHEDULES_LINK,
-  CLIENT_AVAILABLE_SCHEDULES_LINK,
+  CLIENT_APPOINTMENTS_LINK,
   SIGN_IN_LINK,
   VERIFY_EMAIL_LINK,
 } from '../services/constants/links'
