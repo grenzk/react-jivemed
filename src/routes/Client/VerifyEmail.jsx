@@ -46,7 +46,9 @@ const VerifyEmail = ({ avatar, email }) => {
         Still can&apos;t find the email?
       </Text>
       <Center style={{ marginTop: '16px' }}>
-        <Button onClick={handleResendEmail}>Resend Email</Button>
+        <Button variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }} onClick={handleResendEmail}>
+          Resend Email
+        </Button>
       </Center>
     </>
   )
