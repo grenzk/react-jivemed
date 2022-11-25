@@ -108,7 +108,7 @@ const PatientsTable = () => {
   const handleSubmitAddPatient = (userInfo) => {
     axiosPost(ADMIN_CREATE_PATIENT_ENDPOINT, userInfo, headers).then((response) => {
       if (response.status === 201) {
-        showSuccessNotification('User has been successfully created!')
+        showSuccessNotification('Patient has been successfully created!')
         getUsers()
         resetModal()
       } else {
@@ -117,21 +117,10 @@ const PatientsTable = () => {
     })
   }
 
-  const handleSubmitEditPatient = (userInfo) => {
-    axiosPut(
-      `${PATIENTS_ENDPOINT}/${userInfo.id}`,
-      {
-        user: {
-          first_name: userInfo.values.firstName,
-          last_name: userInfo.values.lastName,
-          email: userInfo.values.email,
-          password: userInfo.values.password,
-        },
-      },
-      headers
-    ).then((response) => {
+  const handleSubmitEditPatient = (patientInfo) => {
+    axiosPut(`${PATIENTS_ENDPOINT}/${patientInfo.id}`, patientInfo.values, headers).then((response) => {
       if (response.status === 200) {
-        showSuccessNotification('User has been successfully updated!')
+        showSuccessNotification('Patient has been successfully updated!')
         getUsers()
         resetModal()
       } else {
@@ -143,7 +132,7 @@ const PatientsTable = () => {
   const handleSubmitDeletePatient = (id) => {
     axiosDelete(`${USERS_ENDPOINT}/${id}`, headers).then((response) => {
       if (response.status === 200) {
-        showSuccessNotification('User has been successfully deleted!')
+        showSuccessNotification('Patient has been successfully deleted!')
         getUsers()
         resetModal()
       } else {

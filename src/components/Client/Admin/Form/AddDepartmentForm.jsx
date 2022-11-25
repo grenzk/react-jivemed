@@ -2,7 +2,7 @@ import { Button, TextInput } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { TbMedicalCross } from 'react-icons/tb'
 
-const AddDepartmentForm = () => {
+const AddDepartmentForm = ({ onSubmit }) => {
   const form = useForm({
     initialValues: {
       name: '',
@@ -16,6 +16,11 @@ const AddDepartmentForm = () => {
   return (
     <form
       onSubmit={form.onSubmit((values) => {
+        onSubmit({
+          department: {
+            name: values.name,
+          },
+        })
         form.reset()
       })}
     >

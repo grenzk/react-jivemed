@@ -20,7 +20,14 @@ const EditPatientForm = ({ patient, onSubmit }) => {
       onSubmit={form.onSubmit((values) => {
         onSubmit({
           id: patient.id,
-          values,
+          values: {
+            user: {
+              first_name: values.firstName,
+              last_name: values.lastName,
+              email: values.email,
+              password: values.password,
+            },
+          },
         })
         form.reset()
       })}

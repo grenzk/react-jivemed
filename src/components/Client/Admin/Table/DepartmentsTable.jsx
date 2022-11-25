@@ -1,10 +1,23 @@
 import { useState, useEffect } from 'react'
-import { Table, ScrollArea, Center, Paper, Title, Stack, Button, Group, Modal, useMantineTheme } from '@mantine/core'
+import {
+  useMantineTheme,
+  Modal,
+  Table,
+  ScrollArea,
+  Center,
+  Paper,
+  Title,
+  Stack,
+  Button,
+  Group,
+  ActionIcon,
+} from '@mantine/core'
+import { TbPencil, TbTrash } from 'react-icons/tb'
 import AddDepartmentForm from '../Form/AddDepartmentForm'
 import { showSuccessNotification, showErrorNotification } from '../../../Notification'
 import { headers } from '../../../../services/constants/headers'
 import { DEPARTMENTS_ENDPOINT } from '../../../../services/constants/endpoints'
-import { axiosGet } from '../../../../services/utilities/axios'
+import { axiosGet, axiosPost } from '../../../../services/utilities/axios'
 import useStyles from '../../../../services/hooks/useStyles'
 
 const DepartmentsTable = () => {
@@ -27,6 +40,27 @@ const DepartmentsTable = () => {
     <tr key={index}>
       <td>{row.id}</td>
       <td>{row.name}</td>
+      <td>
+        <Group spacing="xs">
+          <ActionIcon
+            onClick={() => {
+              setDepartment(row.user)
+              // handleEditModal()
+            }}
+          >
+            <TbPencil />
+          </ActionIcon>
+          <ActionIcon
+            color="red"
+            onClick={() => {
+              setDepartment(row.user)
+              // handleDeleteModal(row.user.id)
+            }}
+          >
+            <TbTrash />
+          </ActionIcon>
+        </Group>
+      </td>
     </tr>
   ))
 
@@ -40,14 +74,38 @@ const DepartmentsTable = () => {
     })
   }
 
+  const resetModal = () => {
+    setTitle('')
+    setForm('')
+    setOpened(false)
+  }
+
+  const handleAddModal = () => {
+    setTitle('Add Department')
+    setForm('add')
+    setOpened(true)
+  }
+
+  const handleSubmitAddDepartment = (departmentInfo) => {
+    axiosPost(DEPARTMENTS_ENDPOINT, departmentInfo, headers).then((response) => {
+      if (response.status === 201) {
+        showSuccessNotification('Department has been successfully created!')
+        getDepartments()
+        resetModal()
+      } else {
+        showErrorNotification(response.response.data.errors.messages)
+      }
+    })
+  }
+
   const displayForm = () => {
     switch (form) {
       case 'add':
-        return <AddDepartmentForm onSubmit={handleSubmitAddPatient} />
+        return <AddDepartmentForm onSubmit={handleSubmitAddDepartment} />
       case 'edit':
-        return <EditPatientForm user={user} onSubmit={handleSubmitEditPatient} />
+      // return <EditDepartmentForm department={department} onSubmit={handleSubmitEditDepartment} />
       case 'delete':
-        return <DeletePatientForm user={user} onSubmit={handleSubmitDeletePatient} />
+      // return <DeleteDepartmentForm department={department} onSubmit={handleSubmitDeleteDepartment} />
     }
   }
 
@@ -69,7 +127,7 @@ const DepartmentsTable = () => {
         <Stack>
           <Group position="apart">
             <Title order={2}>Departments</Title>
-            <Button variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }} onClick={() => setOpened(true)}>
+            <Button variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }} onClick={handleAddModal}>
               Add Department
             </Button>
           </Group>
