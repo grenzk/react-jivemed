@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useForm } from '@mantine/form'
-import { Button, Group, TextInput, MultiSelect } from '@mantine/core'
-import { TbUser, TbMail, TbReportMoney, TbMedicalCross } from 'react-icons/tb'
+import { Button, Group, TextInput, PasswordInput, MultiSelect } from '@mantine/core'
+import { TbUser, TbMail, TbLock, TbReportMoney, TbMedicalCross } from 'react-icons/tb'
 import { DEPARTMENTS_ENDPOINT } from '../../../../services/constants/endpoints'
 import { axiosGet } from '../../../../services/utilities/axios'
 import { headers } from '../../../../services/constants/headers'
@@ -19,6 +19,7 @@ const EditDoctorForm = ({ doctor, onSubmit }) => {
       firstName: doctor.user.first_name,
       lastName: doctor.user.last_name,
       email: doctor.user.email,
+      password: '',
       doctorFee: doctor.doctor_fee.amount,
     },
 
@@ -26,7 +27,6 @@ const EditDoctorForm = ({ doctor, onSubmit }) => {
       firstName: (value) => (value !== '' ? null : 'Invalid first name'),
       lastName: (value) => (value !== '' ? null : 'Invalid last name'),
       email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-      password: (value) => (value != '' ? null : 'Invalid password'),
       doctorFee: (value) => (value != '' ? null : 'Invalid amount'),
     },
   })
@@ -51,21 +51,42 @@ const EditDoctorForm = ({ doctor, onSubmit }) => {
   return (
     <form
       onSubmit={form.onSubmit((values) => {
+        const checkPassword = () => {
+          if (values.password === '') {
+            return {
+              user: {
+                first_name: values.firstName,
+                last_name: values.lastName,
+                email: values.email,
+              },
+              department: {
+                department_id: department,
+              },
+              doctor_fee: {
+                amount: values.doctorFee,
+              },
+            }
+          } else {
+            return {
+              user: {
+                first_name: values.firstName,
+                last_name: values.lastName,
+                password: values.password,
+                email: values.email,
+              },
+              department: {
+                department_id: department,
+              },
+              doctor_fee: {
+                amount: values.doctorFee,
+              },
+            }
+          }
+        }
+
         onSubmit({
           id: doctor.user.id,
-          values: {
-            user: {
-              first_name: values.firstName,
-              last_name: values.lastName,
-              email: values.email,
-            },
-            department: {
-              department_id: department,
-            },
-            doctor_fee: {
-              amount: values.doctorFee,
-            },
-          },
+          values: checkPassword(),
         })
         form.reset()
         setDepartment([])
@@ -76,6 +97,7 @@ const EditDoctorForm = ({ doctor, onSubmit }) => {
         <TextInput required label="Last Name" icon={<TbUser />} {...form.getInputProps('lastName')} />
       </Group>
       <TextInput required label="Email" mb="sm" icon={<TbMail />} {...form.getInputProps('email')} />
+      <PasswordInput label="Password" mb="sm" icon={<TbLock />} {...form.getInputProps('password')} />
       <TextInput
         required
         mb="sm"
