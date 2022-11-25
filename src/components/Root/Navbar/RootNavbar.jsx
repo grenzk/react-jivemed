@@ -1,23 +1,23 @@
-import { createStyles, Header, Group, Button, Text, Divider, Box, Burger, Drawer, ScrollArea } from '@mantine/core'
+import { useNavigate } from 'react-router-dom'
+import { Header, Group, Button, Text, Divider, Box, Burger, Drawer, ScrollArea } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import Logo from '../../Logo'
 import { SIGN_IN_LINK, SIGN_UP_LINK } from '../../../services/constants/links'
 import useStyles from '../../../services/hooks/useStyles'
 
 const RootNavbar = () => {
+  const navigate = useNavigate()
+
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false)
+
   const { classes, theme } = useStyles()
 
-  const handleLogo = () => {
-    window.location.assign('/')
-  }
-
   const handleSignIn = () => {
-    window.location.assign(SIGN_IN_LINK)
+    navigate(SIGN_IN_LINK)
   }
 
   const handleSignUp = () => {
-    window.location.assign(SIGN_UP_LINK)
+    navigate(SIGN_UP_LINK)
   }
 
   return (

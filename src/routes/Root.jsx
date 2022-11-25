@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { Image, Container, Title, Button, Group, Text, List, ThemeIcon } from '@mantine/core'
 import { TbCheck } from 'react-icons/tb'
 import RootNavbar from '../components/Root/Navbar/RootNavbar'
@@ -9,9 +10,11 @@ import useRedirect from '../services/hooks/useRedirect'
 const Root = () => {
   useRedirect()
 
+  const navigate = useNavigate()
+
   const { classes } = useStyles()
 
-  const handleGetStarted = () => window.location.assign(SIGN_UP_LINK)
+  const handleGetStarted = () => navigate(SIGN_UP_LINK)
 
   return (
     <div>

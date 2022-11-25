@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Header, Container, Group, Avatar, Divider, ActionIcon } from '@mantine/core'
 import { Center, Title, Text, Button } from '@mantine/core'
 import { TbLogout } from 'react-icons/tb'
@@ -9,11 +11,19 @@ import { deleteCookie } from '../../services/utilities/cookie'
 import { accessTokenCookie } from '../../services/constants/cookies'
 
 const VerifyEmail = ({ avatar, email }) => {
+  const navigate = useNavigate()
+
   const { classes } = useStyles()
+
+  const [userEmail, setUserEmail] = useState(email)
+
+  useEffect(() => {
+    setUserEmail(email)
+  }, [email])
 
   const signOut = () => {
     deleteCookie(accessTokenCookie)
-    window.location.assign(SIGN_IN_LINK)
+    navigate(SIGN_IN_LINK)
   }
 
   const handleResendEmail = () => {}
@@ -40,7 +50,7 @@ const VerifyEmail = ({ avatar, email }) => {
         Please verify your email
       </Title>
       <Text color="dimmed" size="sm" align="center" mt="md">
-        We sent an email to <b>{email}</b>
+        We sent an email to <b>{userEmail}</b>
       </Text>
       <Text color="dimmed" size="sm" align="center" mt="md">
         Still can&apos;t find the email?

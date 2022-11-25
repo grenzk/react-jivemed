@@ -82,7 +82,7 @@ const Navbar = ({ user, avatar, role, onDisplayUser }) => {
 
   const signOut = () => {
     deleteCookie(accessTokenCookie)
-    window.location.assign(SIGN_IN_LINK)
+    navigate(SIGN_IN_LINK)
   }
 
   const items = navLinks.map((link) => (

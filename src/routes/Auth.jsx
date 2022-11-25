@@ -38,9 +38,9 @@ const Auth = () => {
         setCookie(accessTokenCookie, response.data.access_token, response.data.access_token_expiration)
 
         if (response.data.user.email_verified) {
-          window.location.assign(CLIENT_DASHBOARD_LINK)
+          navigate(CLIENT_DASHBOARD_LINK)
         } else {
-          window.location.assign(VERIFY_EMAIL_LINK)
+          navigate(VERIFY_EMAIL_LINK)
         }
       } else {
         showErrorNotification(response.response.data.errors.messages)
