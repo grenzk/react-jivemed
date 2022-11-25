@@ -66,15 +66,14 @@ const PatientSchedulesTable = () => {
   }
 
   const handleAddAppointment = (appointment) => {
-    console.log(appointment)
-    // axiosPost(APPOINTMENTS_ENDPOINT, appointment, headers).then((response) => {
-    //   if (response.status === 200) {
-    //     showSuccessNotification('Your appointment has been successfully created!')
-    //     setOpened(false)
-    //   } else {
-    //     showErrorNotification(response.response.data.errors.messages)
-    //   }
-    // })
+    axiosPost(APPOINTMENTS_ENDPOINT, appointment, headers).then((response) => {
+      if (response.status === 200) {
+        showSuccessNotification('Your appointment has been successfully created!')
+        setOpened(false)
+      } else {
+        showErrorNotification(response.response.data.errors.messages)
+      }
+    })
   }
 
   const getAppointments = () => {
