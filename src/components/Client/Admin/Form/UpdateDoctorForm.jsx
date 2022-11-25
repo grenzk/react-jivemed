@@ -88,8 +88,6 @@ const UpdateDoctorForm = ({ doctor, onSubmit }) => {
           id: doctor.user.id,
           values: checkPassword(),
         })
-        form.reset()
-        setDepartment([])
       })}
     >
       <Group mb="sm" grow>

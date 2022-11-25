@@ -24,7 +24,6 @@ const UpdateDepartmentForm = ({ department, onSubmit }) => {
             },
           },
         })
-        form.reset()
       })}
     >
       <TextInput required label="Name" mb="xl" icon={<TbMedicalCross />} {...form.getInputProps('name')} />

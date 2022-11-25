@@ -46,7 +46,6 @@ const UpdatePatientForm = ({ patient, onSubmit }) => {
           id: patient.id,
           values: checkPassword(),
         })
-        form.reset()
       })}
     >
       <Group mb="sm" grow>
