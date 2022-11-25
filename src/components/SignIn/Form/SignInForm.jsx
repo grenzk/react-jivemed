@@ -1,5 +1,6 @@
 import { TextInput, PasswordInput, Button, Text, Anchor } from '@mantine/core'
 import { useForm } from '@mantine/form'
+import { TbMail, TbLock } from 'react-icons/tb'
 import { SIGN_UP_LINK } from '../../../services/constants/links'
 
 const SignInForm = ({ handleSignIn }) => {
@@ -22,8 +23,8 @@ const SignInForm = ({ handleSignIn }) => {
         form.reset()
       })}
     >
-      <TextInput label="Email" size="md" {...form.getInputProps('email')} />
-      <PasswordInput label="Password" mt="md" size="md" {...form.getInputProps('password')} />
+      <TextInput label="Email" size="md" icon={<TbMail />} {...form.getInputProps('email')} />
+      <PasswordInput label="Password" mt="md" size="md" icon={<TbLock />} {...form.getInputProps('password')} />
       <Button fullWidth mt="xl" size="md" type="submit">
         Sign in
       </Button>
