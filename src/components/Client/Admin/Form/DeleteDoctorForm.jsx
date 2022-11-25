@@ -6,7 +6,7 @@ const DeleteDoctorForm = ({ doctor, onSubmit }) => {
         <Text>Are you sure you want to delete this?</Text>
       </Group>
       <Group position="right">
-        <Button color="red" onClick={() => onSubmit(doctor.id)}>
+        <Button color="red" onClick={() => onSubmit(doctor.user.id)}>
           Delete
         </Button>
       </Group>

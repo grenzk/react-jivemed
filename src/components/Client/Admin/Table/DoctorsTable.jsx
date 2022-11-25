@@ -14,6 +14,7 @@ import {
 } from '@mantine/core'
 import { TbPencil, TbTrash } from 'react-icons/tb'
 import AddDoctorForm from '../Form/AddDoctorForm'
+import EditDoctorForm from '../Form/EditDoctorForm'
 import DeleteDoctorForm from '../Form/DeleteDoctorForm'
 import { showSuccessNotification, showErrorNotification } from '../../../Notification'
 import { DOCTORS_ENDPOINT, USERS_ENDPOINT } from '../../../../services/constants/endpoints'
@@ -46,8 +47,8 @@ const DoctorsTable = () => {
         <Group spacing="xs">
           <ActionIcon
             onClick={() => {
-              setDoctor(doctor.user)
-              // handleEditModal()
+              setDoctor(doctor)
+              handleEditModal()
             }}
           >
             <TbPencil />
@@ -55,7 +56,7 @@ const DoctorsTable = () => {
           <ActionIcon
             color="red"
             onClick={() => {
-              setDoctor(doctor.user)
+              setDoctor(doctor)
               handleDeleteModal()
             }}
           >
@@ -86,6 +87,11 @@ const DoctorsTable = () => {
     setForm('add')
     setOpened(true)
   }
+  const handleEditModal = () => {
+    setTitle('Edit Doctor')
+    setForm('edit')
+    setOpened(true)
+  }
 
   const handleDeleteModal = () => {
     setTitle('Delete Doctor')
@@ -97,6 +103,18 @@ const DoctorsTable = () => {
     axiosPost(DOCTORS_ENDPOINT, doctor, headers).then((response) => {
       if (response.status === 201) {
         showSuccessNotification('Doctor has been successfully created!')
+        getDoctors()
+        resetModal()
+      } else {
+        showErrorNotification(response.response.data.errors.messages)
+      }
+    })
+  }
+
+  const handleSubmitEditDoctor = (doctor) => {
+    axiosPut(`${DOCTORS_ENDPOINT}/${doctor.id}`, doctor.values, headers).then((response) => {
+      if (response.status === 200) {
+        showSuccessNotification('Doctor has been successfully updated!')
         getDoctors()
         resetModal()
       } else {
@@ -122,7 +140,7 @@ const DoctorsTable = () => {
       case 'add':
         return <AddDoctorForm onSubmit={handleSubmitAddDoctor} />
       case 'edit':
-      // return <EditDoctorForm doctor={doctor} onSubmit={handleSubmitEditDoctor} />
+        return <EditDoctorForm doctor={doctor} onSubmit={handleSubmitEditDoctor} />
       case 'delete':
         return <DeleteDoctorForm doctor={doctor} onSubmit={handleSubmitDeleteDoctor} />
     }
