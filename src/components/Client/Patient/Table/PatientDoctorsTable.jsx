@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Table, ScrollArea, Center, Paper, Title, Stack, Group } from '@mantine/core'
+import { createStyles, Table, ScrollArea, Center, Paper, Title, Stack, Group, useMantineTheme } from '@mantine/core'
 import useStyles from '../../../../services/hooks/useStyles'
 
 const data = [
@@ -15,7 +15,7 @@ const data = [
   { id: 2, name: 'Juan Dela Cruz', email: 'jdc@email.com' },
 ]
 
-const AppointmentsTable = () => {
+const PatientsDoctorsTable = () => {
   const { classes, cx } = useStyles()
   const [scrolled, setScrolled] = useState(false)
 
@@ -32,7 +32,7 @@ const AppointmentsTable = () => {
       <Center>
         <Stack>
           <Group position="apart">
-            <Title order={2}>Appointments</Title>
+            <Title order={2}>Doctors</Title>
           </Group>
 
           <Paper shadow="xs" p="md">
@@ -59,4 +59,4 @@ const AppointmentsTable = () => {
   )
 }
 
-export default AppointmentsTable
+export default PatientsDoctorsTable

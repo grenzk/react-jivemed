@@ -1,9 +1,9 @@
-import SchedulesTable from '../../../components/Client/Patient/Table/SchedulesTable'
+import PatientSchedulesTable from '../../../components/Client/Patient/Table/PatientSchedulesTable'
 
 const ClientPatientAvailableSchedules = () => {
   return (
     <div>
-      <SchedulesTable />
+      <PatientSchedulesTable />
     </div>
   )
 }

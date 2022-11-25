@@ -17,3 +17,5 @@ export const DEPARTMENTS_ENDPOINT = '/departments'
 export const SCHEDULES_ENDPOINT = '/schedules'
 
 export const APPOINTMENTS_ENDPOINT = '/appointments'
+
+export const USER_TRANSACTIONS_ENDPOINT = '/user_transactions'

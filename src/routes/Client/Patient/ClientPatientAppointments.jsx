@@ -1,9 +1,9 @@
-import AppointmentsTable from '../../../components/Client/Patient/Table/AppointmentsTable'
+import PatientAppointmentsTable from '../../../components/Client/Patient/Table/PatientAppointmentsTable'
 
 const ClientPatientAppointments = () => {
   return (
     <div>
-      <AppointmentsTable />
+      <PatientAppointmentsTable />
     </div>
   )
 }

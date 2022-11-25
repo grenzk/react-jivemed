@@ -31,7 +31,7 @@ const data = [
   { id: 2, name: 'Juan Dela Cruz', email: 'jdc@email.com' },
 ]
 
-const SchedulesTable = () => {
+const PatientSchedulesTable = () => {
   const [opened, setOpened] = useState(false)
   const { classes, cx } = useStyles()
   const [scrolled, setScrolled] = useState(false)
@@ -139,4 +139,4 @@ const SchedulesTable = () => {
   )
 }
 
-export default SchedulesTable
+export default PatientSchedulesTable
