@@ -45,7 +45,7 @@ const DoctorsTable = () => {
         <Group spacing="xs">
           <ActionIcon
             onClick={() => {
-              setPatient(doctor.user)
+              setDoctor(doctor.user)
               // handleEditModal()
             }}
           >
@@ -54,7 +54,7 @@ const DoctorsTable = () => {
           <ActionIcon
             color="red"
             onClick={() => {
-              setPatient(doctor.user)
+              setDoctor(doctor.user)
               // handleDeleteModal()
             }}
           >
