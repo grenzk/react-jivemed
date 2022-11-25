@@ -7,6 +7,7 @@ import {
   CLIENT_PATIENTS_LINK,
   CLIENT_DOCTORS_LINK,
   CLIENT_DEPARTMENTS_LINK,
+  CLIENT_SCHEDULES_LINK,
   CLIENT_AVAILABLE_SCHEDULES_LINK,
   CLIENT_APPOINTMENTS_LINK,
   CLIENT_TRANSACTIONS_LINK,
@@ -29,6 +30,7 @@ const router = createBrowserRouter(
           <Route path={CLIENT_DOCTORS_LINK} element={<Client />} caseSensitive />
           <Route path={CLIENT_PATIENTS_LINK} element={<Client />} caseSensitive />
           <Route path={CLIENT_DEPARTMENTS_LINK} element={<Client />} caseSensitive />
+          <Route path={CLIENT_SCHEDULES_LINK} element={<Client />} caseSensitive />
           <Route path={CLIENT_AVAILABLE_SCHEDULES_LINK} element={<Client />} caseSensitive />
           <Route path={CLIENT_APPOINTMENTS_LINK} element={<Client />} caseSensitive />
           <Route path={CLIENT_TRANSACTIONS_LINK} element={<Client />} caseSensitive />

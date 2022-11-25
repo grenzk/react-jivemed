@@ -13,6 +13,7 @@ import {
   CLIENT_PATIENTS_LINK,
   CLIENT_DOCTORS_LINK,
   CLIENT_DEPARTMENTS_LINK,
+  CLIENT_SCHEDULES_LINK,
   CLIENT_AVAILABLE_SCHEDULES_LINK,
   CLIENT_APPOINTMENTS_LINK,
   CLIENT_TRANSACTIONS_LINK,
@@ -64,6 +65,9 @@ const Navbar = ({ user, avatar, role, onDisplayUser }) => {
           break
         case CLIENT_DEPARTMENTS_LINK:
           setActive(CLIENT_DEPARTMENTS_LINK)
+          break
+        case CLIENT_SCHEDULES_LINK:
+          setActive(CLIENT_SCHEDULES_LINK)
           break
         case CLIENT_AVAILABLE_SCHEDULES_LINK:
           setActive(CLIENT_AVAILABLE_SCHEDULES_LINK)

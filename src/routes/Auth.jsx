@@ -4,7 +4,13 @@ import Logo from '../components/Logo'
 import SignInForm from '../components/SignIn/Form/SignInForm'
 import SignUpForm from '../components/SignUp/Form/SignUpForm'
 import { showSuccessNotification, showErrorNotification } from '../components/Notification'
-import { CLIENT_DASHBOARD_LINK, SIGN_IN_LINK, VERIFY_EMAIL_LINK } from '../services/constants/links'
+import {
+  CLIENT_DASHBOARD_LINK,
+  CLIENT_SCHEDULES_LINK,
+  CLIENT_AVAILABLE_SCHEDULES_LINK,
+  SIGN_IN_LINK,
+  VERIFY_EMAIL_LINK,
+} from '../services/constants/links'
 import { SIGN_IN_ENDPOINT, PATIENTS_ENDPOINT } from '../services/constants/endpoints'
 import { accessTokenCookie } from '../services/constants/cookies'
 import { setCookie } from '../services/utilities/cookie'
@@ -38,7 +44,17 @@ const Auth = () => {
         setCookie(accessTokenCookie, response.data.access_token, response.data.access_token_expiration)
 
         if (response.data.user.email_verified) {
-          window.location.assign(CLIENT_DASHBOARD_LINK)
+          switch (response.data.user.role) {
+            case 'admin':
+              window.location.assign(CLIENT_DASHBOARD_LINK)
+              break
+            case 'doctor':
+              window.location.assign(CLIENT_SCHEDULES_LINK)
+              break
+            case 'patient':
+              window.location.assign(CLIENT_AVAILABLE_SCHEDULES_LINK)
+              break
+          }
         } else {
           window.location.assign(VERIFY_EMAIL_LINK)
         }
