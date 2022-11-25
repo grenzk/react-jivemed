@@ -13,40 +13,41 @@ import {
   ActionIcon,
 } from '@mantine/core'
 import { TbPencil, TbTrash } from 'react-icons/tb'
-import AddDepartmentForm from '../Form/AddDepartmentForm'
-import UpdateDepartmentForm from '../Form/UpdateDepartmentForm'
-import DeleteDepartmentForm from '../Form/DeleteDepartmentForm'
+import AddDoctorForm from '../Form/AddDoctorForm'
+import UpdateDoctorForm from '../Form/UpdateDoctorForm'
+import DeleteDoctorForm from '../Form/DeleteDoctorForm'
 import { showSuccessNotification, showErrorNotification } from '../../../Notification'
+import { DOCTORS_ENDPOINT, USERS_ENDPOINT } from '../../../../services/constants/endpoints'
 import { headers } from '../../../../services/constants/headers'
-import { DEPARTMENTS_ENDPOINT } from '../../../../services/constants/endpoints'
 import { axiosGet, axiosPost, axiosPut, axiosDelete } from '../../../../services/utilities/axios'
 import useStyles from '../../../../services/hooks/useStyles'
 
-const DepartmentsTable = () => {
+const AdminDoctorsTable = () => {
   const { classes, cx } = useStyles()
 
   const theme = useMantineTheme()
 
   const [opened, setOpened] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const [departments, setDepartments] = useState([])
-  const [department, setDepartment] = useState({})
+  const [doctors, setDoctors] = useState([])
+  const [doctor, setDoctor] = useState({})
   const [title, setTitle] = useState('')
   const [form, setForm] = useState('')
 
   useEffect(() => {
-    getDepartments()
+    getDoctors()
   }, [])
 
-  const rows = departments.map((department, index) => (
+  const rows = doctors.map((doctor, index) => (
     <tr key={index}>
-      <td>{department.id}</td>
-      <td>{department.name}</td>
+      <td>{doctor.user.id}</td>
+      <td>{`${doctor.user.first_name} ${doctor.user.last_name}`}</td>
+      <td>{doctor.user.email}</td>
       <td>
         <Group spacing="xs">
           <ActionIcon
             onClick={() => {
-              setDepartment(department)
+              setDoctor(doctor)
               handleUpdateModal()
             }}
           >
@@ -55,7 +56,7 @@ const DepartmentsTable = () => {
           <ActionIcon
             color="red"
             onClick={() => {
-              setDepartment(department)
+              setDoctor(doctor)
               handleDeleteModal()
             }}
           >
@@ -66,10 +67,10 @@ const DepartmentsTable = () => {
     </tr>
   ))
 
-  const getDepartments = () => {
-    axiosGet(DEPARTMENTS_ENDPOINT, headers).then((response) =>
+  const getDoctors = () => {
+    axiosGet(DOCTORS_ENDPOINT, headers).then((response) =>
       response.status === 200
-        ? setDepartments(response.data.departments)
+        ? setDoctors(response.data.users)
         : showErrorNotification(response.response.data.errors.messages)
     )
   }
@@ -77,33 +78,32 @@ const DepartmentsTable = () => {
   const resetModal = () => {
     setTitle('')
     setForm('')
-    setDepartment({})
+    setDoctor({})
     setOpened(false)
   }
 
   const handleAddModal = () => {
-    setTitle('Add Department')
+    setTitle('Add Doctor')
     setForm('add')
     setOpened(true)
   }
-
   const handleUpdateModal = () => {
-    setTitle('Update Department')
+    setTitle('Update Doctor')
     setForm('update')
     setOpened(true)
   }
 
   const handleDeleteModal = () => {
-    setTitle('Delete Department')
+    setTitle('Delete Doctor')
     setForm('delete')
     setOpened(true)
   }
 
-  const handleSubmitAddDepartment = (department) => {
-    axiosPost(DEPARTMENTS_ENDPOINT, department, headers).then((response) => {
+  const handleSubmitAddDoctor = (doctor) => {
+    axiosPost(DOCTORS_ENDPOINT, doctor, headers).then((response) => {
       if (response.status === 201) {
-        showSuccessNotification('Department has been successfully created!')
-        getDepartments()
+        showSuccessNotification('Doctor has been successfully created!')
+        getDoctors()
         resetModal()
       } else {
         showErrorNotification(response.response.data.errors.messages)
@@ -111,11 +111,11 @@ const DepartmentsTable = () => {
     })
   }
 
-  const handleSubmitUpdateDepartment = (department) => {
-    axiosPut(`${DEPARTMENTS_ENDPOINT}/${department.id}`, department.values, headers).then((response) => {
+  const handleSubmitUpdateDoctor = (doctor) => {
+    axiosPut(`${DOCTORS_ENDPOINT}/${doctor.id}`, doctor.values, headers).then((response) => {
       if (response.status === 200) {
-        showSuccessNotification('Department has been successfully updated!')
-        getDepartments()
+        showSuccessNotification('Doctor has been successfully updated!')
+        getDoctors()
         resetModal()
       } else {
         showErrorNotification(response.response.data.errors.messages)
@@ -123,11 +123,11 @@ const DepartmentsTable = () => {
     })
   }
 
-  const handleSubmitDeleteDepartment = (id) => {
-    axiosDelete(`${DEPARTMENTS_ENDPOINT}/${id}`, headers).then((response) => {
+  const handleSubmitDeleteDoctor = (id) => {
+    axiosDelete(`${USERS_ENDPOINT}/${id}`, headers).then((response) => {
       if (response.status === 200) {
-        showSuccessNotification('Department has been successfully deleted!')
-        getDepartments()
+        showSuccessNotification('Doctor has been successfully deleted!')
+        getDoctors()
         resetModal()
       } else {
         showErrorNotification(response.response.data.errors.messages)
@@ -138,16 +138,16 @@ const DepartmentsTable = () => {
   const displayForm = () => {
     switch (form) {
       case 'add':
-        return <AddDepartmentForm onSubmit={handleSubmitAddDepartment} />
+        return <AddDoctorForm onSubmit={handleSubmitAddDoctor} />
       case 'update':
-        return <UpdateDepartmentForm department={department} onSubmit={handleSubmitUpdateDepartment} />
+        return <UpdateDoctorForm doctor={doctor} onSubmit={handleSubmitUpdateDoctor} />
       case 'delete':
-        return <DeleteDepartmentForm department={department} onSubmit={handleSubmitDeleteDepartment} />
+        return <DeleteDoctorForm doctor={doctor} onSubmit={handleSubmitDeleteDoctor} />
     }
   }
 
   return (
-    <>
+    <div>
       <Modal
         overlayColor={theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[2]}
         overlayOpacity={0.55}
@@ -163,9 +163,9 @@ const DepartmentsTable = () => {
       <Center>
         <Stack>
           <Group position="apart">
-            <Title order={2}>Departments</Title>
+            <Title order={2}>Doctors</Title>
             <Button variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }} onClick={handleAddModal}>
-              Add Department
+              Add Doctor
             </Button>
           </Group>
           <Paper shadow="xs" p="md">
@@ -179,6 +179,7 @@ const DepartmentsTable = () => {
                   <tr>
                     <th>Id</th>
                     <th>Name</th>
+                    <th>Email</th>
                   </tr>
                 </thead>
                 <tbody>{rows}</tbody>
@@ -187,8 +188,8 @@ const DepartmentsTable = () => {
           </Paper>
         </Stack>
       </Center>
-    </>
+    </div>
   )
 }
 
-export default DepartmentsTable
+export default AdminDoctorsTable

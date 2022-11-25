@@ -1,9 +1,9 @@
-import PatientsTable from '../../../components/Client/Admin/Table/PatientsTable'
+import AdminPatientsTable from '../../../components/Client/Admin/Table/AdminPatientsTable'
 
 const ClientAdminPatients = () => {
   return (
     <>
-      <PatientsTable />
+      <AdminPatientsTable />
     </>
   )
 }

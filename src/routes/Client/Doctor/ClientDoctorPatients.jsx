@@ -1,11 +1,7 @@
-import PatientsTable from '../../../components/Client/Doctor/Table/PatientsTable'
+// import DoctorPatientsTable from '../../../components/Client/Doctor/Table/DoctorPatientsTable'
 
 const ClientDoctorPatients = () => {
-  return (
-    <div>
-      <PatientsTable />
-    </div>
-  )
+  return <div>{/* <DoctorPatientsTable /> */}</div>
 }
 
 export default ClientDoctorPatients
