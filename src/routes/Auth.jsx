@@ -19,8 +19,8 @@ const Auth = () => {
   const navigate = useNavigate()
   const { classes } = useStyles()
 
-  const handleSignUp = (userInfo) => {
-    axiosPost(PATIENTS_ENDPOINT, userInfo).then((response) => {
+  const handleSignUp = (user) => {
+    axiosPost(PATIENTS_ENDPOINT, user).then((response) => {
       if (response.status === 201) {
         navigate(SIGN_IN_LINK)
         showSuccessNotification('A confirmation email has been sent!')
@@ -30,8 +30,8 @@ const Auth = () => {
     })
   }
 
-  const handleSignIn = (userInfo) => {
-    axiosPost(SIGN_IN_ENDPOINT, userInfo).then((response) => {
+  const handleSignIn = (user) => {
+    axiosPost(SIGN_IN_ENDPOINT, user).then((response) => {
       if (response.status === 200) {
         setCookie(accessTokenCookie, response.data.access_token, response.data.access_token_expiration)
 
