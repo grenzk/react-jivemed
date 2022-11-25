@@ -1,5 +1,11 @@
+import AppointmentsTable from '../../../components/Client/Patient/Table/AppointmentsTable'
+
 const ClientPatientAppointments = () => {
-  return <div>ClientPatientAppointments</div>
+  return (
+    <div>
+      <AppointmentsTable />
+    </div>
+  )
 }
 
 export default ClientPatientAppointments
