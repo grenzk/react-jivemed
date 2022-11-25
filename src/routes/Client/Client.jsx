@@ -15,6 +15,7 @@ const Client = () => {
 
   const [email, setEmail] = useState('')
   const [isEmailVerified, setIsEmailVerified] = useState(false)
+  const [user, setUser] = useState({})
   const [avatar, setAvatar] = useState('')
   const [role, setRole] = useState('')
 
@@ -23,8 +24,7 @@ const Client = () => {
 
     axiosGet(SH0W_CURRENT_USER_ENDPOINT, headers).then((response) => {
       if (response.status === 200) {
-        setAvatar(`${response.data.user.first_name.charAt(0)}${response.data.user.last_name.charAt(0)}`)
-        setEmail(response.data.user.email)
+        displayUser(response.data.user)
         setRole(response.data.role.name)
 
         if (response.data.user.email_verified) {
@@ -41,6 +41,12 @@ const Client = () => {
     })
   }, [])
 
+  const displayUser = (user) => {
+    setUser(user)
+    setAvatar(`${user.first_name.charAt(0)}${user.last_name.charAt(0)}`)
+    setEmail(user.email)
+  }
+
   const displayPage = () => {
     switch (role) {
       case 'admin':
@@ -56,7 +62,7 @@ const Client = () => {
     if (isEmailVerified) {
       return (
         <>
-          <Navbar avatar={avatar} role={role} />
+          <Navbar user={user} avatar={avatar} role={role} onDisplayUser={displayUser} />
           {displayPage()}
         </>
       )

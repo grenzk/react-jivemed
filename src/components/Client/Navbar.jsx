@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { Header, Container, Group, Burger, Paper, Transition, Avatar, Divider, ActionIcon } from '@mantine/core'
+import { Header, Container, Group, Burger, Paper, Transition, Avatar, Divider, ActionIcon, Modal } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { TbLogout } from 'react-icons/tb'
 import Logo from '../Logo'
+import AdminAccountSettings from '../../components/Client/AccountSettings/AdminAccountSettings'
 import { HEADER_HEIGHT } from '../../services/constants/styles'
 import useStyles from '../../services/hooks/useStyles'
 import {
@@ -20,11 +21,12 @@ import { adminNavLinks, userNavLinks, doctorNavLinks } from '../../services/cons
 import { deleteCookie } from '../../services/utilities/cookie'
 import { accessTokenCookie } from '../../services/constants/cookies'
 
-const Navbar = ({ avatar, role }) => {
+const Navbar = ({ user, avatar, role, onDisplayUser }) => {
   const [opened, { toggle, close }] = useDisclosure(false)
 
   const [active, setActive] = useState('')
   const [navLinks, setNavLinks] = useState([])
+  const [modalOpened, setModalOpened] = useState(false)
 
   const { classes, cx } = useStyles()
 
@@ -78,6 +80,16 @@ const Navbar = ({ avatar, role }) => {
     setActiveLink()
   }, [location])
 
+  const displayAccountSettings = () => {
+    switch (role) {
+      case 'admin':
+        return <AdminAccountSettings admin={user} onDisplayUser={onDisplayUser} />
+      case 'patient':
+
+      case 'doctor':
+    }
+  }
+
   const signOut = () => {
     deleteCookie(accessTokenCookie)
     window.location.assign(SIGN_IN_LINK)
@@ -100,33 +112,38 @@ const Navbar = ({ avatar, role }) => {
   ))
 
   return (
-    <Header height={HEADER_HEIGHT} mb={30} className={classes.navbarRoot}>
-      <Container size={1250} className={classes.navbarHeader}>
-        <Logo />
-        <Group>
-          <Group spacing={8} className={classes.navbarLinks}>
-            {items}
-          </Group>
-          <Divider orientation="vertical" />
-          <ActionIcon>
-            <Avatar color="cyan" radius="xl">
-              {avatar}
-            </Avatar>
-          </ActionIcon>
-          <ActionIcon onClick={signOut}>
-            <TbLogout size={18} />
-          </ActionIcon>
-        </Group>
-        <Burger opened={opened} onClick={toggle} className={classes.navbarBurger} size="sm" />
-        <Transition transition="pop-top-right" duration={200} mounted={opened}>
-          {(styles) => (
-            <Paper className={classes.navbarDropdown} withBorder style={styles}>
+    <>
+      <Header height={HEADER_HEIGHT} mb={30} className={classes.navbarRoot}>
+        <Container size={1250} className={classes.navbarHeader}>
+          <Logo />
+          <Group>
+            <Group spacing={8} className={classes.navbarLinks}>
               {items}
-            </Paper>
-          )}
-        </Transition>
-      </Container>
-    </Header>
+            </Group>
+            <Divider orientation="vertical" />
+            <ActionIcon onClick={() => setModalOpened(true)}>
+              <Avatar color="cyan" radius="xl">
+                {avatar}
+              </Avatar>
+            </ActionIcon>
+            <ActionIcon onClick={signOut}>
+              <TbLogout size={18} />
+            </ActionIcon>
+          </Group>
+          <Burger opened={opened} onClick={toggle} className={classes.navbarBurger} size="sm" />
+          <Transition transition="pop-top-right" duration={200} mounted={opened}>
+            {(styles) => (
+              <Paper className={classes.navbarDropdown} withBorder style={styles}>
+                {items}
+              </Paper>
+            )}
+          </Transition>
+        </Container>
+      </Header>
+      <Modal opened={modalOpened} onClose={() => setModalOpened(false)} title="Account Settings" fullScreen>
+        {displayAccountSettings()}
+      </Modal>
+    </>
   )
 }
 
