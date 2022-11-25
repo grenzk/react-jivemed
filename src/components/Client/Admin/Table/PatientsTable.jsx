@@ -39,7 +39,7 @@ const PatientsTable = () => {
   const [form, setForm] = useState('')
 
   useEffect(() => {
-    getUsers()
+    getPatients()
   }, [])
 
   const rows = patients.map((patient, index) => (
@@ -71,7 +71,7 @@ const PatientsTable = () => {
     </tr>
   ))
 
-  const getUsers = () => {
+  const getPatients = () => {
     axiosGet(PATIENTS_ENDPOINT, headers).then((response) =>
       response.status === 200
         ? setPatients(response.data.users)
@@ -108,7 +108,7 @@ const PatientsTable = () => {
     axiosPost(ADMIN_CREATE_PATIENT_ENDPOINT, patient, headers).then((response) => {
       if (response.status === 201) {
         showSuccessNotification('Patient has been successfully created!')
-        getUsers()
+        getPatients()
         resetModal()
       } else {
         showErrorNotification(response.response.data.errors.messages)
@@ -120,7 +120,7 @@ const PatientsTable = () => {
     axiosPut(`${PATIENTS_ENDPOINT}/${patient.id}`, patient.values, headers).then((response) => {
       if (response.status === 200) {
         showSuccessNotification('Patient has been successfully updated!')
-        getUsers()
+        getPatients()
         resetModal()
       } else {
         showErrorNotification(response.response.data.errors.messages)
@@ -132,7 +132,7 @@ const PatientsTable = () => {
     axiosDelete(`${USERS_ENDPOINT}/${id}`, headers).then((response) => {
       if (response.status === 200) {
         showSuccessNotification('Patient has been successfully deleted!')
-        getUsers()
+        getPatients()
         resetModal()
       } else {
         showErrorNotification(response.response.data.errors.messages)

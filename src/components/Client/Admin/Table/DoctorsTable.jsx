@@ -14,8 +14,9 @@ import {
 } from '@mantine/core'
 import { TbPencil, TbTrash } from 'react-icons/tb'
 import AddDoctorForm from '../Form/AddDoctorForm'
+import DeleteDoctorForm from '../Form/DeleteDoctorForm'
 import { showSuccessNotification, showErrorNotification } from '../../../Notification'
-import { DOCTORS_ENDPOINT } from '../../../../services/constants/endpoints'
+import { DOCTORS_ENDPOINT, USERS_ENDPOINT } from '../../../../services/constants/endpoints'
 import { headers } from '../../../../services/constants/headers'
 import { axiosGet, axiosPost, axiosPut, axiosDelete } from '../../../../services/utilities/axios'
 import useStyles from '../../../../services/hooks/useStyles'
@@ -55,7 +56,7 @@ const DoctorsTable = () => {
             color="red"
             onClick={() => {
               setDoctor(doctor.user)
-              // handleDeleteModal()
+              handleDeleteModal()
             }}
           >
             <TbTrash />
@@ -86,10 +87,28 @@ const DoctorsTable = () => {
     setOpened(true)
   }
 
+  const handleDeleteModal = () => {
+    setTitle('Delete Doctor')
+    setForm('delete')
+    setOpened(true)
+  }
+
   const handleSubmitAddDoctor = (doctor) => {
     axiosPost(DOCTORS_ENDPOINT, doctor, headers).then((response) => {
       if (response.status === 201) {
         showSuccessNotification('Doctor has been successfully created!')
+        getDoctors()
+        resetModal()
+      } else {
+        showErrorNotification(response.response.data.errors.messages)
+      }
+    })
+  }
+
+  const handleSubmitDeleteDoctor = (id) => {
+    axiosDelete(`${USERS_ENDPOINT}/${id}`, headers).then((response) => {
+      if (response.status === 200) {
+        showSuccessNotification('Doctor has been successfully deleted!')
         getDoctors()
         resetModal()
       } else {
@@ -105,7 +124,7 @@ const DoctorsTable = () => {
       case 'edit':
       // return <EditDoctorForm doctor={doctor} onSubmit={handleSubmitEditDoctor} />
       case 'delete':
-      // return <DeleteDoctorForm doctor={doctor} onSubmit={handleSubmitDeleteDoctor} />
+        return <DeleteDoctorForm doctor={doctor} onSubmit={handleSubmitDeleteDoctor} />
     }
   }
 
