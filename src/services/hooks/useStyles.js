@@ -127,6 +127,8 @@ const useStyles = createStyles((theme) => ({
     [theme.fn.largerThan('sm')]: {
       display: 'none',
     },
+
+    cursor: 'pointer',
   },
 
   navbarHeader: {

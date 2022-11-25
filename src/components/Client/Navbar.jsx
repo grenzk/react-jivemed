@@ -83,23 +83,21 @@ const Navbar = ({ avatar, role }) => {
     window.location.assign(SIGN_IN_LINK)
   }
 
-  const showItems = () => {
-    return navLinks.map((link) => (
-      <a
-        key={link.label}
-        className={cx(classes.navbarLink, {
-          [classes.navbarLinkActive]: active === link.link,
-        })}
-        onClick={() => {
-          setActive(link.link)
-          navigate(link.link)
-          close()
-        }}
-      >
-        {link.label}
-      </a>
-    ))
-  }
+  const items = navLinks.map((link) => (
+    <a
+      key={link.label}
+      className={cx(classes.navbarLink, {
+        [classes.navbarLinkActive]: active === link.link,
+      })}
+      onClick={() => {
+        setActive(link.link)
+        navigate(link.link)
+        close()
+      }}
+    >
+      {link.label}
+    </a>
+  ))
 
   return (
     <Header height={HEADER_HEIGHT} mb={30} className={classes.navbarRoot}>
@@ -107,7 +105,7 @@ const Navbar = ({ avatar, role }) => {
         <Logo />
         <Group>
           <Group spacing={8} className={classes.navbarLinks}>
-            {showItems()}
+            {items}
           </Group>
           <Divider orientation="vertical" />
           <ActionIcon>
@@ -123,7 +121,7 @@ const Navbar = ({ avatar, role }) => {
         <Transition transition="pop-top-right" duration={200} mounted={opened}>
           {(styles) => (
             <Paper className={classes.navbarDropdown} withBorder style={styles}>
-              {showItems()}
+              {items}
             </Paper>
           )}
         </Transition>

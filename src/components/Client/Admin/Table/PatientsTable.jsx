@@ -22,8 +22,7 @@ import {
   ADMIN_CREATE_PATIENT_ENDPOINT,
   USERS_ENDPOINT,
 } from '../../../../services/constants/endpoints'
-import { accessTokenCookie } from '../../../../services/constants/cookies'
-import { getCookie } from '../../../../services/utilities/cookie'
+import { headers } from '../../../../services/constants/headers'
 import { axiosGet, axiosPost, axiosPut, axiosDelete } from '../../../../services/utilities/axios'
 import useStyles from '../../../../services/hooks/useStyles'
 
@@ -34,25 +33,48 @@ const PatientsTable = () => {
 
   const [opened, setOpened] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const [data, setData] = useState([])
-  const [user, setUser] = useState({})
+  const [patients, setPatients] = useState([])
+  const [patient, setPatient] = useState({})
   const [title, setTitle] = useState('')
   const [form, setForm] = useState('')
-
-  const accessToken = getCookie(accessTokenCookie)
-  const headers = {
-    'Access-Control-Allow-Origin': '*',
-    Authorization: accessToken,
-  }
 
   useEffect(() => {
     getUsers()
   }, [])
 
+  const rows = patients.map((row, index) => (
+    <tr key={index}>
+      <td>{row.user.id}</td>
+      <td>{`${row.user.first_name} ${row.user.last_name}`}</td>
+      <td>{row.user.email}</td>
+      <td>
+        <Group spacing="xs">
+          <ActionIcon
+            onClick={() => {
+              setPatient(row.user)
+              handleEditModal()
+            }}
+          >
+            <TbPencil />
+          </ActionIcon>
+          <ActionIcon
+            color="red"
+            onClick={() => {
+              setPatient(row.user)
+              handleDeleteModal(row.user.id)
+            }}
+          >
+            <TbTrash />
+          </ActionIcon>
+        </Group>
+      </td>
+    </tr>
+  ))
+
   const getUsers = () => {
     axiosGet(PATIENTS_ENDPOINT, headers).then((response) => {
       if (response.status === 200) {
-        setData(response.data.users)
+        setPatients(response.data.users)
       } else {
         showErrorNotification(response.response.data.errors.messages)
       }
@@ -135,40 +157,11 @@ const PatientsTable = () => {
       case 'add':
         return <AddPatientForm onSubmit={handleSubmitAddPatient} />
       case 'edit':
-        return <EditPatientForm user={user} onSubmit={handleSubmitEditPatient} />
+        return <EditPatientForm patient={patient} onSubmit={handleSubmitEditPatient} />
       case 'delete':
-        return <DeletePatientForm user={user} onSubmit={handleSubmitDeletePatient} />
+        return <DeletePatientForm patient={patient} onSubmit={handleSubmitDeletePatient} />
     }
   }
-
-  const rows = data.map((row, index) => (
-    <tr key={index}>
-      <td>{row.user.id}</td>
-      <td>{`${row.user.first_name} ${row.user.last_name}`}</td>
-      <td>{row.user.email}</td>
-      <td>
-        <Group spacing="xs">
-          <ActionIcon
-            onClick={() => {
-              setUser(row.user)
-              handleEditModal()
-            }}
-          >
-            <TbPencil />
-          </ActionIcon>
-          <ActionIcon
-            color="red"
-            onClick={() => {
-              setUser(row.user)
-              handleDeleteModal(row.user.id)
-            }}
-          >
-            <TbTrash />
-          </ActionIcon>
-        </Group>
-      </td>
-    </tr>
-  ))
 
   return (
     <>

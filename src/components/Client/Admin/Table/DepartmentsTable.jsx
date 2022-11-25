@@ -1,111 +1,70 @@
-import { useState } from 'react'
-import {
-  Table,
-  ScrollArea,
-  Center,
-  Paper,
-  Title,
-  Stack,
-  Button,
-  Group,
-  Modal,
-  TextInput,
-  PasswordInput,
-  useMantineTheme,
-} from '@mantine/core'
-import { useForm } from '@mantine/form'
-import { TbMail } from 'react-icons/tb'
-import { TbLock } from 'react-icons/tb'
+import { useState, useEffect } from 'react'
+import { Table, ScrollArea, Center, Paper, Title, Stack, Button, Group, Modal, useMantineTheme } from '@mantine/core'
+import AddDepartmentForm from '../Form/AddDepartmentForm'
+import { showSuccessNotification, showErrorNotification } from '../../../Notification'
+import { headers } from '../../../../services/constants/headers'
+import { DEPARTMENTS_ENDPOINT } from '../../../../services/constants/endpoints'
+import { axiosGet } from '../../../../services/utilities/axios'
 import useStyles from '../../../../services/hooks/useStyles'
 
-const data = [
-  { id: 1, name: 'Maria Dela cruz', email: 'mdc.doctor@email.com' },
-  { id: 2, name: 'Juan Dela Cruz', email: 'jdc@email.com' },
-  { id: 2, name: 'Juan Dela Cruz', email: 'jdc@email.com' },
-  { id: 2, name: 'Juan Dela Cruz', email: 'jdc@email.com' },
-  { id: 2, name: 'Juan Dela Cruz', email: 'jdc@email.com' },
-  { id: 2, name: 'Juan Dela Cruz', email: 'jdc@email.com' },
-  { id: 2, name: 'Juan Dela Cruz', email: 'jdc@email.com' },
-  { id: 2, name: 'Juan Dela Cruz', email: 'jdc@email.com' },
-  { id: 2, name: 'Juan Dela Cruz', email: 'jdc@email.com' },
-  { id: 2, name: 'Juan Dela Cruz', email: 'jdc@email.com' },
-]
-
 const DepartmentsTable = () => {
-  const [opened, setOpened] = useState(false)
   const { classes, cx } = useStyles()
-  const [scrolled, setScrolled] = useState(false)
+
   const theme = useMantineTheme()
 
-  const rows = data.map((row, index) => (
+  const [opened, setOpened] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const [departments, setDepartments] = useState([])
+  const [department, setDepartment] = useState({})
+  const [title, setTitle] = useState('')
+  const [form, setForm] = useState('')
+
+  useEffect(() => {
+    getDepartments()
+  }, [])
+
+  const rows = departments.map((row, index) => (
     <tr key={index}>
       <td>{row.id}</td>
       <td>{row.name}</td>
-      <td>{row.email}</td>
     </tr>
   ))
 
-  const form = useForm({
-    initialValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-    },
+  const getDepartments = () => {
+    axiosGet(DEPARTMENTS_ENDPOINT, headers).then((response) => {
+      if (response.status === 200) {
+        setDepartments(response.data.departments)
+      } else {
+        showErrorNotification(response.response.data.errors.messages)
+      }
+    })
+  }
 
-    validate: {
-      email: (value) => (value === '' ? 'Invalid email' : null),
-      password: (value) => (value === '' ? 'Invalid password' : null),
-    },
-  })
+  const displayForm = () => {
+    switch (form) {
+      case 'add':
+        return <AddDepartmentForm onSubmit={handleSubmitAddPatient} />
+      case 'edit':
+        return <EditPatientForm user={user} onSubmit={handleSubmitEditPatient} />
+      case 'delete':
+        return <DeletePatientForm user={user} onSubmit={handleSubmitDeletePatient} />
+    }
+  }
 
   return (
-    <div>
+    <>
       <Modal
         overlayColor={theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[2]}
         overlayOpacity={0.55}
         overlayBlur={3}
         centered
         opened={opened}
-        title="Add New Doctor"
+        title={title}
         onClose={() => setOpened(false)}
         size="auto"
       >
-        <form
-          onSubmit={form.onSubmit((values) => {
-            form.reset()
-          })}
-        >
-          <Group mb="sm">
-            <TextInput required label="First Name" {...form.getInputProps('firstName')} />
-            <TextInput required label="Last Name" {...form.getInputProps('lastName')} />
-          </Group>
-
-          <TextInput required label="Email" mb="sm" icon={<TbMail size={16} />} {...form.getInputProps('email')} />
-
-          <PasswordInput
-            required
-            mb="sm"
-            label="Password"
-            icon={<TbLock size={16} />}
-            {...form.getInputProps('password')}
-          />
-
-          <PasswordInput
-            required
-            mb="xl"
-            label="Confirm Password"
-            icon={<TbLock size={16} />}
-            {...form.getInputProps('confirmPassword')}
-          />
-
-          <Button variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }} fullWidth={true}>
-            Add Department
-          </Button>
-        </form>
+        {displayForm()}
       </Modal>
-
       <Center>
         <Stack>
           <Group position="apart">
@@ -114,7 +73,6 @@ const DepartmentsTable = () => {
               Add Department
             </Button>
           </Group>
-
           <Paper shadow="xs" p="md">
             <ScrollArea sx={{ height: 450 }} onScrollPositionChange={({ y }) => setScrolled(y !== 0)}>
               <Table sx={{ minWidth: 1000 }} verticalSpacing="md">
@@ -126,7 +84,6 @@ const DepartmentsTable = () => {
                   <tr>
                     <th>Id</th>
                     <th>Name</th>
-                    <th>Email</th>
                   </tr>
                 </thead>
                 <tbody>{rows}</tbody>
@@ -135,7 +92,7 @@ const DepartmentsTable = () => {
           </Paper>
         </Stack>
       </Center>
-    </div>
+    </>
   )
 }
 

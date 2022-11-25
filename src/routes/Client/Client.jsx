@@ -5,19 +5,12 @@ import Admin from './Admin/Admin'
 import Patient from './Patient/Patient'
 import Doctor from './Doctor/Doctor'
 import VerifyEmail from './VerifyEmail'
-import { accessTokenCookie } from '../../services/constants/cookies'
 import { SH0W_CURRENT_USER_ENDPOINT } from '../../services/constants/endpoints'
 import { CLIENT_DASHBOARD_LINK, VERIFY_EMAIL_LINK } from '../../services/constants/links'
-import { getCookie } from '../../services/utilities/cookie'
 import { axiosGet } from '../../services/utilities/axios'
+import { headers } from '../../services/constants/headers'
 
 const Client = () => {
-  const accessToken = getCookie(accessTokenCookie)
-  const headers = {
-    'Access-Control-Allow-Origin': '*',
-    Authorization: accessToken,
-  }
-
   const navigate = useNavigate()
 
   const [email, setEmail] = useState('')

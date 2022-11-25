@@ -2,12 +2,12 @@ import { useForm } from '@mantine/form'
 import { Button, Group, TextInput, PasswordInput } from '@mantine/core'
 import { TbUser, TbMail } from 'react-icons/tb'
 
-const EditPatientForm = ({ user, onSubmit }) => {
+const EditPatientForm = ({ patient, onSubmit }) => {
   const form = useForm({
     initialValues: {
-      firstName: user.first_name,
-      lastName: user.last_name,
-      email: user.email,
+      firstName: patient.first_name,
+      lastName: patient.last_name,
+      email: patient.email,
     },
 
     validate: {
@@ -19,7 +19,7 @@ const EditPatientForm = ({ user, onSubmit }) => {
     <form
       onSubmit={form.onSubmit((values) => {
         onSubmit({
-          id: user.id,
+          id: patient.id,
           values,
         })
         form.reset()
