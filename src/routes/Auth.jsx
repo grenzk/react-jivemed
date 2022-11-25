@@ -44,7 +44,7 @@ const Auth = () => {
         setCookie(accessTokenCookie, response.data.access_token, response.data.access_token_expiration)
 
         if (response.data.user.email_verified) {
-          switch (response.data.user.role) {
+          switch (response.data.role.name) {
             case 'admin':
               window.location.assign(CLIENT_DASHBOARD_LINK)
               break

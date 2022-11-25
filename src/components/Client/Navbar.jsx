@@ -32,6 +32,7 @@ const Navbar = ({ user, avatar, role, onDisplayUser }) => {
   const { classes, cx } = useStyles()
 
   const location = useLocation()
+
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -86,7 +87,7 @@ const Navbar = ({ user, avatar, role, onDisplayUser }) => {
 
   const signOut = () => {
     deleteCookie(accessTokenCookie)
-    navigate(SIGN_IN_LINK)
+    window.location.assign(SIGN_IN_LINK)
   }
 
   const items = navLinks.map((link) => (
