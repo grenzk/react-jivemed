@@ -71,8 +71,8 @@ const UpdateDoctorForm = ({ doctor, onSubmit }) => {
               user: {
                 first_name: values.firstName,
                 last_name: values.lastName,
-                password: values.password,
                 email: values.email,
+                password: values.password,
               },
               department: {
                 department_id: department,

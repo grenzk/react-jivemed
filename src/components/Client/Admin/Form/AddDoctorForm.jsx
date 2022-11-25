@@ -56,8 +56,8 @@ const AddDoctorForm = ({ onSubmit }) => {
           user: {
             first_name: values.firstName,
             last_name: values.lastName,
-            email: values.email,
             password: values.password,
+            email: values.email,
           },
           department: {
             department_id: department,
