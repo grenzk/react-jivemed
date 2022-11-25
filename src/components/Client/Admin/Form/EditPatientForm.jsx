@@ -32,7 +32,7 @@ const EditPatientForm = ({ patient, onSubmit }) => {
         form.reset()
       })}
     >
-      <Group mb="sm">
+      <Group mb="sm" grow>
         <TextInput required label="First Name" icon={<TbUser />} {...form.getInputProps('firstName')} />
         <TextInput required label="Last Name" icon={<TbUser />} {...form.getInputProps('lastName')} />
       </Group>

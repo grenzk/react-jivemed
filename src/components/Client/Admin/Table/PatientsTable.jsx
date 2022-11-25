@@ -13,8 +13,8 @@ import {
   ActionIcon,
 } from '@mantine/core'
 import { TbPencil, TbTrash } from 'react-icons/tb'
-import EditPatientForm from '../Form/EditPatientForm'
 import AddPatientForm from '../Form/AddPatientForm'
+import EditPatientForm from '../Form/EditPatientForm'
 import DeletePatientForm from '../Form/DeletePatientForm'
 import { showSuccessNotification, showErrorNotification } from '../../../Notification'
 import {
