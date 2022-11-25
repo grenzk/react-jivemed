@@ -2,7 +2,7 @@ import { useForm } from '@mantine/form'
 import { Button, Group, TextInput, PasswordInput } from '@mantine/core'
 import { TbUser, TbMail, TbLock } from 'react-icons/tb'
 
-const EditAdminForm = ({ admin, onSubmit }) => {
+const UpdateAdminForm = ({ admin, onSubmit }) => {
   const form = useForm({
     initialValues: {
       firstName: admin.first_name,
@@ -61,4 +61,4 @@ const EditAdminForm = ({ admin, onSubmit }) => {
   )
 }
 
-export default EditAdminForm
+export default UpdateAdminForm

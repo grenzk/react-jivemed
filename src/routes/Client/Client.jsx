@@ -24,7 +24,7 @@ const Client = () => {
 
     axiosGet(SH0W_CURRENT_USER_ENDPOINT, headers).then((response) => {
       if (response.status === 200) {
-        displayUser(response.data.user)
+        displayUser(response.data)
         setRole(response.data.role.name)
 
         if (response.data.user.email_verified) {
@@ -43,8 +43,8 @@ const Client = () => {
 
   const displayUser = (user) => {
     setUser(user)
-    setAvatar(`${user.first_name.charAt(0)}${user.last_name.charAt(0)}`)
-    setEmail(user.email)
+    setAvatar(`${user.user.first_name.charAt(0)}${user.user.last_name.charAt(0)}`)
+    setEmail(user.user.email)
   }
 
   const displayPage = () => {

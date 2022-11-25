@@ -4,7 +4,7 @@ import { Header, Container, Group, Burger, Paper, Transition, Avatar, Divider, A
 import { useDisclosure } from '@mantine/hooks'
 import { TbLogout } from 'react-icons/tb'
 import Logo from '../Logo'
-import AdminAccountSettings from '../../components/Client/AccountSettings/AdminAccountSettings'
+import AccountSettings from './AccountSettings/AccountSettings'
 import { HEADER_HEIGHT } from '../../services/constants/styles'
 import useStyles from '../../services/hooks/useStyles'
 import {
@@ -80,16 +80,6 @@ const Navbar = ({ user, avatar, role, onDisplayUser }) => {
     setActiveLink()
   }, [location])
 
-  const displayAccountSettings = () => {
-    switch (role) {
-      case 'admin':
-        return <AdminAccountSettings admin={user} onDisplayUser={onDisplayUser} />
-      case 'patient':
-
-      case 'doctor':
-    }
-  }
-
   const signOut = () => {
     deleteCookie(accessTokenCookie)
     window.location.assign(SIGN_IN_LINK)
@@ -141,7 +131,7 @@ const Navbar = ({ user, avatar, role, onDisplayUser }) => {
         </Container>
       </Header>
       <Modal opened={modalOpened} onClose={() => setModalOpened(false)} title="Account Settings" fullScreen>
-        {displayAccountSettings()}
+        <AccountSettings user={user} role={role} onDisplayUser={onDisplayUser} />
       </Modal>
     </>
   )
