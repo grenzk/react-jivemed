@@ -67,13 +67,11 @@ const DepartmentsTable = () => {
   ))
 
   const getDepartments = () => {
-    axiosGet(DEPARTMENTS_ENDPOINT, headers).then((response) => {
-      if (response.status === 200) {
-        setDepartments(response.data.departments)
-      } else {
-        showErrorNotification(response.response.data.errors.messages)
-      }
-    })
+    axiosGet(DEPARTMENTS_ENDPOINT, headers).then((response) =>
+      response.status === 200
+        ? setDepartments(response.data.departments)
+        : showErrorNotification(response.response.data.errors.messages)
+    )
   }
 
   const resetModal = () => {

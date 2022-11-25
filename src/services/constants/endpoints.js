@@ -6,4 +6,6 @@ export const SH0W_CURRENT_USER_ENDPOINT = '/user/show'
 export const PATIENTS_ENDPOINT = '/patients'
 export const ADMIN_CREATE_PATIENT_ENDPOINT = '/patients/admin_create'
 
+export const DOCTORS_ENDPOINT = '/doctors'
+
 export const DEPARTMENTS_ENDPOINT = '/departments'

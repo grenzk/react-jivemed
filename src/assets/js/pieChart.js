@@ -1,4 +1,4 @@
-const style = {
+const pieChartStyle = {
   data: {
     fillOpacity: 0.9,
     stroke: 'rgb(0, 44, 97)',
@@ -11,4 +11,4 @@ const style = {
   },
 }
 
-export default style
+export default pieChartStyle

@@ -72,13 +72,11 @@ const PatientsTable = () => {
   ))
 
   const getUsers = () => {
-    axiosGet(PATIENTS_ENDPOINT, headers).then((response) => {
-      if (response.status === 200) {
-        setPatients(response.data.users)
-      } else {
-        showErrorNotification(response.response.data.errors.messages)
-      }
-    })
+    axiosGet(PATIENTS_ENDPOINT, headers).then((response) =>
+      response.status === 200
+        ? setPatients(response.data.users)
+        : showErrorNotification(response.response.data.errors.messages)
+    )
   }
 
   const resetModal = () => {
