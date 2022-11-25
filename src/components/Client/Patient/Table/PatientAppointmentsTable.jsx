@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Table, ScrollArea, Center, Paper, Title, Stack, Group } from '@mantine/core'
+import { Table, ScrollArea, Center, Paper, Title, Stack, Group, Badge } from '@mantine/core'
 import { APPOINTMENTS_ENDPOINT } from '../../../../services/constants/endpoints'
 import { headers } from '../../../../services/constants/headers'
 import { axiosGet } from '../../../../services/utilities/axios'
@@ -20,6 +20,13 @@ const PatientAppointmentsTable = () => {
       <td>{appointment.details.id}</td>
       <td>{appointment.schedule.date}</td>
       <td>{`${appointment.doctor.first_name} ${appointment.doctor.last_name}`}</td>
+      <td>
+        {appointment.departments.map((department, index) => (
+          <Badge key={index} mx={6}>
+            {department.name}
+          </Badge>
+        ))}
+      </td>
     </tr>
   ))
 
@@ -50,6 +57,7 @@ const PatientAppointmentsTable = () => {
                     <th>Id</th>
                     <th>Schedule</th>
                     <th>Name</th>
+                    <th>Department</th>
                   </tr>
                 </thead>
                 <tbody>{rows}</tbody>
