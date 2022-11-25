@@ -16,7 +16,9 @@ const Auth = () => {
   useRedirect()
 
   const location = useLocation()
+
   const navigate = useNavigate()
+
   const { classes } = useStyles()
 
   const handleSignUp = (user) => {
