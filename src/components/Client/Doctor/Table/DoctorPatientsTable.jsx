@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useMantineTheme, Table, ScrollArea, Center, Paper, Title, Stack, Group } from '@mantine/core'
+import { showErrorNotification } from '../../../Notification'
 import { PATIENTS_ENDPOINT } from '../../../../services/constants/endpoints'
 import { headers } from '../../../../services/constants/headers'
 import { axiosGet } from '../../../../services/utilities/axios'
