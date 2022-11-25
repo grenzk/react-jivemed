@@ -14,4 +14,6 @@ export const DOCTORS_ENDPOINT = '/doctors'
 
 export const DEPARTMENTS_ENDPOINT = '/departments'
 
+export const SCHEDULES_ENDPOINT = '/schedules'
+
 export const APPOINTMENTS_ENDPOINT = '/appointments'
