@@ -17,14 +17,14 @@ export const adminNavLinks = [
 ]
 
 export const userNavLinks = [
+  { link: CLIENT_APPOINTMENTS_LINK, label: 'Appointments' },
   { link: CLIENT_AVAILABLE_SCHEDULES_LINK, label: 'Available Schedules' },
   { link: CLIENT_DOCTORS_LINK, label: 'Doctors' },
-  { link: CLIENT_APPOINTMENTS_LINK, label: 'Appointments' },
   { link: CLIENT_TRANSACTIONS_LINK, label: 'Transactions' },
 ]
 
 export const doctorNavLinks = [
-  { link: CLIENT_SCHEDULES_LINK, label: 'Schedules' },
   { link: CLIENT_APPOINTMENTS_LINK, label: 'Appointments' },
+  { link: CLIENT_SCHEDULES_LINK, label: 'Schedules' },
   { link: CLIENT_PATIENTS_LINK, label: 'Patients' },
 ]

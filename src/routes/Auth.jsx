@@ -49,10 +49,10 @@ const Auth = () => {
               window.location.assign(CLIENT_DASHBOARD_LINK)
               break
             case 'doctor':
-              window.location.assign(CLIENT_SCHEDULES_LINK)
+              window.location.assign(CLIENT_APPOINTMENTS_LINK)
               break
             case 'patient':
-              window.location.assign(CLIENT_AVAILABLE_SCHEDULES_LINK)
+              window.location.assign(CLIENT_APPOINTMENTS_LINK)
               break
           }
         } else {
