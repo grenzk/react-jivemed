@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { createStyles, Table, ScrollArea, Center, Paper, Title, Stack, Group, useMantineTheme } from '@mantine/core'
-import { useForm } from '@mantine/form'
 import useStyles from '../../../../services/hooks/useStyles'
 
 const data = [
