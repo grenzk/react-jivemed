@@ -1,5 +1,7 @@
 export const SIGN_IN_ENDPOINT = '/auth/sign_in'
 
+export const REQUEST_EMAIL_TOKEN_ENDPOINT = '/auth/request'
+
 export const USERS_ENDPOINT = '/users'
 export const SH0W_CURRENT_USER_ENDPOINT = '/user/show'
 export const UPDATE_CURRENT_USER_ENDPOINT = '/user/update'

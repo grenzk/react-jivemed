@@ -4,11 +4,15 @@ import { Header, Container, Group, Avatar, Divider, ActionIcon } from '@mantine/
 import { Center, Title, Text, Button } from '@mantine/core'
 import { TbLogout } from 'react-icons/tb'
 import Logo from '../../components/Logo'
+import { showSuccessNotification, showErrorNotification } from '../../components/Notification'
 import { HEADER_HEIGHT } from '../../services/constants/styles'
 import useStyles from '../../services/hooks/useStyles'
 import { SIGN_IN_LINK } from '../../services/constants/links'
 import { deleteCookie } from '../../services/utilities/cookie'
 import { accessTokenCookie } from '../../services/constants/cookies'
+import { REQUEST_EMAIL_TOKEN_ENDPOINT } from '../../services/constants/endpoints'
+import { axiosGet } from '../../services/utilities/axios'
+import { headers } from '../../services/constants/headers'
 
 const VerifyEmail = ({ avatar, email }) => {
   const navigate = useNavigate()
@@ -26,7 +30,13 @@ const VerifyEmail = ({ avatar, email }) => {
     navigate(SIGN_IN_LINK)
   }
 
-  const handleResendEmail = () => {}
+  const handleResendEmail = () => {
+    axiosGet(REQUEST_EMAIL_TOKEN_ENDPOINT, headers).then((response) =>
+      response.status === 200
+        ? showSuccessNotification('A confirmation email has been sent!')
+        : showErrorNotification(response.response.data.errors.messages)
+    )
+  }
 
   return (
     <>
