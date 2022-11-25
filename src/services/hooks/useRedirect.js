@@ -10,7 +10,7 @@ const useRedirect = () => {
 
   useEffect(() => {
     if (isLoggedIn()) {
-      navigate(CLIENT_DASHBOARD_LINK)
+      navigate(-1)
     } else {
       switch (urlPath) {
         case '/':

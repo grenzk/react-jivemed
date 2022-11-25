@@ -6,7 +6,6 @@ import {
 } from '../../../services/constants/links'
 import ClientDoctorSchedules from './ClientDoctorSchedules'
 import ClientDoctorAppointments from './ClientDoctorAppointments'
-import ClientDoctorPatients from './ClientDoctorPatients'
 import Error from '../../Error'
 
 const Doctor = ({ user }) => {
@@ -17,8 +16,6 @@ const Doctor = ({ user }) => {
       return <ClientDoctorSchedules />
     case CLIENT_APPOINTMENTS_LINK:
       return <ClientDoctorAppointments user={user} />
-    case CLIENT_PATIENTS_LINK:
-      return <ClientDoctorPatients />
     default:
       return <Error />
   }

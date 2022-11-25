@@ -26,5 +26,4 @@ export const userNavLinks = [
 export const doctorNavLinks = [
   { link: CLIENT_APPOINTMENTS_LINK, label: 'Appointments' },
   { link: CLIENT_SCHEDULES_LINK, label: 'Schedules' },
-  { link: CLIENT_PATIENTS_LINK, label: 'Patients' },
 ]
