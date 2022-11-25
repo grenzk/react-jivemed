@@ -1,14 +1,12 @@
 import { useState, useEffect } from 'react'
-import { useMantineTheme, Table, ScrollArea, Center, Paper, Title, Stack, Button, Group } from '@mantine/core'
+import { Table, ScrollArea, Center, Paper, Title, Stack, Group } from '@mantine/core'
 import { APPOINTMENTS_ENDPOINT } from '../../../../services/constants/endpoints'
 import { headers } from '../../../../services/constants/headers'
 import { axiosGet } from '../../../../services/utilities/axios'
 import useStyles from '../../../../services/hooks/useStyles'
 
-const DoctorAppointmentsTable = () => {
+const DoctorAppointmentsTable = ({ user }) => {
   const { classes, cx } = useStyles()
-
-  const theme = useMantineTheme()
 
   const [scrolled, setScrolled] = useState(false)
   const [appointments, setAppointments] = useState([])
@@ -29,7 +27,7 @@ const DoctorAppointmentsTable = () => {
   const getAppointments = () => {
     axiosGet(APPOINTMENTS_ENDPOINT, headers).then((response) => {
       response.status === 200
-        ? setAppointments(response.data.appointments)
+        ? setAppointments(response.data.appointments.filter((appointment) => appointment.doctor.id === user.user.id))
         : showErrorNotification(response.response.data.errors.messages)
     })
   }

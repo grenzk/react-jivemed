@@ -9,14 +9,14 @@ import ClientDoctorAppointments from './ClientDoctorAppointments'
 import ClientDoctorPatients from './ClientDoctorPatients'
 import Error from '../../Error'
 
-const Doctor = () => {
+const Doctor = ({ user }) => {
   const location = useLocation()
 
   switch (location.pathname) {
     case CLIENT_SCHEDULES_LINK:
       return <ClientDoctorSchedule />
     case CLIENT_APPOINTMENTS_LINK:
-      return <ClientDoctorAppointments />
+      return <ClientDoctorAppointments user={user} />
     case CLIENT_PATIENTS_LINK:
       return <ClientDoctorPatients />
     default:
