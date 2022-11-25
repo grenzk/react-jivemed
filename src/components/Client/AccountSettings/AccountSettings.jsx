@@ -30,7 +30,7 @@ const AccountSettings = ({ user, role, onDisplayUser }) => {
       if (response.status === 200) {
         showSuccessNotification('Your account has been successfully deleted!')
         deleteCookie(accessTokenCookie)
-        navigate(SIGN_IN_LINK)
+        window.location.assign(SIGN_IN_LINK)
       } else {
         showErrorNotification(response.response.data.errors.messages)
       }
@@ -52,7 +52,7 @@ const AccountSettings = ({ user, role, onDisplayUser }) => {
     <Center>
       <Stack>
         {displayAccountSettingsForm()}
-        <Button color="red" mt="xl">
+        <Button color="red" mt="xl" onClick={handleDeleteSubmit}>
           Delete Account
         </Button>
       </Stack>

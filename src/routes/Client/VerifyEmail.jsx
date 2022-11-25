@@ -15,19 +15,11 @@ import { axiosGet } from '../../services/utilities/axios'
 import { headers } from '../../services/constants/headers'
 
 const VerifyEmail = ({ avatar, email }) => {
-  const navigate = useNavigate()
-
   const { classes } = useStyles()
-
-  const [userEmail, setUserEmail] = useState(email)
-
-  useEffect(() => {
-    setUserEmail(email)
-  }, [email])
 
   const signOut = () => {
     deleteCookie(accessTokenCookie)
-    navigate(SIGN_IN_LINK)
+    window.location.assign(SIGN_IN_LINK)
   }
 
   const handleResendEmail = () => {
@@ -60,7 +52,7 @@ const VerifyEmail = ({ avatar, email }) => {
         Please verify your email
       </Title>
       <Text color="dimmed" size="sm" align="center" mt="md">
-        We sent an email to <b>{userEmail}</b>
+        We sent an email to <b>{email}</b>
       </Text>
       <Text color="dimmed" size="sm" align="center" mt="md">
         Still can&apos;t find the email?
