@@ -61,7 +61,7 @@ const PatientsTable = () => {
             color="red"
             onClick={() => {
               setPatient(row.user)
-              handleDeleteModal(row.user.id)
+              handleDeleteModal()
             }}
           >
             <TbTrash />
