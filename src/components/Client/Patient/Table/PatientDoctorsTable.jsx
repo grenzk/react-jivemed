@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useMantineTheme, Table, ScrollArea, Center, Paper, Title, Stack, Group, Badge } from '@mantine/core'
+import { Table, ScrollArea, Center, Paper, Title, Stack, Group, Badge } from '@mantine/core'
 import { DOCTORS_ENDPOINT } from '../../../../services/constants/endpoints'
 import { headers } from '../../../../services/constants/headers'
 import { axiosGet } from '../../../../services/utilities/axios'
@@ -7,8 +7,6 @@ import useStyles from '../../../../services/hooks/useStyles'
 
 const PatientDoctorsTable = () => {
   const { classes, cx } = useStyles()
-
-  const theme = useMantineTheme()
 
   const [scrolled, setScrolled] = useState(false)
   const [doctors, setDoctors] = useState([])
