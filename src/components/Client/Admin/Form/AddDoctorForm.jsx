@@ -3,7 +3,7 @@ import { useForm } from '@mantine/form'
 import { Button, Group, TextInput, PasswordInput, MultiSelect } from '@mantine/core'
 import { TbUser, TbMail, TbLock, TbReportMoney, TbMedicalCross } from 'react-icons/tb'
 import { DEPARTMENTS_ENDPOINT } from '../../../../services/constants/endpoints'
-import { axiosGet, axiosPost, axiosPut, axiosDelete } from '../../../../services/utilities/axios'
+import { axiosGet } from '../../../../services/utilities/axios'
 import { headers } from '../../../../services/constants/headers'
 
 const AddDoctorForm = ({ onSubmit }) => {
