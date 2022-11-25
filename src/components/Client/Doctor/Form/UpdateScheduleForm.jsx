@@ -1,7 +1,36 @@
-import React from 'react'
+import { useState } from 'react'
+import { DatePicker } from '@mantine/dates'
+import { Button } from '@mantine/core'
 
-const UpdateScheduleForm = () => {
-  return <div>UpdateScheduleForm</div>
+const UpdateScheduleForm = ({ schedule, onSubmit }) => {
+  const [value, setValue] = useState(new Date(schedule.schedule.date))
+  const [error, setError] = useState('')
+
+  return (
+    <>
+      <DatePicker required value={value} onChange={setValue} mb="xl" label="Schedule" withAsterisk error={error} />
+      <Button
+        variant="gradient"
+        gradient={{ from: 'indigo', to: 'cyan' }}
+        fullWidth={true}
+        onClick={() => {
+          if (value === '') {
+            setError('Invalid date.')
+          } else {
+            onSubmit({
+              id: schedule.schedule.id,
+              values: {
+                schedule: { date: new Date(value).toLocaleDateString('en-CA') },
+              },
+            })
+            setValue()
+          }
+        }}
+      >
+        Submit
+      </Button>
+    </>
+  )
 }
 
 export default UpdateScheduleForm
