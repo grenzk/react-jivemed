@@ -54,7 +54,7 @@ const DepartmentsTable = () => {
             color="red"
             onClick={() => {
               setDepartment(row.user)
-              // handleDeleteModal(row.user.id)
+              // handleDeleteModal()
             }}
           >
             <TbTrash />
