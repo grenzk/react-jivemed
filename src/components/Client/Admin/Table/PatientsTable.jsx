@@ -42,16 +42,16 @@ const PatientsTable = () => {
     getUsers()
   }, [])
 
-  const rows = patients.map((row, index) => (
+  const rows = patients.map((patient, index) => (
     <tr key={index}>
-      <td>{row.user.id}</td>
-      <td>{`${row.user.first_name} ${row.user.last_name}`}</td>
-      <td>{row.user.email}</td>
+      <td>{patient.user.id}</td>
+      <td>{`${patient.user.first_name} ${patient.user.last_name}`}</td>
+      <td>{patient.user.email}</td>
       <td>
         <Group spacing="xs">
           <ActionIcon
             onClick={() => {
-              setPatient(row.user)
+              setPatient(patient.user)
               handleEditModal()
             }}
           >
@@ -60,7 +60,7 @@ const PatientsTable = () => {
           <ActionIcon
             color="red"
             onClick={() => {
-              setPatient(row.user)
+              setPatient(patient.user)
               handleDeleteModal()
             }}
           >
@@ -84,6 +84,7 @@ const PatientsTable = () => {
   const resetModal = () => {
     setTitle('')
     setForm('')
+    setPatient({})
     setOpened(false)
   }
 

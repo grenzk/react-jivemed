@@ -14,10 +14,11 @@ import {
 } from '@mantine/core'
 import { TbPencil, TbTrash } from 'react-icons/tb'
 import AddDepartmentForm from '../Form/AddDepartmentForm'
+import EditDepartmentForm from '../Form/EditDepartmentForm'
 import { showSuccessNotification, showErrorNotification } from '../../../Notification'
 import { headers } from '../../../../services/constants/headers'
 import { DEPARTMENTS_ENDPOINT } from '../../../../services/constants/endpoints'
-import { axiosGet, axiosPost } from '../../../../services/utilities/axios'
+import { axiosGet, axiosPost, axiosPut, axiosDelete } from '../../../../services/utilities/axios'
 import useStyles from '../../../../services/hooks/useStyles'
 
 const DepartmentsTable = () => {
@@ -36,16 +37,16 @@ const DepartmentsTable = () => {
     getDepartments()
   }, [])
 
-  const rows = departments.map((row, index) => (
+  const rows = departments.map((department, index) => (
     <tr key={index}>
-      <td>{row.id}</td>
-      <td>{row.name}</td>
+      <td>{department.id}</td>
+      <td>{department.name}</td>
       <td>
         <Group spacing="xs">
           <ActionIcon
             onClick={() => {
-              setDepartment(row.user)
-              // handleEditModal()
+              setDepartment(department)
+              handleEditModal()
             }}
           >
             <TbPencil />
@@ -53,7 +54,7 @@ const DepartmentsTable = () => {
           <ActionIcon
             color="red"
             onClick={() => {
-              setDepartment(row.user)
+              setDepartment(department)
               // handleDeleteModal()
             }}
           >
@@ -77,12 +78,19 @@ const DepartmentsTable = () => {
   const resetModal = () => {
     setTitle('')
     setForm('')
+    setDepartment({})
     setOpened(false)
   }
 
   const handleAddModal = () => {
     setTitle('Add Department')
     setForm('add')
+    setOpened(true)
+  }
+
+  const handleEditModal = () => {
+    setTitle('Edit Department')
+    setForm('edit')
     setOpened(true)
   }
 
@@ -98,12 +106,24 @@ const DepartmentsTable = () => {
     })
   }
 
+  const handleSubmitEditDepartment = (departmentInfo) => {
+    axiosPut(`${DEPARTMENTS_ENDPOINT}/${departmentInfo.id}`, departmentInfo.values, headers).then((response) => {
+      if (response.status === 200) {
+        showSuccessNotification('Department has been successfully updated!')
+        getDepartments()
+        resetModal()
+      } else {
+        showErrorNotification(response.response.data.errors.messages)
+      }
+    })
+  }
+
   const displayForm = () => {
     switch (form) {
       case 'add':
         return <AddDepartmentForm onSubmit={handleSubmitAddDepartment} />
       case 'edit':
-      // return <EditDepartmentForm department={department} onSubmit={handleSubmitEditDepartment} />
+        return <EditDepartmentForm department={department} onSubmit={handleSubmitEditDepartment} />
       case 'delete':
       // return <DeleteDepartmentForm department={department} onSubmit={handleSubmitDeleteDepartment} />
     }
