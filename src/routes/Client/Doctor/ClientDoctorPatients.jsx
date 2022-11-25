@@ -2,9 +2,9 @@ import DoctorPatientsTable from '../../../components/Client/Doctor/Table/DoctorP
 
 const ClientDoctorPatients = () => {
   return (
-    <div>
+    <>
       <DoctorPatientsTable />
-    </div>
+    </>
   )
 }
 

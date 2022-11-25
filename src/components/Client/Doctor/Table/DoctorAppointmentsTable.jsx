@@ -1,50 +1,57 @@
-import { useState } from 'react'
-import { Table, ScrollArea, Center, Paper, Title, Stack, Group } from '@mantine/core'
+import { useState, useEffect } from 'react'
+import { useMantineTheme, Table, ScrollArea, Center, Paper, Title, Stack, Button, Group } from '@mantine/core'
+import { APPOINTMENTS_ENDPOINT } from '../../../../services/constants/endpoints'
+import { headers } from '../../../../services/constants/headers'
+import { axiosGet } from '../../../../services/utilities/axios'
 import useStyles from '../../../../services/hooks/useStyles'
 
-const data = [
-  { id: 1, name: 'Maria Dela cruz', email: 'mdc.doctor@email.com' },
-  { id: 2, name: 'Juan Dela Cruz', email: 'jdc@email.com' },
-  { id: 2, name: 'Juan Dela Cruz', email: 'jdc@email.com' },
-  { id: 2, name: 'Juan Dela Cruz', email: 'jdc@email.com' },
-  { id: 2, name: 'Juan Dela Cruz', email: 'jdc@email.com' },
-  { id: 2, name: 'Juan Dela Cruz', email: 'jdc@email.com' },
-  { id: 2, name: 'Juan Dela Cruz', email: 'jdc@email.com' },
-  { id: 2, name: 'Juan Dela Cruz', email: 'jdc@email.com' },
-  { id: 2, name: 'Juan Dela Cruz', email: 'jdc@email.com' },
-  { id: 2, name: 'Juan Dela Cruz', email: 'jdc@email.com' },
-]
-
-const AppointmentsTable = () => {
+const DoctorAppointmentsTable = () => {
   const { classes, cx } = useStyles()
-  const [scrolled, setScrolled] = useState(false)
 
-  const rows = data.map((row, index) => (
+  const theme = useMantineTheme()
+
+  const [scrolled, setScrolled] = useState(false)
+  const [appointments, setAppointments] = useState([])
+
+  useEffect(() => {
+    getAppointments()
+  }, [])
+
+  const rows = appointments.map((appointment, index) => (
     <tr key={index}>
-      <td>{row.id}</td>
-      <td>{row.name}</td>
-      <td>{row.email}</td>
+      <td>{appointment.details.id}</td>
+      <td>{appointment.schedule.date}</td>
+      <td>{`${appointment.patient.first_name} ${appointment.patient.last_name}`}</td>
+      <td>{appointment.patient.email}</td>
     </tr>
   ))
 
+  const getAppointments = () => {
+    axiosGet(APPOINTMENTS_ENDPOINT, headers).then((response) => {
+      response.status === 200
+        ? setAppointments(response.data.appointments)
+        : showErrorNotification(response.response.data.errors.messages)
+    })
+  }
+
   return (
-    <div>
+    <>
       <Center>
         <Stack>
           <Group position="apart">
             <Title order={2}>Appointments</Title>
           </Group>
-
           <Paper shadow="xs" p="md">
             <ScrollArea sx={{ height: 450 }} onScrollPositionChange={({ y }) => setScrolled(y !== 0)}>
               <Table sx={{ minWidth: 1000 }} verticalSpacing="md">
                 <thead
-                  className={cx(classes.tableHeader, {
-                    [classes.tableScrolled]: scrolled,
+                  className={cx(classes.header, {
+                    [classes.scrolled]: scrolled,
                   })}
                 >
                   <tr>
                     <th>Id</th>
+                    <th>Schedule</th>
                     <th>Name</th>
                     <th>Email</th>
                   </tr>
@@ -55,8 +62,8 @@ const AppointmentsTable = () => {
           </Paper>
         </Stack>
       </Center>
-    </div>
+    </>
   )
 }
 
-export default AppointmentsTable
+export default DoctorAppointmentsTable

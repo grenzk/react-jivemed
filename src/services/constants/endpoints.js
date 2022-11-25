@@ -13,3 +13,5 @@ export const ADMIN_CREATE_PATIENT_ENDPOINT = '/patients/admin_create'
 export const DOCTORS_ENDPOINT = '/doctors'
 
 export const DEPARTMENTS_ENDPOINT = '/departments'
+
+export const APPOINTMENTS_ENDPOINT = '/appointments'
