@@ -106,8 +106,8 @@ const PatientsTable = () => {
     setOpened(true)
   }
 
-  const handleSubmitAddPatient = (userInfo) => {
-    axiosPost(ADMIN_CREATE_PATIENT_ENDPOINT, userInfo, headers).then((response) => {
+  const handleSubmitAddPatient = (patient) => {
+    axiosPost(ADMIN_CREATE_PATIENT_ENDPOINT, patient, headers).then((response) => {
       if (response.status === 201) {
         showSuccessNotification('Patient has been successfully created!')
         getUsers()
@@ -118,8 +118,8 @@ const PatientsTable = () => {
     })
   }
 
-  const handleSubmitEditPatient = (patientInfo) => {
-    axiosPut(`${PATIENTS_ENDPOINT}/${patientInfo.id}`, patientInfo.values, headers).then((response) => {
+  const handleSubmitEditPatient = (patient) => {
+    axiosPut(`${PATIENTS_ENDPOINT}/${patient.id}`, patient.values, headers).then((response) => {
       if (response.status === 200) {
         showSuccessNotification('Patient has been successfully updated!')
         getUsers()

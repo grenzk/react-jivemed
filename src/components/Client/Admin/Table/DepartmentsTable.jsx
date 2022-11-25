@@ -15,6 +15,7 @@ import {
 import { TbPencil, TbTrash } from 'react-icons/tb'
 import AddDepartmentForm from '../Form/AddDepartmentForm'
 import EditDepartmentForm from '../Form/EditDepartmentForm'
+import DeleteDepartmentForm from '../Form/DeleteDepartmentForm'
 import { showSuccessNotification, showErrorNotification } from '../../../Notification'
 import { headers } from '../../../../services/constants/headers'
 import { DEPARTMENTS_ENDPOINT } from '../../../../services/constants/endpoints'
@@ -55,7 +56,7 @@ const DepartmentsTable = () => {
             color="red"
             onClick={() => {
               setDepartment(department)
-              // handleDeleteModal()
+              handleDeleteModal()
             }}
           >
             <TbTrash />
@@ -94,8 +95,14 @@ const DepartmentsTable = () => {
     setOpened(true)
   }
 
-  const handleSubmitAddDepartment = (departmentInfo) => {
-    axiosPost(DEPARTMENTS_ENDPOINT, departmentInfo, headers).then((response) => {
+  const handleDeleteModal = () => {
+    setTitle('Delete Department')
+    setForm('delete')
+    setOpened(true)
+  }
+
+  const handleSubmitAddDepartment = (department) => {
+    axiosPost(DEPARTMENTS_ENDPOINT, department, headers).then((response) => {
       if (response.status === 201) {
         showSuccessNotification('Department has been successfully created!')
         getDepartments()
@@ -106,10 +113,22 @@ const DepartmentsTable = () => {
     })
   }
 
-  const handleSubmitEditDepartment = (departmentInfo) => {
-    axiosPut(`${DEPARTMENTS_ENDPOINT}/${departmentInfo.id}`, departmentInfo.values, headers).then((response) => {
+  const handleSubmitEditDepartment = (department) => {
+    axiosPut(`${DEPARTMENTS_ENDPOINT}/${department.id}`, department.values, headers).then((response) => {
       if (response.status === 200) {
         showSuccessNotification('Department has been successfully updated!')
+        getDepartments()
+        resetModal()
+      } else {
+        showErrorNotification(response.response.data.errors.messages)
+      }
+    })
+  }
+
+  const handleSubmitDeleteDepartment = (id) => {
+    axiosDelete(`${DEPARTMENTS_ENDPOINT}/${id}`, headers).then((response) => {
+      if (response.status === 200) {
+        showSuccessNotification('Department has been successfully deleted!')
         getDepartments()
         resetModal()
       } else {
@@ -125,7 +144,7 @@ const DepartmentsTable = () => {
       case 'edit':
         return <EditDepartmentForm department={department} onSubmit={handleSubmitEditDepartment} />
       case 'delete':
-      // return <DeleteDepartmentForm department={department} onSubmit={handleSubmitDeleteDepartment} />
+        return <DeleteDepartmentForm department={department} onSubmit={handleSubmitDeleteDepartment} />
     }
   }
 
