@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 import { Button, Center, Stack } from '@mantine/core'
 import UpdateAdminForm from './Form/UpdateAdminForm'
 import UpdateDoctorForm from '../Admin/Form/UpdateDoctorForm'
@@ -12,10 +12,12 @@ import { deleteCookie } from '../../../services/utilities/cookie'
 import { accessTokenCookie } from '../../../services/constants/cookies'
 
 const AccountSettings = ({ user, role, onDisplayUser }) => {
-  const navigate = useNavigate()
+  const [loading, setLoading] = useState(false)
 
   const handleUpdateSubmit = (user) => {
+    setLoading(true)
     axiosPut(UPDATE_CURRENT_USER_ENDPOINT, user.values, headers).then((response) => {
+      setLoading(false)
       if (response.status === 200) {
         showSuccessNotification('Your account has been successfully updated!')
         onDisplayUser(response.data)
@@ -26,7 +28,9 @@ const AccountSettings = ({ user, role, onDisplayUser }) => {
   }
 
   const handleDeleteSubmit = () => {
+    setLoading(true)
     axiosDelete(DELETE_CURRENT_USER_ENDPOINT, headers).then((response) => {
+      setLoading(false)
       if (response.status === 200) {
         showSuccessNotification('Your account has been successfully deleted!')
         deleteCookie(accessTokenCookie)
@@ -40,11 +44,25 @@ const AccountSettings = ({ user, role, onDisplayUser }) => {
   const displayAccountSettingsForm = () => {
     switch (role) {
       case 'admin':
-        return <UpdateAdminForm admin={user.user} onSubmit={handleUpdateSubmit} />
+        return <UpdateAdminForm loading={loading} admin={user.user} onSubmit={handleUpdateSubmit} />
       case 'patient':
-        return <UpdatePatientForm patient={user.user} onDisplayUser={onDisplayUser} onSubmit={handleUpdateSubmit} />
+        return (
+          <UpdatePatientForm
+            loading={loading}
+            patient={user.user}
+            onDisplayUser={onDisplayUser}
+            onSubmit={handleUpdateSubmit}
+          />
+        )
       case 'doctor':
-        return <UpdateDoctorForm doctor={user} onDisplayUser={onDisplayUser} onSubmit={handleUpdateSubmit} />
+        return (
+          <UpdateDoctorForm
+            loading={loading}
+            doctor={user}
+            onDisplayUser={onDisplayUser}
+            onSubmit={handleUpdateSubmit}
+          />
+        )
     }
   }
 

@@ -6,7 +6,7 @@ import { DEPARTMENTS_ENDPOINT } from '../../../../services/constants/endpoints'
 import { axiosGet } from '../../../../services/utilities/axios'
 import { headers } from '../../../../services/constants/headers'
 
-const UpdateDoctorForm = ({ doctor, onSubmit }) => {
+const UpdateDoctorForm = ({ loading, doctor, onSubmit }) => {
   const [departments, setDepartments] = useState([])
   const [department, setDepartment] = useState(doctor.departments.map((department) => department.id))
 
@@ -119,7 +119,13 @@ const UpdateDoctorForm = ({ doctor, onSubmit }) => {
         clearable
         searchable
       />
-      <Button variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }} fullWidth={true} type="submit">
+      <Button
+        variant="gradient"
+        gradient={{ from: 'indigo', to: 'cyan' }}
+        fullWidth={true}
+        type="submit"
+        loading={loading}
+      >
         Submit
       </Button>
     </form>
