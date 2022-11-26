@@ -52,7 +52,7 @@ const Client = () => {
       case 'admin':
         return <Admin />
       case 'patient':
-        return <Patient />
+        return <Patient user={user} />
       case 'doctor':
         return <Doctor user={user} />
     }

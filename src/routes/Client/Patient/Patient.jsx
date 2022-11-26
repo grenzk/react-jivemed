@@ -11,7 +11,7 @@ import ClientPatientDoctors from './ClientPatientDoctors'
 import ClientPatientTransactions from './ClientPatientTransactions'
 import Error from '../../Error'
 
-const Patient = () => {
+const Patient = ({ user }) => {
   const location = useLocation()
 
   switch (location.pathname) {
@@ -20,7 +20,7 @@ const Patient = () => {
     case CLIENT_DOCTORS_LINK:
       return <ClientPatientDoctors />
     case CLIENT_APPOINTMENTS_LINK:
-      return <ClientPatientAppointments />
+      return <ClientPatientAppointments user={user} />
     case CLIENT_TRANSACTIONS_LINK:
       return <ClientPatientTransactions />
     default:
