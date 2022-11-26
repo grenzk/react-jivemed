@@ -45,6 +45,7 @@ const Auth = () => {
   const handleSignIn = (user) => {
     setLoading(true)
     axiosPost(SIGN_IN_ENDPOINT, user).then((response) => {
+      console.log(response)
       setLoading(false)
       if (response.status === 200) {
         setCookie(accessTokenCookie, response.data.access_token, response.data.access_token_expiration)
