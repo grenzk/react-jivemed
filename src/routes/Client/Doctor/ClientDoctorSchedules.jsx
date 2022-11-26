@@ -1,9 +1,9 @@
 import DoctorSchedulesTable from '../../../components/Client/Doctor/Table/DoctorSchedulesTable'
 
-const ClientDoctorSchedules = () => {
+const ClientDoctorSchedules = ({ user }) => {
   return (
     <>
-      <DoctorSchedulesTable />
+      <DoctorSchedulesTable user={user} />
     </>
   )
 }

@@ -22,7 +22,7 @@ import { headers } from '../../../../services/constants/headers'
 import { axiosGet, axiosPost, axiosPut, axiosDelete } from '../../../../services/utilities/axios'
 import useStyles from '../../../../services/hooks/useStyles'
 
-const DoctorSchedulesTable = () => {
+const DoctorSchedulesTable = ({ user }) => {
   const { classes, cx } = useStyles()
 
   const theme = useMantineTheme()
@@ -71,7 +71,7 @@ const DoctorSchedulesTable = () => {
   const getSchedules = () => {
     axiosGet(SCHEDULES_ENDPOINT, headers).then((response) => {
       response.status === 200
-        ? setSchedules(response.data.schedules)
+        ? setSchedules(response.data.schedules.filter((schedule) => schedule.user.id === user.user.id))
         : showErrorNotification(response.response.data.errors.messages)
     })
   }

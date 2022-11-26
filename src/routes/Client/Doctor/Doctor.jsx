@@ -9,7 +9,7 @@ const Doctor = ({ user }) => {
 
   switch (location.pathname) {
     case CLIENT_SCHEDULES_LINK:
-      return <ClientDoctorSchedules />
+      return <ClientDoctorSchedules user={user} />
     case CLIENT_APPOINTMENTS_LINK:
       return <ClientDoctorAppointments user={user} />
     default:
