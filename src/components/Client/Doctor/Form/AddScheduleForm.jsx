@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { DatePicker } from '@mantine/dates'
 import { Button } from '@mantine/core'
 
-const AddScheduleForm = ({ onSubmit }) => {
+const AddScheduleForm = ({ loading, onSubmit }) => {
   const [value, setValue] = useState(new Date())
   const [error, setError] = useState('')
 
@@ -23,6 +23,7 @@ const AddScheduleForm = ({ onSubmit }) => {
             setValue()
           }
         }}
+        loading={loading}
       >
         Submit
       </Button>

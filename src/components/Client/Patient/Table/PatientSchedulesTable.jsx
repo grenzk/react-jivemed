@@ -26,6 +26,7 @@ const PatientSchedulesTable = () => {
 
   const [opened, setOpened] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [schedules, setSchedules] = useState([])
   const [schedule, setSchedule] = useState({})
 
@@ -66,7 +67,9 @@ const PatientSchedulesTable = () => {
   }
 
   const handleAddAppointment = (appointment) => {
+    setLoading(true)
     axiosPost(APPOINTMENTS_ENDPOINT, appointment, headers).then((response) => {
+      setLoading(false)
       if (response.status === 200) {
         showSuccessNotification('Your appointment has been successfully created!')
         setOpened(false)
@@ -96,7 +99,7 @@ const PatientSchedulesTable = () => {
         onClose={() => setOpened(false)}
         size="auto"
       >
-        <AddAppointmentForm schedule={schedule} onSubmit={handleAddAppointment} />
+        <AddAppointmentForm loading={loading} schedule={schedule} onSubmit={handleAddAppointment} />
       </Modal>
       <Center>
         <Stack>

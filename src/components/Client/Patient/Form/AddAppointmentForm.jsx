@@ -1,8 +1,8 @@
 import { useForm } from '@mantine/form'
-import { Button, Group, TextInput, PasswordInput } from '@mantine/core'
+import { Button, Group, TextInput } from '@mantine/core'
 import { TbUser, TbCreditCard, TbCalendar, TbInfoCircle } from 'react-icons/tb'
 
-const AddAppointmentForm = ({ schedule, onSubmit }) => {
+const AddAppointmentForm = ({ loading, schedule, onSubmit }) => {
   const form = useForm({
     initialValues: {
       name: '',
@@ -70,7 +70,13 @@ const AddAppointmentForm = ({ schedule, onSubmit }) => {
         />
       </Group>
       <TextInput required label="CVC" mb="xl" type="number" icon={<TbInfoCircle />} {...form.getInputProps('cvc')} />
-      <Button variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }} fullWidth={true} type="submit">
+      <Button
+        variant="gradient"
+        gradient={{ from: 'indigo', to: 'cyan' }}
+        fullWidth={true}
+        type="submit"
+        loading={loading}
+      >
         Submit
       </Button>
     </form>

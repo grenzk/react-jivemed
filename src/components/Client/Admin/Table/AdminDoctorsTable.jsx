@@ -29,6 +29,7 @@ const AdminDoctorsTable = () => {
 
   const [opened, setOpened] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [doctors, setDoctors] = useState([])
   const [doctor, setDoctor] = useState({})
   const [title, setTitle] = useState('')
@@ -100,7 +101,9 @@ const AdminDoctorsTable = () => {
   }
 
   const handleSubmitAddDoctor = (doctor) => {
+    setLoading(true)
     axiosPost(DOCTORS_ENDPOINT, doctor, headers).then((response) => {
+      setLoading(false)
       if (response.status === 201) {
         showSuccessNotification('Doctor has been successfully created!')
         getDoctors()
@@ -112,7 +115,9 @@ const AdminDoctorsTable = () => {
   }
 
   const handleSubmitUpdateDoctor = (doctor) => {
+    setLoading(true)
     axiosPut(`${DOCTORS_ENDPOINT}/${doctor.id}`, doctor.values, headers).then((response) => {
+      setLoading(false)
       if (response.status === 200) {
         showSuccessNotification('Doctor has been successfully updated!')
         getDoctors()
@@ -124,7 +129,9 @@ const AdminDoctorsTable = () => {
   }
 
   const handleSubmitDeleteDoctor = (id) => {
+    setLoading(true)
     axiosDelete(`${USERS_ENDPOINT}/${id}`, headers).then((response) => {
+      setLoading(false)
       if (response.status === 200) {
         showSuccessNotification('Doctor has been successfully deleted!')
         getDoctors()
@@ -138,11 +145,11 @@ const AdminDoctorsTable = () => {
   const displayForm = () => {
     switch (form) {
       case 'add':
-        return <AddDoctorForm onSubmit={handleSubmitAddDoctor} />
+        return <AddDoctorForm loading={loading} onSubmit={handleSubmitAddDoctor} />
       case 'update':
-        return <UpdateDoctorForm doctor={doctor} onSubmit={handleSubmitUpdateDoctor} />
+        return <UpdateDoctorForm loading={loading} doctor={doctor} onSubmit={handleSubmitUpdateDoctor} />
       case 'delete':
-        return <DeleteDoctorForm doctor={doctor} onSubmit={handleSubmitDeleteDoctor} />
+        return <DeleteDoctorForm loading={loading} doctor={doctor} onSubmit={handleSubmitDeleteDoctor} />
     }
   }
 

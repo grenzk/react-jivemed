@@ -6,7 +6,7 @@ import { DEPARTMENTS_ENDPOINT } from '../../../../services/constants/endpoints'
 import { axiosGet } from '../../../../services/utilities/axios'
 import { headers } from '../../../../services/constants/headers'
 
-const AddDoctorForm = ({ onSubmit }) => {
+const AddDoctorForm = ({ loading, onSubmit }) => {
   const [departments, setDepartments] = useState([])
   const [department, setDepartment] = useState([])
 
@@ -99,7 +99,13 @@ const AddDoctorForm = ({ onSubmit }) => {
         clearable
         searchable
       />
-      <Button variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }} fullWidth={true} type="submit">
+      <Button
+        variant="gradient"
+        gradient={{ from: 'indigo', to: 'cyan' }}
+        fullWidth={true}
+        type="submit"
+        loading={loading}
+      >
         Submit
       </Button>
     </form>

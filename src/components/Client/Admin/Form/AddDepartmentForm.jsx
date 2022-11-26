@@ -2,7 +2,7 @@ import { Button, TextInput } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { TbMedicalCross } from 'react-icons/tb'
 
-const AddDepartmentForm = ({ onSubmit }) => {
+const AddDepartmentForm = ({ loading, onSubmit }) => {
   const form = useForm({
     initialValues: {
       name: '',
@@ -25,7 +25,13 @@ const AddDepartmentForm = ({ onSubmit }) => {
       })}
     >
       <TextInput required label="Name" mb="xl" icon={<TbMedicalCross />} {...form.getInputProps('name')} />
-      <Button variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }} fullWidth={true} type="submit">
+      <Button
+        variant="gradient"
+        gradient={{ from: 'indigo', to: 'cyan' }}
+        fullWidth={true}
+        type="submit"
+        loading={loading}
+      >
         Submit
       </Button>
     </form>

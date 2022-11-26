@@ -28,6 +28,7 @@ const DoctorSchedulesTable = ({ user }) => {
   const theme = useMantineTheme()
 
   const [opened, setOpened] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [schedule, setSchedule] = useState({})
   const [schedules, setSchedules] = useState([])
@@ -101,7 +102,9 @@ const DoctorSchedulesTable = ({ user }) => {
   }
 
   const handleSubmitAddSchedule = (schedule) => {
+    setLoading(true)
     axiosPost(SCHEDULES_ENDPOINT, schedule, headers).then((response) => {
+      setLoading(false)
       if (response.status === 201) {
         showSuccessNotification('Schedule has been successfully created!')
         getSchedules()
@@ -113,7 +116,9 @@ const DoctorSchedulesTable = ({ user }) => {
   }
 
   const handleSubmitUpdateSchedule = (schedule) => {
+    setLoading(true)
     axiosPut(`${SCHEDULES_ENDPOINT}/${schedule.id}`, schedule.values, headers).then((response) => {
+      setLoading(false)
       if (response.status === 200) {
         showSuccessNotification('Schedule has been successfully updated!')
         getSchedules()
@@ -125,7 +130,9 @@ const DoctorSchedulesTable = ({ user }) => {
   }
 
   const handleSubmitDeleteSchedule = (id) => {
+    setLoading(true)
     axiosDelete(`${SCHEDULES_ENDPOINT}/${id}`, headers).then((response) => {
+      setLoading(false)
       if (response.status === 200) {
         showSuccessNotification('Schedule has been successfully deleted!')
         getSchedules()
@@ -139,11 +146,11 @@ const DoctorSchedulesTable = ({ user }) => {
   const displayForm = () => {
     switch (form) {
       case 'add':
-        return <AddScheduleForm onSubmit={handleSubmitAddSchedule} />
+        return <AddScheduleForm loading={loading} onSubmit={handleSubmitAddSchedule} />
       case 'update':
-        return <UpdateScheduleForm schedule={schedule} onSubmit={handleSubmitUpdateSchedule} />
+        return <UpdateScheduleForm loading={loading} schedule={schedule} onSubmit={handleSubmitUpdateSchedule} />
       case 'delete':
-        return <DeleteScheduleForm schedule={schedule} onSubmit={handleSubmitDeleteSchedule} />
+        return <DeleteScheduleForm loading={loading} schedule={schedule} onSubmit={handleSubmitDeleteSchedule} />
     }
   }
 

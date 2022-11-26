@@ -2,7 +2,7 @@ import { useForm } from '@mantine/form'
 import { Button, Group, TextInput, PasswordInput } from '@mantine/core'
 import { TbUser, TbMail, TbLock } from 'react-icons/tb'
 
-const AddPatientForm = ({ onSubmit }) => {
+const AddPatientForm = ({ loading, onSubmit }) => {
   const form = useForm({
     initialValues: {
       firstName: '',
@@ -39,7 +39,13 @@ const AddPatientForm = ({ onSubmit }) => {
       </Group>
       <TextInput required label="Email" mb="sm" icon={<TbMail />} {...form.getInputProps('email')} />
       <PasswordInput required label="Password" mb="xl" icon={<TbLock />} {...form.getInputProps('password')} />
-      <Button variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }} fullWidth={true} type="submit">
+      <Button
+        variant="gradient"
+        gradient={{ from: 'indigo', to: 'cyan' }}
+        fullWidth={true}
+        type="submit"
+        loading={loading}
+      >
         Submit
       </Button>
     </form>

@@ -29,6 +29,7 @@ const AdminDepartmentsTable = () => {
 
   const [opened, setOpened] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [departments, setDepartments] = useState([])
   const [department, setDepartment] = useState({})
   const [title, setTitle] = useState('')
@@ -100,7 +101,9 @@ const AdminDepartmentsTable = () => {
   }
 
   const handleSubmitAddDepartment = (department) => {
+    setLoading(true)
     axiosPost(DEPARTMENTS_ENDPOINT, department, headers).then((response) => {
+      setLoading(false)
       if (response.status === 201) {
         showSuccessNotification('Department has been successfully created!')
         getDepartments()
@@ -112,7 +115,9 @@ const AdminDepartmentsTable = () => {
   }
 
   const handleSubmitUpdateDepartment = (department) => {
+    setLoading(true)
     axiosPut(`${DEPARTMENTS_ENDPOINT}/${department.id}`, department.values, headers).then((response) => {
+      setLoading(false)
       if (response.status === 200) {
         showSuccessNotification('Department has been successfully updated!')
         getDepartments()
@@ -124,7 +129,9 @@ const AdminDepartmentsTable = () => {
   }
 
   const handleSubmitDeleteDepartment = (id) => {
+    setLoading(true)
     axiosDelete(`${DEPARTMENTS_ENDPOINT}/${id}`, headers).then((response) => {
+      setLoading(false)
       if (response.status === 200) {
         showSuccessNotification('Department has been successfully deleted!')
         getDepartments()
@@ -138,11 +145,15 @@ const AdminDepartmentsTable = () => {
   const displayForm = () => {
     switch (form) {
       case 'add':
-        return <AddDepartmentForm onSubmit={handleSubmitAddDepartment} />
+        return <AddDepartmentForm loading={loading} onSubmit={handleSubmitAddDepartment} />
       case 'update':
-        return <UpdateDepartmentForm department={department} onSubmit={handleSubmitUpdateDepartment} />
+        return (
+          <UpdateDepartmentForm loading={loading} department={department} onSubmit={handleSubmitUpdateDepartment} />
+        )
       case 'delete':
-        return <DeleteDepartmentForm department={department} onSubmit={handleSubmitDeleteDepartment} />
+        return (
+          <DeleteDepartmentForm loading={loading} department={department} onSubmit={handleSubmitDeleteDepartment} />
+        )
     }
   }
 
