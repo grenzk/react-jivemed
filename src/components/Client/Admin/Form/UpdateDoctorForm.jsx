@@ -102,7 +102,7 @@ const UpdateDoctorForm = ({ loading, doctor, onSubmit }) => {
         label="Doctor Fee"
         type="number"
         step="0.01"
-        min=".01"
+        min="100"
         icon={<TbReportMoney />}
         {...form.getInputProps('doctorFee')}
       />
