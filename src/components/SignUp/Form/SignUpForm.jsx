@@ -3,7 +3,7 @@ import { useForm } from '@mantine/form'
 import { TbUser, TbMail, TbLock } from 'react-icons/tb'
 import { SIGN_IN_LINK } from '../../../services/constants/links'
 
-const SignUpForm = ({ handleSignUp }) => {
+const SignUpForm = ({ loading, handleSignUp }) => {
   const form = useForm({
     initialValues: {
       firstName: '',
@@ -51,7 +51,7 @@ const SignUpForm = ({ handleSignUp }) => {
       </Group>
       <TextInput label="Email" mt="md" size="md" icon={<TbMail />} {...form.getInputProps('email')} />
       <PasswordInput label="Password" mt="md" size="md" icon={<TbLock />} {...form.getInputProps('password')} />
-      <Button fullWidth mt="xl" size="md" type="submit">
+      <Button fullWidth mt="xl" size="md" type="submit" loading={loading}>
         Sign up
       </Button>
       <Text align="center" mt="md">

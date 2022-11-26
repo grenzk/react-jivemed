@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Paper, Title } from '@mantine/core'
 import Logo from '../components/Logo'
@@ -24,10 +25,14 @@ const Auth = () => {
 
   const navigate = useNavigate()
 
+  const [loading, setLoading] = useState(false)
+
   const { classes } = useStyles()
 
   const handleSignUp = (user) => {
+    setLoading(true)
     axiosPost(PATIENTS_ENDPOINT, user).then((response) => {
+      setLoading(false)
       if (response.status === 201) {
         navigate(SIGN_IN_LINK)
         showSuccessNotification('A confirmation email has been sent!')
@@ -38,7 +43,9 @@ const Auth = () => {
   }
 
   const handleSignIn = (user) => {
+    setLoading(true)
     axiosPost(SIGN_IN_ENDPOINT, user).then((response) => {
+      setLoading(false)
       if (response.status === 200) {
         setCookie(accessTokenCookie, response.data.access_token, response.data.access_token_expiration)
 
@@ -67,9 +74,9 @@ const Auth = () => {
 
   const displayForm = () =>
     location.pathname === SIGN_IN_LINK ? (
-      <SignInForm handleSignIn={handleSignIn} />
+      <SignInForm loading={loading} handleSignIn={handleSignIn} />
     ) : (
-      <SignUpForm handleSignUp={handleSignUp} />
+      <SignUpForm loading={loading} handleSignUp={handleSignUp} />
     )
 
   return (
