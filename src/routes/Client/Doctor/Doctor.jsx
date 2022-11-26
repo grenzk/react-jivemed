@@ -1,9 +1,5 @@
 import { useLocation } from 'react-router-dom'
-import {
-  CLIENT_SCHEDULES_LINK,
-  CLIENT_APPOINTMENTS_LINK,
-  CLIENT_PATIENTS_LINK,
-} from '../../../services/constants/links'
+import { CLIENT_SCHEDULES_LINK, CLIENT_APPOINTMENTS_LINK } from '../../../services/constants/links'
 import ClientDoctorSchedules from './ClientDoctorSchedules'
 import ClientDoctorAppointments from './ClientDoctorAppointments'
 import Error from '../../Error'
