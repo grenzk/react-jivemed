@@ -6,7 +6,7 @@ const DeleteScheduleForm = ({ schedule, onSubmit }) => {
         <Text>Are you sure you want to delete this?</Text>
       </Group>
       <Group position="right">
-        <Button color="red" onClick={() => onSubmit(schedule.user.id)}>
+        <Button color="red" onClick={() => onSubmit(schedule.schedule.id)}>
           Delete
         </Button>
       </Group>
