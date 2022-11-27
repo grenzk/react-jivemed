@@ -45,7 +45,7 @@ const AdminPatientsTable = () => {
 
   const rows = patients.map((patient, index) => (
     <tr key={index}>
-      <td>{patient.user.id}</td>
+      <td>{patient.user.id.toString()}</td>
       <td>{`${patient.user.first_name} ${patient.user.last_name}`}</td>
       <td>{patient.user.email}</td>
       <td>
@@ -73,11 +73,11 @@ const AdminPatientsTable = () => {
   ))
 
   const getPatients = () => {
-    axiosGet(PATIENTS_ENDPOINT, headers).then((response) =>
+    axiosGet(PATIENTS_ENDPOINT, headers).then((response) => {
       response.status === 200
         ? setPatients(response.data.users)
         : showErrorNotification(response.response.data.errors.messages)
-    )
+    })
   }
 
   const resetModal = () => {

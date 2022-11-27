@@ -41,7 +41,7 @@ const AdminDepartmentsTable = () => {
 
   const rows = departments.map((department, index) => (
     <tr key={index}>
-      <td>{department.id}</td>
+      <td>{department.id.toString()}</td>
       <td>{department.name}</td>
       <td>
         <Group spacing="xs">

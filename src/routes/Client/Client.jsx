@@ -9,7 +9,6 @@ import { SH0W_CURRENT_USER_ENDPOINT } from '../../services/constants/endpoints'
 import { CLIENT_DASHBOARD_LINK, VERIFY_EMAIL_LINK } from '../../services/constants/links'
 import { axiosGet } from '../../services/utilities/axios'
 import { headers } from '../../services/constants/headers'
-import { checkDoctorFee } from '../../services/utilities/checkDoctorFee'
 
 const Client = () => {
   const navigate = useNavigate()
@@ -25,17 +24,7 @@ const Client = () => {
 
     axiosGet(SH0W_CURRENT_USER_ENDPOINT, headers).then((response) => {
       if (response.status === 200) {
-        displayUser({
-          ...response.data,
-          departments: [
-            ...response.data.departments.map((department) => {
-              return { ...department, id: department.id.toString() }
-            }),
-          ],
-          doctor_fee: checkDoctorFee({ ...response.data.doctor_fee }),
-          role: { ...response.data.role, id: response.data.role.id.toString() },
-          user: { ...response.data.user, id: response.data.user.id.toString() },
-        })
+        displayUser(response.data)
         setRole(response.data.role.name)
 
         if (response.data.user.email_verified) {
