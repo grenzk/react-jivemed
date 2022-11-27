@@ -24,7 +24,17 @@ const Client = () => {
 
     axiosGet(SH0W_CURRENT_USER_ENDPOINT, headers).then((response) => {
       if (response.status === 200) {
-        displayUser(response.data)
+        displayUser({
+          ...response.data,
+          departments: [
+            ...response.data.departments.map((department) => {
+              return { ...department, id: department.id.toString() }
+            }),
+          ],
+          doctor_fee: { ...response.data.doctor_fee, id: response.data.doctor_fee.id.toString() },
+          role: { ...response.data.role, id: response.data.role.id.toString() },
+          user: { ...response.data.user, id: response.data.user.id.toString() },
+        })
         setRole(response.data.role.name)
 
         if (response.data.user.email_verified) {

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import JSONbig from 'json-bigint'
+import jsonBigInt from 'json-bigint'
 
 export const JivemedRef = axios.create({
   baseURL: 'http://localhost:3000/api/v1',
@@ -8,7 +8,7 @@ export const JivemedRef = axios.create({
 
 export const axiosGet = async (endpoint, headers) => {
   return JivemedRef.get(endpoint, {
-    transformResponse: (data) => JSONbig.parse(data),
+    transformResponse: (response) => jsonBigInt.parse(response),
     headers,
   })
     .then((response) => response)

@@ -37,7 +37,7 @@ const UpdateDoctorForm = ({ loading, doctor, onSubmit }) => {
         setDepartments(
           response.data.departments.map((department) => {
             return {
-              value: department.id,
+              value: department.id.toString(),
               label: department.name,
             }
           })
