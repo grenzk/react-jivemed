@@ -20,6 +20,7 @@ import { showSuccessNotification, showErrorNotification } from '../../../Notific
 import { DOCTORS_ENDPOINT, USERS_ENDPOINT } from '../../../../services/constants/endpoints'
 import { headers } from '../../../../services/constants/headers'
 import { axiosGet, axiosPost, axiosPut, axiosDelete } from '../../../../services/utilities/axios'
+import { checkDoctorFee } from '../../../../services/utilities/checkDoctorFee'
 import useStyles from '../../../../services/hooks/useStyles'
 
 const AdminDoctorsTable = () => {
@@ -69,11 +70,25 @@ const AdminDoctorsTable = () => {
   ))
 
   const getDoctors = () => {
-    axiosGet(DOCTORS_ENDPOINT, headers).then((response) =>
+    axiosGet(DOCTORS_ENDPOINT, headers).then((response) => {
       response.status === 200
-        ? setDoctors(response.data.users)
+        ? setDoctors(
+            response.data.users.map((user) => {
+              return {
+                ...user,
+                departments: [
+                  ...user.departments.map((department) => {
+                    return { ...department, id: department.id.toString() }
+                  }),
+                ],
+                doctor_fee: checkDoctorFee({ ...user.doctor_fee }),
+                role: { ...user.role, id: user.role.id.toString() },
+                user: { ...user.user, id: user.user.id.toString() },
+              }
+            })
+          )
         : showErrorNotification(response.response.data.errors.messages)
-    )
+    })
   }
 
   const resetModal = () => {

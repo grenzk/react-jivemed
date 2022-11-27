@@ -9,6 +9,7 @@ import { SH0W_CURRENT_USER_ENDPOINT } from '../../services/constants/endpoints'
 import { CLIENT_DASHBOARD_LINK, VERIFY_EMAIL_LINK } from '../../services/constants/links'
 import { axiosGet } from '../../services/utilities/axios'
 import { headers } from '../../services/constants/headers'
+import { checkDoctorFee } from '../../services/utilities/checkDoctorFee'
 
 const Client = () => {
   const navigate = useNavigate()
@@ -24,16 +25,6 @@ const Client = () => {
 
     axiosGet(SH0W_CURRENT_USER_ENDPOINT, headers).then((response) => {
       if (response.status === 200) {
-        const checkDoctorFee = (doctor_fee) => {
-          if (Object.keys(doctor_fee).length !== 0) {
-            return {
-              ...doctor_fee,
-              id: doctor_fee.id.toString(),
-              user_id: doctor_fee.user_id.toString(),
-            }
-          }
-        }
-
         displayUser({
           ...response.data,
           departments: [
