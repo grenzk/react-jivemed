@@ -24,6 +24,16 @@ const Client = () => {
 
     axiosGet(SH0W_CURRENT_USER_ENDPOINT, headers).then((response) => {
       if (response.status === 200) {
+        const checkDoctorFee = (doctor_fee) => {
+          if (Object.keys(doctor_fee).length !== 0) {
+            return {
+              ...doctor_fee,
+              id: doctor_fee.id.toString(),
+              user_id: doctor_fee.user_id.toString(),
+            }
+          }
+        }
+
         displayUser({
           ...response.data,
           departments: [
@@ -31,7 +41,7 @@ const Client = () => {
               return { ...department, id: department.id.toString() }
             }),
           ],
-          doctor_fee: { ...response.data.doctor_fee, id: response.data.doctor_fee.id.toString() },
+          doctor_fee: checkDoctorFee({ ...response.data.doctor_fee }),
           role: { ...response.data.role, id: response.data.role.id.toString() },
           user: { ...response.data.user, id: response.data.user.id.toString() },
         })
