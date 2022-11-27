@@ -7,9 +7,8 @@ export const JivemedRef = axios.create({
 })
 
 export const axiosGet = async (endpoint, headers) => {
-  return JivemedRef.get(endpoint, {
+  return JivemedRef.get(endpoint, headers, {
     transformResponse: (response) => jsonBigInt.parse(response),
-    headers,
   })
     .then((response) => response)
     .catch((error) => error)
