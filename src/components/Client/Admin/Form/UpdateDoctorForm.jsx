@@ -8,7 +8,7 @@ import { headers } from '../../../../services/constants/headers'
 
 const UpdateDoctorForm = ({ loading, doctor, onSubmit }) => {
   const [departments, setDepartments] = useState([])
-  const [department, setDepartment] = useState(doctor.departments.map((department) => department.id))
+  const [department, setDepartment] = useState(doctor.departments.map((department) => department.id.toString()))
 
   useEffect(() => {
     getDepartments()

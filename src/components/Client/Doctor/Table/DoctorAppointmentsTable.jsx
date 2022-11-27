@@ -17,7 +17,7 @@ const DoctorAppointmentsTable = ({ user }) => {
 
   const rows = appointments.map((appointment, index) => (
     <tr key={index}>
-      <td>{appointment.details.id}</td>
+      <td>{appointment.details.id.toString()}</td>
       <td>{appointment.schedule.date}</td>
       <td>{`${appointment.patient.first_name} ${appointment.patient.last_name}`}</td>
       <td>{appointment.patient.email}</td>
@@ -27,7 +27,11 @@ const DoctorAppointmentsTable = ({ user }) => {
   const getAppointments = () => {
     axiosGet(APPOINTMENTS_ENDPOINT, headers).then((response) => {
       response.status === 200
-        ? setAppointments(response.data.appointments.filter((appointment) => appointment.doctor.id === user.user.id))
+        ? setAppointments(
+            response.data.appointments.filter(
+              (appointment) => appointment.doctor.id.toString() === user.user.id.toString()
+            )
+          )
         : showErrorNotification(response.response.data.errors.messages)
     })
   }
