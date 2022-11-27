@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Table, ScrollArea, Center, Paper, Title, Stack, Group } from '@mantine/core'
+import { Table, ScrollArea, Center, Paper, Title, Stack, Group, Button } from '@mantine/core'
 import { USER_TRANSACTIONS_ENDPOINT } from '../../../../services/constants/endpoints'
 import { headers } from '../../../../services/constants/headers'
 import { axiosGet } from '../../../../services/utilities/axios'
@@ -26,6 +26,16 @@ const PatientTransactionsTable = () => {
         })}
       </td>
       <td>{new Date(transaction.details.created_at).toLocaleString('en-US', { hour12: false })}</td>
+      <td>
+        <Button
+          variant="gradient"
+          gradient={{ from: 'indigo', to: 'cyan' }}
+          compact
+          onClick={() => window.open(transaction.details.receipt_url, '_blank')}
+        >
+          View
+        </Button>
+      </td>
     </tr>
   ))
 
@@ -55,8 +65,9 @@ const PatientTransactionsTable = () => {
                   <tr>
                     <th>Id</th>
                     <th>Stripe Id</th>
-                    <th>Name</th>
+                    <th>Amount</th>
                     <th>Created At</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>{rows}</tbody>
