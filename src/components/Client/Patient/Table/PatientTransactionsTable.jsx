@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useMantineTheme, Table, ScrollArea, Center, Paper, Title, Stack, Group } from '@mantine/core'
+import { Table, ScrollArea, Center, Paper, Title, Stack, Group } from '@mantine/core'
 import { USER_TRANSACTIONS_ENDPOINT } from '../../../../services/constants/endpoints'
 import { headers } from '../../../../services/constants/headers'
 import { axiosGet } from '../../../../services/utilities/axios'
@@ -7,8 +7,6 @@ import useStyles from '../../../../services/hooks/useStyles'
 
 const PatientTransactionsTable = () => {
   const { classes, cx } = useStyles()
-
-  const theme = useMantineTheme()
 
   const [scrolled, setScrolled] = useState(false)
   const [transactions, setTransactions] = useState([])
@@ -19,7 +17,7 @@ const PatientTransactionsTable = () => {
 
   const rows = transactions.map((transaction, index) => (
     <tr key={index}>
-      <td>{transaction.user.id}</td>
+      <td>{transaction.user.id.toString()}</td>
       <td>{transaction.details.stripe_id}</td>
       <td>
         {parseFloat(transaction.details.amount).toLocaleString('en-US', {

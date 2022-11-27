@@ -36,7 +36,7 @@ const PatientSchedulesTable = () => {
 
   const rows = schedules.map((schedule, index) => (
     <tr key={index}>
-      <td>{schedule.schedule.id}</td>
+      <td>{schedule.schedule.id.toString()}</td>
       <td>{schedule.schedule.date}</td>
       <td>{`${schedule.user.first_name} ${schedule.user.last_name}`}</td>
       <td>
@@ -95,7 +95,7 @@ const PatientSchedulesTable = () => {
         overlayBlur={3}
         centered
         opened={opened}
-        title="Enter Credit Card details"
+        title="Credit card details"
         onClose={() => setOpened(false)}
         size="auto"
       >

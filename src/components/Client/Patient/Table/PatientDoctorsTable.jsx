@@ -17,7 +17,7 @@ const PatientDoctorsTable = () => {
 
   const rows = doctors.map((doctor, index) => (
     <tr key={index}>
-      <td>{doctor.user.id}</td>
+      <td>{doctor.user.id.toString()}</td>
       <td>{`${doctor.user.first_name} ${doctor.user.last_name}`}</td>
       <td>
         {doctor.departments.map((department, index) => (

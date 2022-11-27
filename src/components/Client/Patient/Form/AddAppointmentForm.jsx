@@ -39,10 +39,10 @@ const AddAppointmentForm = ({ loading, schedule, onSubmit }) => {
         form.reset()
       })}
     >
-      <TextInput required label="Name" mb="sm" icon={<TbUser />} {...form.getInputProps('name')} />
+      <TextInput required label="Name on card" mb="sm" icon={<TbUser />} {...form.getInputProps('name')} />
       <TextInput
         required
-        label="Card Number"
+        label="Card number"
         mb="sm"
         type="number"
         icon={<TbCreditCard />}
@@ -69,7 +69,14 @@ const AddAppointmentForm = ({ loading, schedule, onSubmit }) => {
           {...form.getInputProps('exp_year')}
         />
       </Group>
-      <TextInput required label="CVC" mb="xl" type="number" icon={<TbInfoCircle />} {...form.getInputProps('cvc')} />
+      <TextInput
+        required
+        label="CVC/CVV"
+        mb="xl"
+        type="number"
+        icon={<TbInfoCircle />}
+        {...form.getInputProps('cvc')}
+      />
       <Button
         variant="gradient"
         gradient={{ from: 'indigo', to: 'cyan' }}
