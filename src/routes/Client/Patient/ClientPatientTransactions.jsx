@@ -1,9 +1,9 @@
 import PatientTransactionsTable from '../../../components/Client/Patient/Table/PatientTransactionsTable'
 
-const ClientPatientTransactions = () => {
+const ClientPatientTransactions = ({ user }) => {
   return (
     <div>
-      <PatientTransactionsTable />
+      <PatientTransactionsTable user={user} />
     </div>
   )
 }

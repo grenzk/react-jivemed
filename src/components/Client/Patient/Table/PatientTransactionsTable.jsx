@@ -5,7 +5,7 @@ import { headers } from '../../../../services/constants/headers'
 import { axiosGet } from '../../../../services/utilities/axios'
 import useStyles from '../../../../services/hooks/useStyles'
 
-const PatientTransactionsTable = () => {
+const PatientTransactionsTable = ({ user }) => {
   const { classes, cx } = useStyles()
 
   const [scrolled, setScrolled] = useState(false)
@@ -40,11 +40,15 @@ const PatientTransactionsTable = () => {
   ))
 
   const getPatients = () => {
-    axiosGet(USER_TRANSACTIONS_ENDPOINT, headers).then((response) =>
+    axiosGet(USER_TRANSACTIONS_ENDPOINT, headers).then((response) => {
       response.status === 200
-        ? setTransactions(response.data.user_transactions)
+        ? setTransactions(
+            response.data.user_transactions.filter(
+              (user_transaction) => user_transaction.user.id.toString() === user.user.id.toString()
+            )
+          )
         : showErrorNotification(response.response.data.errors.messages)
-    )
+    })
   }
 
   return (

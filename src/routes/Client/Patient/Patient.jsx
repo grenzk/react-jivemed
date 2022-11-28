@@ -22,7 +22,7 @@ const Patient = ({ user }) => {
     case CLIENT_APPOINTMENTS_LINK:
       return <ClientPatientAppointments user={user} />
     case CLIENT_TRANSACTIONS_LINK:
-      return <ClientPatientTransactions />
+      return <ClientPatientTransactions user={user} />
     default:
       return <Error />
   }
