@@ -31,7 +31,7 @@ const PatientSchedulesTable = () => {
   const [schedule, setSchedule] = useState({})
 
   useEffect(() => {
-    getAppointments()
+    getSchedules()
   }, [])
 
   const rows = schedules.map((schedule, index) => (
@@ -79,7 +79,7 @@ const PatientSchedulesTable = () => {
     })
   }
 
-  const getAppointments = () => {
+  const getSchedules = () => {
     axiosGet(SCHEDULES_ENDPOINT, headers).then((response) => {
       response.status === 200
         ? setSchedules(response.data.schedules)
