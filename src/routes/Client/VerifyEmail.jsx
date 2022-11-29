@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { Header, Container, Group, Avatar, Divider, ActionIcon } from '@mantine/core'
 import { Center, Title, Text, Button } from '@mantine/core'
 import { TbLogout } from 'react-icons/tb'
