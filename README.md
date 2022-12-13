@@ -61,6 +61,20 @@ This project is an application that allows users to create hospital appointments
 - `email: dc@email.com`  
   `password: 123456`
 
+### Credit Cards
+
+- `Visa`  
+  `Card Number: 4242424242424242`  
+  `CVC: Any 3 digits`  
+  `Date: Any future date`
+
+- `Mastercard`  
+  `Card Number: 5555555555554444`  
+  `CVC: Any 3 digits`  
+  `Date: Any future date`
+
+More info: https://stripe.com/docs/testing
+
 ## Live Demo
 
 https://react-jivemed-426p.onrender.com
