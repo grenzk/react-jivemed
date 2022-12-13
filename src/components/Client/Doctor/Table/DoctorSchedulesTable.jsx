@@ -134,6 +134,7 @@ const DoctorSchedulesTable = ({ user }) => {
   const handleSubmitDeleteSchedule = (id) => {
     setLoading(true)
     axiosDelete(`${SCHEDULES_ENDPOINT}/${id}`, headers).then((response) => {
+      console.log(response)
       setLoading(false)
       if (response.status === 200) {
         showSuccessNotification('Schedule has been successfully deleted!')
