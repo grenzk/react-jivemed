@@ -130,7 +130,7 @@ const AdminDepartmentsTable = () => {
 
   const handleSubmitDeleteDepartment = (id) => {
     setLoading(true)
-    axiosDelete(`${DEPARTMENTS_ENDPOINT}/${id}`, headers).then((response) => {
+    axiosDelete(`${DEPARTMENTS_ENDPOINT}/${id.toString()}`, headers).then((response) => {
       setLoading(false)
       if (response.status === 200) {
         showSuccessNotification('Department has been successfully deleted!')

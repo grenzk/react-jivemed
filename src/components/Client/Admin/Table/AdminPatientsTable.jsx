@@ -135,7 +135,7 @@ const AdminPatientsTable = () => {
 
   const handleSubmitDeletePatient = (id) => {
     setLoading(true)
-    axiosDelete(`${USERS_ENDPOINT}/${id}`, headers).then((response) => {
+    axiosDelete(`${USERS_ENDPOINT}/${id.toString()}`, headers).then((response) => {
       setLoading(false)
       if (response.status === 200) {
         showSuccessNotification('Patient has been successfully deleted!')

@@ -130,7 +130,7 @@ const AdminDoctorsTable = () => {
 
   const handleSubmitDeleteDoctor = (id) => {
     setLoading(true)
-    axiosDelete(`${USERS_ENDPOINT}/${id}`, headers).then((response) => {
+    axiosDelete(`${USERS_ENDPOINT}/${id.toString()}`, headers).then((response) => {
       setLoading(false)
       if (response.status === 200) {
         showSuccessNotification('Doctor has been successfully deleted!')

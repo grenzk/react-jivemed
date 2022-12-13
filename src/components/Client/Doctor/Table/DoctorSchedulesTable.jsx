@@ -133,7 +133,7 @@ const DoctorSchedulesTable = ({ user }) => {
 
   const handleSubmitDeleteSchedule = (id) => {
     setLoading(true)
-    axiosDelete(`${SCHEDULES_ENDPOINT}/${id}`, headers).then((response) => {
+    axiosDelete(`${SCHEDULES_ENDPOINT}/${id.toString()}`, headers).then((response) => {
       setLoading(false)
       if (response.status === 200) {
         showSuccessNotification('Schedule has been successfully deleted!')
