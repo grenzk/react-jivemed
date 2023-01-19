@@ -81,9 +81,18 @@ const PatientSchedulesTable = () => {
 
   const getSchedules = () => {
     axiosGet(SCHEDULES_ENDPOINT, headers).then((response) => {
-      response.status === 200
-        ? setSchedules(response.data.schedules)
-        : showErrorNotification(response.response.data.errors.messages)
+      if (response.status === 200) {
+        const dateFilter = response.data.schedules.filter((schedule) => {
+          const scheduleDate = new Date(schedule.schedule.date).toISOString().split('T')[0]
+          const currentDate = new Date(Date.now()).toISOString().split('T')[0]
+
+          return scheduleDate >= currentDate
+        })
+
+        setSchedules(dateFilter)
+      } else {
+        showErrorNotification(response.response.data.errors.messages)
+      }
     })
   }
 
