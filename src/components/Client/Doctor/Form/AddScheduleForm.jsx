@@ -8,7 +8,16 @@ const AddScheduleForm = ({ loading, onSubmit }) => {
 
   return (
     <>
-      <DatePicker required value={value} onChange={setValue} mb="xl" label="Schedule" withAsterisk error={error} />
+      <DatePicker
+        required
+        value={value}
+        onChange={setValue}
+        mb="xl"
+        label="Schedule"
+        firstDayOfWeek="sunday"
+        withAsterisk
+        error={error}
+      />
       <Button
         variant="gradient"
         gradient={{ from: 'indigo', to: 'cyan' }}
