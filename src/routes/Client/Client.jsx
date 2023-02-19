@@ -9,6 +9,7 @@ import { SH0W_CURRENT_USER_ENDPOINT } from '../../services/constants/endpoints'
 import { CLIENT_DASHBOARD_LINK, VERIFY_EMAIL_LINK } from '../../services/constants/links'
 import { axiosGet } from '../../services/utilities/axios'
 import { headers } from '../../services/constants/headers'
+import CenterLoader from '../../components/CenterLoader'
 
 const Client = () => {
   const navigate = useNavigate()
@@ -18,11 +19,13 @@ const Client = () => {
   const [user, setUser] = useState({})
   const [avatar, setAvatar] = useState('')
   const [role, setRole] = useState('')
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const urlPath = `/${window.location.pathname.split('/')[1]}`
 
     axiosGet(SH0W_CURRENT_USER_ENDPOINT, headers).then((response) => {
+      setLoading(false)
       if (response.status === 200) {
         displayUser(response.data)
         setRole(response.data.role.name)
@@ -59,15 +62,23 @@ const Client = () => {
   }
 
   const checkEmailVerified = () => {
-    if (isEmailVerified) {
+    if (loading) {
       return (
-        <>
-          <Navbar user={user} avatar={avatar} role={role} onDisplayUser={displayUser} />
-          {displayPage()}
-        </>
+        <div style={{ paddingTop: '10.45rem' }}>
+          <CenterLoader />
+        </div>
       )
     } else {
-      return <VerifyEmail avatar={avatar} email={email} />
+      if (isEmailVerified) {
+        return (
+          <>
+            <Navbar user={user} avatar={avatar} role={role} onDisplayUser={displayUser} />
+            {displayPage()}
+          </>
+        )
+      } else {
+        return <VerifyEmail avatar={avatar} email={email} />
+      }
     }
   }
 

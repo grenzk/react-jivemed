@@ -3,6 +3,7 @@ import { Title, Group, Paper, SimpleGrid, Text, Stack } from '@mantine/core'
 import { TbStethoscope, TbUser, TbMedicalCross } from 'react-icons/tb'
 import { VictoryPie } from 'victory'
 import { showErrorNotification } from '../../../components/Notification'
+import CenterLoader from '../../../components/CenterLoader'
 import pieChartStyle from '../../../assets/js/pieChart'
 import useStyles from '../../../services/hooks/useStyles'
 import { axiosGet } from '../../../services/utilities/axios'
@@ -17,9 +18,13 @@ const ClientAdminDashboard = () => {
   const [departments, setDepartments] = useState([])
 
   useEffect(() => {
-    getDoctors()
-    getPatients()
-    getDepartments()
+    const loadData = () => {
+      getDoctors()
+      getPatients()
+      getDepartments()
+    }
+
+    loadData()
   }, [])
 
   const data = [
@@ -78,19 +83,25 @@ const ClientAdminDashboard = () => {
   return (
     <div className={classes.adminDashboardRoot}>
       <Stack>
-        <Title order={2}>Dashboard</Title>
-        <SimpleGrid
-          cols={3}
-          breakpoints={[
-            { maxWidth: 'md', cols: 1 },
-            { maxWidth: 'xs', cols: 1 },
-          ]}
-        >
-          {stats}
-        </SimpleGrid>
-        <Paper withBorder={true}>
-          <VictoryPie style={pieChartStyle} colorScale="blue" width={1200} data={pieChartData} />
-        </Paper>
+        {stats.length ? (
+          <>
+            <Title order={2}>Dashboard</Title>
+            <SimpleGrid
+              cols={3}
+              breakpoints={[
+                { maxWidth: 'md', cols: 1 },
+                { maxWidth: 'xs', cols: 1 },
+              ]}
+            >
+              {stats}
+            </SimpleGrid>
+            <Paper withBorder={true}>
+              <VictoryPie style={pieChartStyle} colorScale="blue" width={1200} data={pieChartData} />
+            </Paper>
+          </>
+        ) : (
+          <CenterLoader />
+        )}
       </Stack>
     </div>
   )
