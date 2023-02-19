@@ -27,7 +27,7 @@ const AddScheduleForm = ({ loading, onSubmit }) => {
             setError('Invalid date.')
           } else {
             onSubmit({
-              schedule: { date: value },
+              schedule: { date: value.toString() },
             })
             setValue()
           }

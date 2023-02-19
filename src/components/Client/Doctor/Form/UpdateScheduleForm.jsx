@@ -29,7 +29,7 @@ const UpdateScheduleForm = ({ loading, schedule, onSubmit }) => {
             onSubmit({
               id: schedule.schedule.id,
               values: {
-                schedule: { date: value },
+                schedule: { date: value.toString() },
               },
             })
             setValue()
