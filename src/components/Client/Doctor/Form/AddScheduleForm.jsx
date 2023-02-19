@@ -11,7 +11,7 @@ const AddScheduleForm = ({ loading, onSubmit }) => {
       <DatePicker
         required
         value={value}
-        onChange={setValue}
+        onChange={(e) => setValue(new Date(e))}
         mb="xl"
         label="Schedule"
         firstDayOfWeek="sunday"
@@ -27,7 +27,7 @@ const AddScheduleForm = ({ loading, onSubmit }) => {
             setError('Invalid date.')
           } else {
             onSubmit({
-              schedule: { date: new Date(value).toLocaleDateString('en-CA') },
+              schedule: { date: value },
             })
             setValue()
           }
