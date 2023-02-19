@@ -90,11 +90,11 @@ const ClientAdminDashboard = () => {
   return (
     <div className={classes.adminDashboardRoot}>
       <Stack>
+        <Title order={2}>Dashboard</Title>
         {loading ? (
           <CenterLoader />
         ) : (
           <>
-            <Title order={2}>Dashboard</Title>
             <SimpleGrid
               cols={3}
               breakpoints={[
