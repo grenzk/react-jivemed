@@ -16,6 +16,7 @@ const ClientAdminDashboard = () => {
   const [doctors, setDoctors] = useState([])
   const [patients, setPatients] = useState([])
   const [departments, setDepartments] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const loadData = () => {
@@ -39,27 +40,33 @@ const ClientAdminDashboard = () => {
   ]
 
   const getDoctors = () => {
-    axiosGet(DOCTORS_ENDPOINT, headers).then((response) =>
+    axiosGet(DOCTORS_ENDPOINT, headers).then((response) => {
+      setLoading(false)
+
       response.status === 200
         ? setDoctors(response.data.users)
         : showErrorNotification(response.response.data.errors.messages)
-    )
+    })
   }
 
   const getPatients = () => {
-    axiosGet(PATIENTS_ENDPOINT, headers).then((response) =>
+    axiosGet(PATIENTS_ENDPOINT, headers).then((response) => {
+      setLoading(false)
+
       response.status === 200
         ? setPatients(response.data.users)
         : showErrorNotification(response.response.data.errors.messages)
-    )
+    })
   }
 
   const getDepartments = () => {
-    axiosGet(DEPARTMENTS_ENDPOINT, headers).then((response) =>
+    axiosGet(DEPARTMENTS_ENDPOINT, headers).then((response) => {
+      setLoading(false)
+
       response.status === 200
         ? setDepartments(response.data.departments)
         : showErrorNotification(response.response.data.errors.messages)
-    )
+    })
   }
 
   const stats = data.map((stat) => {
@@ -83,7 +90,9 @@ const ClientAdminDashboard = () => {
   return (
     <div className={classes.adminDashboardRoot}>
       <Stack>
-        {stats.length ? (
+        {loading ? (
+          <CenterLoader />
+        ) : (
           <>
             <Title order={2}>Dashboard</Title>
             <SimpleGrid
@@ -99,8 +108,6 @@ const ClientAdminDashboard = () => {
               <VictoryPie style={pieChartStyle} colorScale="blue" width={1200} data={pieChartData} />
             </Paper>
           </>
-        ) : (
-          <CenterLoader />
         )}
       </Stack>
     </div>
