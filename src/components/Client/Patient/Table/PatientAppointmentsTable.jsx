@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Table, ScrollArea, Center, Paper, Title, Stack, Group, Badge } from '@mantine/core'
+import CenterLoader from '../../../CenterLoader'
 import { APPOINTMENTS_ENDPOINT } from '../../../../services/constants/endpoints'
 import { headers } from '../../../../services/constants/headers'
 import { axiosGet } from '../../../../services/utilities/axios'
@@ -50,23 +51,27 @@ const PatientAppointmentsTable = ({ user }) => {
             <Title order={2}>Appointments</Title>
           </Group>
           <Paper shadow="xs" p="md">
-            <ScrollArea sx={{ height: 450 }} onScrollPositionChange={({ y }) => setScrolled(y !== 0)}>
-              <Table sx={{ minWidth: 1000 }} verticalSpacing="md">
-                <thead
-                  className={cx(classes.header, {
-                    [classes.scrolled]: scrolled,
-                  })}
-                >
-                  <tr>
-                    <th>Id</th>
-                    <th>Schedule</th>
-                    <th>Name</th>
-                    <th>Department</th>
-                  </tr>
-                </thead>
-                <tbody>{rows}</tbody>
-              </Table>
-            </ScrollArea>
+            {rows.length ? (
+              <ScrollArea sx={{ height: 450 }} onScrollPositionChange={({ y }) => setScrolled(y !== 0)}>
+                <Table sx={{ minWidth: 1000 }} verticalSpacing="md">
+                  <thead
+                    className={cx(classes.header, {
+                      [classes.scrolled]: scrolled,
+                    })}
+                  >
+                    <tr>
+                      <th>Id</th>
+                      <th>Schedule</th>
+                      <th>Name</th>
+                      <th>Department</th>
+                    </tr>
+                  </thead>
+                  <tbody>{rows}</tbody>
+                </Table>
+              </ScrollArea>
+            ) : (
+              <CenterLoader />
+            )}
           </Paper>
         </Stack>
       </Center>

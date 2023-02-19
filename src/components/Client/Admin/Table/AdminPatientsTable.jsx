@@ -16,6 +16,7 @@ import { TbPencil, TbTrash } from 'react-icons/tb'
 import AddPatientForm from '../Form/AddPatientForm'
 import UpdatePatientForm from '../Form/UpdatePatientForm'
 import DeletePatientForm from '../Form/DeletePatientForm'
+import CenterLoader from '../../../CenterLoader'
 import { showSuccessNotification, showErrorNotification } from '../../../Notification'
 import {
   PATIENTS_ENDPOINT,
@@ -181,23 +182,27 @@ const AdminPatientsTable = () => {
             </Button>
           </Group>
           <Paper shadow="xs" p="md">
-            <ScrollArea sx={{ height: 450 }} onScrollPositionChange={({ y }) => setScrolled(y !== 0)}>
-              <Table sx={{ minWidth: 1000 }} verticalSpacing="md">
-                <thead
-                  className={cx(classes.header, {
-                    [classes.scrolled]: scrolled,
-                  })}
-                >
-                  <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>{rows}</tbody>
-              </Table>
-            </ScrollArea>
+            {rows.length ? (
+              <ScrollArea sx={{ height: 450 }} onScrollPositionChange={({ y }) => setScrolled(y !== 0)}>
+                <Table sx={{ minWidth: 1000 }} verticalSpacing="md">
+                  <thead
+                    className={cx(classes.header, {
+                      [classes.scrolled]: scrolled,
+                    })}
+                  >
+                    <tr>
+                      <th>Id</th>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>{rows}</tbody>
+                </Table>
+              </ScrollArea>
+            ) : (
+              <CenterLoader />
+            )}
           </Paper>
         </Stack>
       </Center>

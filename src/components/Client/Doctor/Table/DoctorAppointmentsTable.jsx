@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { Table, ScrollArea, Center, Paper, Title, Stack, Group } from '@mantine/core'
+import { Table, ScrollArea, Center, Paper, Title, Stack, Group, Container } from '@mantine/core'
+import CenterLoader from '../../../CenterLoader'
 import { APPOINTMENTS_ENDPOINT } from '../../../../services/constants/endpoints'
 import { headers } from '../../../../services/constants/headers'
 import { axiosGet } from '../../../../services/utilities/axios'
@@ -44,23 +45,29 @@ const DoctorAppointmentsTable = ({ user }) => {
             <Title order={2}>Appointments</Title>
           </Group>
           <Paper shadow="xs" p="md">
-            <ScrollArea sx={{ height: 450 }} onScrollPositionChange={({ y }) => setScrolled(y !== 0)}>
-              <Table sx={{ minWidth: 1000 }} verticalSpacing="md">
-                <thead
-                  className={cx(classes.header, {
-                    [classes.scrolled]: scrolled,
-                  })}
-                >
-                  <tr>
-                    <th>Id</th>
-                    <th>Schedule</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                  </tr>
-                </thead>
-                <tbody>{rows}</tbody>
-              </Table>
-            </ScrollArea>
+            {rows.length ? (
+              <ScrollArea sx={{ height: 450 }} onScrollPositionChange={({ y }) => setScrolled(y !== 0)}>
+                <Table sx={{ minWidth: 1000 }} verticalSpacing="md">
+                  <thead
+                    className={cx(classes.header, {
+                      [classes.scrolled]: scrolled,
+                    })}
+                  >
+                    <tr>
+                      <th>Id</th>
+                      <th>Schedule</th>
+                      <th>Name</th>
+                      <th>Email</th>
+                    </tr>
+                  </thead>
+                  <tbody>{rows}</tbody>
+                </Table>
+              </ScrollArea>
+            ) : (
+              <Container sx={{ minWidth: 1000 }}>
+                <CenterLoader />
+              </Container>
+            )}
           </Paper>
         </Stack>
       </Center>

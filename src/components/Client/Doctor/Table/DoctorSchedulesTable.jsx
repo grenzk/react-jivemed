@@ -16,6 +16,7 @@ import { TbPencil, TbTrash } from 'react-icons/tb'
 import AddScheduleForm from '../Form/AddScheduleForm'
 import UpdateScheduleForm from '../Form/UpdateScheduleForm'
 import DeleteScheduleForm from '../Form/DeleteScheduleForm'
+import CenterLoader from '../../../CenterLoader'
 import { showSuccessNotification, showErrorNotification } from '../../../Notification'
 import { SCHEDULES_ENDPOINT } from '../../../../services/constants/endpoints'
 import { headers } from '../../../../services/constants/headers'
@@ -179,23 +180,27 @@ const DoctorSchedulesTable = ({ user }) => {
             </Button>
           </Group>
           <Paper shadow="xs" p="md">
-            <ScrollArea sx={{ height: 450 }} onScrollPositionChange={({ y }) => setScrolled(y !== 0)}>
-              <Table sx={{ minWidth: 1000 }} verticalSpacing="md">
-                <thead
-                  className={cx(classes.header, {
-                    [classes.scrolled]: scrolled,
-                  })}
-                >
-                  <tr>
-                    <th>Id</th>
-                    <th>Date</th>
-                    <th>Available</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>{rows}</tbody>
-              </Table>
-            </ScrollArea>
+            {rows.length ? (
+              <ScrollArea sx={{ height: 450 }} onScrollPositionChange={({ y }) => setScrolled(y !== 0)}>
+                <Table sx={{ minWidth: 1000 }} verticalSpacing="md">
+                  <thead
+                    className={cx(classes.header, {
+                      [classes.scrolled]: scrolled,
+                    })}
+                  >
+                    <tr>
+                      <th>Id</th>
+                      <th>Date</th>
+                      <th>Available</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>{rows}</tbody>
+                </Table>
+              </ScrollArea>
+            ) : (
+              <CenterLoader />
+            )}
           </Paper>
         </Stack>
       </Center>

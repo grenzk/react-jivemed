@@ -16,6 +16,7 @@ import { TbPencil, TbTrash } from 'react-icons/tb'
 import AddDoctorForm from '../Form/AddDoctorForm'
 import UpdateDoctorForm from '../Form/UpdateDoctorForm'
 import DeleteDoctorForm from '../Form/DeleteDoctorForm'
+import CenterLoader from '../../../CenterLoader'
 import { showSuccessNotification, showErrorNotification } from '../../../Notification'
 import { DOCTORS_ENDPOINT, USERS_ENDPOINT } from '../../../../services/constants/endpoints'
 import { headers } from '../../../../services/constants/headers'
@@ -176,22 +177,26 @@ const AdminDoctorsTable = () => {
             </Button>
           </Group>
           <Paper shadow="xs" p="md">
-            <ScrollArea sx={{ height: 450 }} onScrollPositionChange={({ y }) => setScrolled(y !== 0)}>
-              <Table sx={{ minWidth: 1000 }} verticalSpacing="md">
-                <thead
-                  className={cx(classes.tableHeader, {
-                    [classes.tableScrolled]: scrolled,
-                  })}
-                >
-                  <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                  </tr>
-                </thead>
-                <tbody>{rows}</tbody>
-              </Table>
-            </ScrollArea>
+            {rows.length ? (
+              <ScrollArea sx={{ height: 450 }} onScrollPositionChange={({ y }) => setScrolled(y !== 0)}>
+                <Table sx={{ minWidth: 1000 }} verticalSpacing="md">
+                  <thead
+                    className={cx(classes.tableHeader, {
+                      [classes.tableScrolled]: scrolled,
+                    })}
+                  >
+                    <tr>
+                      <th>Id</th>
+                      <th>Name</th>
+                      <th>Email</th>
+                    </tr>
+                  </thead>
+                  <tbody>{rows}</tbody>
+                </Table>
+              </ScrollArea>
+            ) : (
+              <CenterLoader />
+            )}
           </Paper>
         </Stack>
       </Center>

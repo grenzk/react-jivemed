@@ -16,6 +16,7 @@ import { TbPencil, TbTrash } from 'react-icons/tb'
 import AddDepartmentForm from '../Form/AddDepartmentForm'
 import UpdateDepartmentForm from '../Form/UpdateDepartmentForm'
 import DeleteDepartmentForm from '../Form/DeleteDepartmentForm'
+import CenterLoader from '../../../CenterLoader'
 import { showSuccessNotification, showErrorNotification } from '../../../Notification'
 import { headers } from '../../../../services/constants/headers'
 import { DEPARTMENTS_ENDPOINT } from '../../../../services/constants/endpoints'
@@ -180,21 +181,25 @@ const AdminDepartmentsTable = () => {
             </Button>
           </Group>
           <Paper shadow="xs" p="md">
-            <ScrollArea sx={{ height: 450 }} onScrollPositionChange={({ y }) => setScrolled(y !== 0)}>
-              <Table sx={{ minWidth: 1000 }} verticalSpacing="md">
-                <thead
-                  className={cx(classes.tableHeader, {
-                    [classes.tableScrolled]: scrolled,
-                  })}
-                >
-                  <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                  </tr>
-                </thead>
-                <tbody>{rows}</tbody>
-              </Table>
-            </ScrollArea>
+            {rows.length ? (
+              <ScrollArea sx={{ height: 450 }} onScrollPositionChange={({ y }) => setScrolled(y !== 0)}>
+                <Table sx={{ minWidth: 1000 }} verticalSpacing="md">
+                  <thead
+                    className={cx(classes.tableHeader, {
+                      [classes.tableScrolled]: scrolled,
+                    })}
+                  >
+                    <tr>
+                      <th>Id</th>
+                      <th>Name</th>
+                    </tr>
+                  </thead>
+                  <tbody>{rows}</tbody>
+                </Table>
+              </ScrollArea>
+            ) : (
+              <CenterLoader />
+            )}
           </Paper>
         </Stack>
       </Center>

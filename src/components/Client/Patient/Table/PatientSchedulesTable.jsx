@@ -13,6 +13,7 @@ import {
   Modal,
 } from '@mantine/core'
 import AddAppointmentForm from '../../Patient/Form/AddAppointmentForm'
+import CenterLoader from '../../../CenterLoader'
 import { showSuccessNotification, showErrorNotification } from '../../../Notification'
 import { SCHEDULES_ENDPOINT, APPOINTMENTS_ENDPOINT } from '../../../../services/constants/endpoints'
 import { headers } from '../../../../services/constants/headers'
@@ -116,24 +117,28 @@ const PatientSchedulesTable = () => {
             <Title order={2}>Available Schedules</Title>
           </Group>
           <Paper shadow="xs" p="md">
-            <ScrollArea sx={{ height: 450 }} onScrollPositionChange={({ y }) => setScrolled(y !== 0)}>
-              <Table sx={{ minWidth: 1000 }} verticalSpacing="md">
-                <thead
-                  className={cx(classes.header, {
-                    [classes.scrolled]: scrolled,
-                  })}
-                >
-                  <tr>
-                    <th>Id</th>
-                    <th>Schedule</th>
-                    <th>Name</th>
-                    <th>Department</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>{rows}</tbody>
-              </Table>
-            </ScrollArea>
+            {rows.length ? (
+              <ScrollArea sx={{ height: 450 }} onScrollPositionChange={({ y }) => setScrolled(y !== 0)}>
+                <Table sx={{ minWidth: 1000 }} verticalSpacing="md">
+                  <thead
+                    className={cx(classes.header, {
+                      [classes.scrolled]: scrolled,
+                    })}
+                  >
+                    <tr>
+                      <th>Id</th>
+                      <th>Schedule</th>
+                      <th>Name</th>
+                      <th>Department</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>{rows}</tbody>
+                </Table>
+              </ScrollArea>
+            ) : (
+              <CenterLoader />
+            )}
           </Paper>
         </Stack>
       </Center>
