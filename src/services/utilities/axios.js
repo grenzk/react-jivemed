@@ -1,9 +1,9 @@
 import axios from 'axios'
 import jsonBigInt from 'json-bigint'
+import { JIVEMED_URL } from '../constants/links'
 
 export const JivemedRef = axios.create({
-  // baseURL: 'http://localhost:3000/api/v1',
-  baseURL: 'https://rails-jivemed.onrender.com/api/v1',
+  baseURL: JIVEMED_URL,
 })
 
 export const axiosGet = async (endpoint, headers) => {

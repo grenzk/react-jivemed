@@ -1,3 +1,6 @@
+export const JIVEMED_URL = 'https://rails-jivemed.onrender.com/api/v1'
+// export const JIVEMED_URL = 'http://localhost:3000/api/v1'
+
 export const SIGN_IN_LINK = '/sign-in'
 export const SIGN_UP_LINK = '/sign-up'
 export const VERIFY_EMAIL_LINK = '/verify-email'
