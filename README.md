@@ -77,7 +77,7 @@ More info: https://stripe.com/docs/testing
 
 ## Live Demo
 
-https://react-jivemed-426p.onrender.com
+https://react-jivemed.onrender.com
 
 ## Frontend Repo
 
